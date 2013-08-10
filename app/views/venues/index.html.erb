@@ -1,0 +1,28 @@
+<% provide(:title, 'Lugares') %>
+<div data-role="header">
+  <h1><%= full_title('') %></h1>
+  <%= link_to 'Add', new_venue_path, "data-icon" => "plus", "class" => "ui-btn-right" %>
+
+
+
+
+<% if current_user %>
+  Welcome <%= current_user.name %>!
+  <%= link_to "Log Out", logout_path %>
+<% else %>
+  <a href="/auth/facebook" data-ajax="false" class="ui-btn-left">Login</a>
+<% end %>
+
+  
+</div>
+ 
+<div data-role="content">
+  <ul data-role="listview">
+    <% @venues.each do |venue| %>
+    <li>
+      <%= link_to venue.title, venue %>
+      <%= link_to 'edit venue', edit_venue_path(venue), "data-icon" => "gear" %>
+    </li>
+    <% end %>
+  </ul>
+</div>

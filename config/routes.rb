@@ -1,4 +1,12 @@
 PrimaApp::Application.routes.draw do
+
+  get "users/new"
+  resources :venues
+  root :to =>"venues#index"
+  get  '/login', :to => 'sessions#new', :as => :login
+  match '/auth/:provider/callback', :to => 'sessions#create', via: [:get, :post]
+  match '/auth/failure', :to => 'sessions#failure', via: [:get, :post]
+  match '/logout', :to => 'sessions#destroy', via: [:get]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

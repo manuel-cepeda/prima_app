@@ -1,0 +1,14 @@
+<% provide(:title, @venue.title) %>
+<div data-role="header">
+  <h1><%= @venue.title %></h1>
+  <%= link_to 'Home', venues_url, "class" => "ui-btn-right" %>
+  <%= link_to 'Back', venues_url, "class" => "ui-btn-left" %>
+</div>
+ 
+<div data-role="content">
+  <%= @venue.body %>
+</div>
+
+<div>
+
+
