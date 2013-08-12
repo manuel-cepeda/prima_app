@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-
+    acts_as_voter
 	has_many :authorizations
     validates :name,  presence: true
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
 	    Authorization.create :user => self, :provider => auth_hash["provider"], :uid => auth_hash["uid"]
 	  end
 	end
+
 
 
 end

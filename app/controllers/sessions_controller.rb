@@ -5,12 +5,14 @@ class SessionsController < ApplicationController
 	def create
 	  auth_hash = request.env['omniauth.auth']
 	 
+
 	  if session[:user_id]
 	    # Means our user is signed in. Add the authorization to the user
 
 	    user=User.find(session[:user_id]);
 	    auth = user.add_provider(auth_hash)
-        redirect_to root_url, :notice => "Signed in!"
+	   
+        
         
 	  else
 	    # Log him in or sign him up
@@ -18,9 +20,11 @@ class SessionsController < ApplicationController
 	 
 	    # Create the session
 	    session[:user_id] = auth.user.id
-	 
-	    redirect_to root_url
+	 	
 	  end
+
+	  redirect_to root_url, :success => "Signed in!"
+
 	end
 
 	def failure
@@ -29,7 +33,7 @@ class SessionsController < ApplicationController
 
 	def destroy
 	  session[:user_id] = nil
-      redirect_to root_url, :notice => "Signed out!"
+      redirect_to root_url, :success => "Signed out!"
 	end
 
 end

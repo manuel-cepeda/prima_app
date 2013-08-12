@@ -1,0 +1,29 @@
+<% provide(:title, @user.name) %>
+<div data-role="header">
+  <h1>Profile</h1>
+
+  <%= link_to 'Home', venues_url, "class" => "ui-btn-right" %>
+  <%= link_to 'Back', venues_url, "class" => "ui-btn-left" %>
+</div>
+ 
+<div data-role="content">
+
+<aside class="span4">
+    <section>
+      <h1>
+		<%= avatar_for(@user,200,200) %>
+    <%= @user.name %>
+   
+      </h1>
+    </section>
+  </aside>
+
+
+
+
+
+
+
+</div>
+
+<div>

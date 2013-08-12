@@ -1,15 +1,21 @@
 class VenuesController < ApplicationController
   before_action :set_venue, only: [:show, :edit, :update, :destroy]
-
+  include VenuesHelper
   # GET /venues
   # GET /venues.json
   def index
-    @venues = Venue.all
+    #@venues = Venue.all
+
+    @venues = venues_by_plus_minus_vote(params[:time])
+
+
   end
 
   # GET /venues/1
   # GET /venues/1.json
   def show
+
+    
   end
 
   # GET /venues/new
@@ -61,6 +67,33 @@ class VenuesController < ApplicationController
     end
   end
 
+  def vote_up
+    begin
+      current_user.vote_exclusively_for(@venue = Venue.find(params[:id])) 
+     # current_user.vote_for(@venue = Venue.find(params[:id]))
+      redirect_to [@venue]
+      flash[:success] = "You have voted successfully"
+    rescue ActiveRecord::RecordInvalid
+      #Manage this to show user can't vote twice
+      redirect_to [@venue]
+      flash[:error] =  "You have already voted"
+    end      
+  end
+
+  def vote_down
+    begin
+      current_user.vote_exclusively_against(@venue = Venue.find(params[:id]))
+      #current_user.vote_against(@venue = Venue.find(params[:id]))
+      redirect_to [@venue]
+      flash[:success] = "You have voted successfully"
+    rescue ActiveRecord::RecordInvalid
+      #Manage this to show user can't vote twice
+      redirect_to [@venue]
+      flash[:error] =  "You have already voted"
+    end      
+  end 
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_venue
@@ -71,4 +104,5 @@ class VenuesController < ApplicationController
     def venue_params
       params.require(:venue).permit(:title, :body)
     end
+
 end

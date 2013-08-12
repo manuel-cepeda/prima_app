@@ -2,7 +2,7 @@ module ApplicationHelper
   
 	def full_title(page_title)
 
-		base_title="Prima descubre a donde ir"
+		base_title="Descubre donde esta pasando"
 		if page_title.empty?
 			base_title
 		else

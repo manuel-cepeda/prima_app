@@ -6,7 +6,24 @@
 </div>
  
 <div data-role="content">
+
+  <% flash.each do |key, value| %>
+          <div class="alert alert-<%= key %>"><%= value %></div>
+  <% end %>
   <%= @venue.body %>
+  <%= link_to('vote up', vote_up_venue_path(@venue), :method => :post) %>
+  <%= link_to('vote down', vote_down_venue_path(@venue), :method => :post) %>
+  
+
+
+  aqui es total en contra 
+
+<%=  @venue.votes_against%>
+
+
+y a favor
+
+<%=  @venue.votes_for%>
 </div>
 
 <div>

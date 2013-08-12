@@ -1,26 +1,42 @@
 <% provide(:title, 'Lugares') %>
 <div data-role="header">
-  <h1><%= full_title('') %></h1>
-  <%= link_to 'Add', new_venue_path, "data-icon" => "plus", "class" => "ui-btn-right" %>
+    <h1><%= full_title('') %></h1>
+    <%= link_to 'Add', new_venue_path, "data-icon" => "plus", "class" => "ui-btn-right" %>
 
 
-
-
-<% if current_user %>
-  Welcome <%= current_user.name %>!
-  <%= link_to "Log Out", logout_path %>
-<% else %>
-  <a href="/auth/facebook" data-ajax="false" class="ui-btn-left">Login</a>
-<% end %>
+    <% if current_user %>
+      Welcome <%= current_user.name %>!
+      <%= link_to "Log Out", logout_path %>
+    <% else %>
+      <a href="/auth/facebook" data-ajax="false" class="ui-btn-left">Login</a>
+    <% end %>
 
   
 </div>
- 
+
+<% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+<% end %>
+
+ <div data-role="navbar">
+  <ul>
+   <li><%= link_to 'Hace 1 hora', venues_path(:time => "1"), "class" => "ui-btn-active ui-state-persist" %></li>
+   <li><%= link_to '1 día', venues_path(:time => "2") %></li>
+   <li><%= link_to 'Siempre', venues_path(:time => "3") %></li>
+  </ul>
+</div><!-- /navbar -->
 <div data-role="content">
+
+
+
   <ul data-role="listview">
     <% @venues.each do |venue| %>
     <li>
       <%= link_to venue.title, venue %>
+       votes a favor<%= venue.votes_for %>
+        votes against <%= venue.votes_against %>
+
+
       <%= link_to 'edit venue', edit_venue_path(venue), "data-icon" => "gear" %>
     </li>
     <% end %>
