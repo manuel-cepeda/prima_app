@@ -24,6 +24,24 @@
 y a favor
 
 <%=  @venue.votes_for%>
+
+<% if signed_in? %>
+<%= render 'shared/post_form' %>
+<% end %>
+
+  <div class="span8">
+    <% if @venue.posts.any? %>
+      <h3>POsts (<%= @venue.posts.count %>)</h3>
+      <ol class="microposts">
+        <%= render @posts %>
+      </ol>
+      <%= will_paginate @posts %>
+    <% end %>
+  </div>
+
+
+
+
 </div>
 
 <div>

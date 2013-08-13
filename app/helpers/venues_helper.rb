@@ -8,7 +8,7 @@ module VenuesHelper
                 where(created_at: 1.hours.ago..Time.now)
 	when 2    #compare to 2
 	   @items = Venue.plusminus_tally.limit(30).
-                where(created_at: 24.minutes.ago..Time.now)
+                where(created_at: 24.hours.ago..Time.now)
 	when 3    #compare to 3
 	   @items = Venue.plusminus_tally.limit(30)
 	else

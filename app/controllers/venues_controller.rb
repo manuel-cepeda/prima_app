@@ -15,7 +15,10 @@ class VenuesController < ApplicationController
   # GET /venues/1.json
   def show
 
-    
+    @venue = Venue.find(params[:id])
+    @posts = @venue.posts.paginate(page: params[:page])
+    @post =  current_user.posts.build if signed_in?
+    session[:venue_id] = @venue.id
   end
 
   # GET /venues/new

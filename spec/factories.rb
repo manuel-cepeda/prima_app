@@ -8,6 +8,12 @@ FactoryGirl.define do
     factory :user do
       name     "Manuel Cepeda"
       email    "manuel@example.com"
-  end
+  	end
+
+  	factory :post do
+      content "lorem ipsum"
+      user
+      venue
+  	end
 
 end
