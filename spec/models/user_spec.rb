@@ -96,4 +96,16 @@ describe User do
   end
 
 
+   describe "with admin attribute set to 'true'" do
+
+	   	before do
+	   		@user.save!
+	   		@user.toggle!(:admin)
+	   	end
+
+	   	it { should be_admin}
+   	
+   end
+
+
 end

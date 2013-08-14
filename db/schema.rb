@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130812165340) do
+ActiveRecord::Schema.define(version: 20130813214616) do
 
   create_table "authorizations", force: true do |t|
     t.string   "provider"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20130812165340) do
     t.datetime "updated_at"
     t.string   "fb_id"
     t.string   "gender"
+    t.boolean  "admin",      default: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
@@ -48,6 +49,7 @@ ActiveRecord::Schema.define(version: 20130812165340) do
     t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "votes", force: true do |t|

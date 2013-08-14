@@ -1,5 +1,7 @@
 class VenuesController < ApplicationController
   before_action :set_venue, only: [:show, :edit, :update, :destroy]
+  before_action :admin_user,     only: :destroy
+  before_action :correct_user,   only: :destroy
   include VenuesHelper
   # GET /venues
   # GET /venues.json
@@ -33,7 +35,9 @@ class VenuesController < ApplicationController
   # POST /venues
   # POST /venues.json
   def create
-    @venue = Venue.new(venue_params)
+
+   
+    @venue = current_user.venues.build(venue_params) 
 
     respond_to do |format|
       if @venue.save
@@ -64,6 +68,7 @@ class VenuesController < ApplicationController
   # DELETE /venues/1.json
   def destroy
     @venue.destroy
+    flash[:success] = "venue destroyed"
     respond_to do |format|
       format.html { redirect_to venues_url }
       format.json { head :no_content }
@@ -106,6 +111,15 @@ class VenuesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def venue_params
       params.require(:venue).permit(:title, :body)
+    end
+
+    def admin_user
+      redirect_to(root_url) unless current_user.admin?
+    end
+
+    def correct_user
+      @venue = current_user.venues.find_by(id: params[:id])
+      redirect_to root_url if @venue.nil?
     end
 
 end

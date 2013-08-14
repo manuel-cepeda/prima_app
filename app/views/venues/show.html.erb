@@ -11,10 +11,13 @@
           <div class="alert alert-<%= key %>"><%= value %></div>
   <% end %>
   <%= @venue.body %>
+
+
+<% if signed_in? %>
+
   <%= link_to('vote up', vote_up_venue_path(@venue), :method => :post) %>
   <%= link_to('vote down', vote_down_venue_path(@venue), :method => :post) %>
-  
-
+<% end %>
 
   aqui es total en contra 
 
@@ -32,7 +35,7 @@ y a favor
   <div class="span8">
     <% if @venue.posts.any? %>
       <h3>POsts (<%= @venue.posts.count %>)</h3>
-      <ol class="microposts">
+      <ol class="posts">
         <%= render @posts %>
       </ol>
       <%= will_paginate @posts %>

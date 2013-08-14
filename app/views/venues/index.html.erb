@@ -5,7 +5,8 @@
 
 
     <% if current_user %>
-      Welcome <%= current_user.name %>!
+      
+      <%= link_to current_user.name, current_user %>
       <%= link_to "Log Out", logout_path %>
     <% else %>
       <a href="/auth/facebook" data-ajax="false" class="ui-btn-left">Login</a>
@@ -35,9 +36,19 @@
       <%= link_to venue.title, venue %>
        votes a favor<%= venue.votes_for %>
         votes against <%= venue.votes_against %>
-
+ 
+<% if signed_in? %>
+  <% if current_user.admin? || current_user?(venue.user)%>
+    | <%= link_to "delete", venue, method: :delete,
+                                  data: { confirm: "You sure?" } %>
 
       <%= link_to 'edit venue', edit_venue_path(venue), "data-icon" => "gear" %>
+<% end %>
+
+
+  <% end %>
+
+
     </li>
     <% end %>
   </ul>
