@@ -1,0 +1,42 @@
+
+<%= form_tag vote_path, :method => :get do %>
+<p>
+<%= text_field_tag :search, params[:search], placeholder: "Search Venue" %>
+<%= submit_tag "Search", :name => nil %>
+</p>
+<% end %>
+
+
+  <% if @venues.empty?&&@search_flag%>
+   No venues found
+
+   Add the venue clicking here 
+    <%= link_to 'Add', new_venue_path, "data-icon" => "plus", "class" => "ui-btn-right" %>
+  <% else %>
+
+	  <ul data-role="listview">
+	    <% @venues.each do |venue| %>
+	    <li>
+	      <%= link_to venue.title, venue %>
+	       votes a favor<%= venue.votes_for %>
+	        votes against <%= venue.votes_against %>
+	 
+	  <% if signed_in? %>
+	    <% if current_user.admin? || current_user?(venue.user)%>
+	      | <%= link_to "delete", venue, method: :delete,
+	                                    data: { confirm: "You sure?" } %>
+
+	        <%= link_to 'edit venue', edit_venue_path(venue), "data-icon" => "gear" %>
+	    <% end %>
+
+
+	  <% end %>
+
+  <% end %>
+    </li>
+
+    No venue you are?
+    add your current venue here:
+    <%= link_to 'Add', new_venue_path, html: {"data-ajax"=>"false"}, "data-icon" => "plus", "class" => "ui-btn-right" %>
+    <% end %>
+  </ul>

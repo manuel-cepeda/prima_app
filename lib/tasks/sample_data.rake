@@ -15,12 +15,16 @@ namespace :db do
     end
 
     Venue.create!(title: "Example User",
-                 body: "example@railstutorial.org")
+                 body: "example@railstutorial.org",
+                 lat: 0,
+                 lng: 0)
     99.times do |n|
       title  = Faker::Company.name
       body = Faker::Lorem.sentence(5)
       Venue.create!(title: title,
-                   body: body)
+                   body: body,
+                   lat: 0,
+                   lng: 0)
     end 
 
     venues = Venue.all(limit: 6)

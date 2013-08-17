@@ -4,4 +4,9 @@ class Venue < ActiveRecord::Base
 	belongs_to :user
 	validates :title, presence: true, length: {maximum: 60}
 
+	searchable  do
+		
+		text :title
+	end
+
 end

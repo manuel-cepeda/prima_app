@@ -1,9 +1,67 @@
+
+<% provide(:title, @venue.title) %>
+<div id="new_map" data-role="page" data-url="<%= request.path %>">
+
+    <script type="text/javascript">
+        $("div:jqmData(role='page'):last").bind('pageinit', function() {
+            if(navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position){
+                    initialize(position.coords.latitude,position.coords.longitude);
+                });
+            }
+        });
+        function initialize(lat,lng) {
+            var latlng = new google.maps.LatLng(lat, lng);
+            var minZoomLevel = 15;
+            var myOptions = {
+                zoom: minZoomLevel,
+                center: latlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            var map = new google.maps.Map(document.getElementById("map_canvas"),myOptions);
+            var marker = new google.maps.Marker({
+                position: latlng,
+                map: map,
+                title:"You are here!"
+            });
+
+            document.getElementById('venue_lat').value=lat;
+            document.getElementById('venue_lng').value=lng;
+
+        }
+
+
+
+    </script>
+
+
 <div data-role="header">
 <h1>New venue</h1>
 </div>
 
-<div data-role="content">
-<%= render 'form' %>
+   
+  <% if signed_in? %>
+	<div data-role="content">
+	<%= form_for @venue , html: {"data-ajax"=>"false"} do |f|%>
+
+		<%= f.label "Nombre del lugar" %>
+		<%= f.text_field :title, placeholder: "ej: La Cantina de Moe" %>
+		<%= f.label "Donde queda? opcional" %>
+		<%= f.text_field :body, placeholder: "ej: Calle constitución, Avda Siempre Viva 3432" %>
+		<%= f.hidden_field :lat, :value => "" %>
+		<%= f.hidden_field :lng, :value => "" %>
+		<%= f.submit "Add Venue" %>
+  <div id="map_canvas" style="height:300px; width:200px"></div>
+
+    <% end  %>
+
+    </div>
+
+                 
+	Click the allow button to let the browser find your location.
+	<button onclick="getLocation()">Obtener tu ubicación</button>
+	<% else  %>
+	Debes autentificarte
+	<% end  %>
+
 </div>
-
-

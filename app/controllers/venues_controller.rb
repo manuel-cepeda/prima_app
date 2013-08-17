@@ -10,7 +10,6 @@ class VenuesController < ApplicationController
 
     @venues = venues_by_plus_minus_vote(params[:time])
 
-
   end
 
   # GET /venues/1
@@ -99,6 +98,27 @@ class VenuesController < ApplicationController
       redirect_to [@venue]
       flash[:error] =  "You have already voted"
     end      
+  end
+
+
+  def vote
+
+    @venues=[]
+    @search_flag=false
+
+      # If the search param with it's whitespace stripped off
+      # actually has something left then search for it
+      unless params[:search].nil? || params[:search].strip.empty?
+          @search = Venue.search do
+              fulltext params[:search]    
+          end
+          @venues = @search.results
+          @search_flag=true
+      end
+
+      @venues
+
+
   end 
 
 
@@ -110,7 +130,7 @@ class VenuesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def venue_params
-      params.require(:venue).permit(:title, :body)
+      params.require(:venue).permit(:title, :body, :lat, :lng)
     end
 
     def admin_user

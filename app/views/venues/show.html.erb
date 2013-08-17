@@ -1,52 +1,99 @@
 <% provide(:title, @venue.title) %>
-<div data-role="header">
-  <h1><%= @venue.title %></h1>
-  <%= link_to 'Home', venues_url, "class" => "ui-btn-right" %>
-  <%= link_to 'Back', venues_url, "class" => "ui-btn-left" %>
-</div>
- 
-<div data-role="content">
+<div id="basic_map" data-role="page" data-url="<%= request.path %>" data-theme="c">
 
-  <% flash.each do |key, value| %>
-          <div class="alert alert-<%= key %>"><%= value %></div>
-  <% end %>
-  <%= @venue.body %>
+<script type="text/javascript">
 
 
-<% if signed_in? %>
-
-  <%= link_to('vote up', vote_up_venue_path(@venue), :method => :post) %>
-  <%= link_to('vote down', vote_down_venue_path(@venue), :method => :post) %>
-<% end %>
-
-  aqui es total en contra 
-
-<%=  @venue.votes_against%>
+        function initialize() {
 
 
-y a favor
+             
 
-<%=  @venue.votes_for%>
+document.getElementById('map-canvas').style.display = "";
 
-<% if signed_in? %>
-<%= render 'shared/post_form' %>
-<% end %>
 
-  <div class="span8">
-    <% if @venue.posts.any? %>
-      <h3>POsts (<%= @venue.posts.count %>)</h3>
-      <ol class="posts">
-        <%= render @posts %>
-      </ol>
-      <%= will_paginate @posts %>
+           // This is the minimum zoom level that we'll allow
+           var minZoomLevel = 15;
+           var latlng = new google.maps.LatLng(<%= @venue.lat %>, <%= @venue.lng %>);
+           var map = new google.maps.Map(document.getElementById('map-canvas'), {
+              zoom: minZoomLevel,
+              center: latlng,
+              mapTypeId: google.maps.MapTypeId.ROADMAP
+           });
+
+          var marker = new google.maps.Marker({
+              position: latlng,
+              map: map,
+              title:"You are here!"
+          });
+
+          
+google.maps.event.trigger(map, 'resize');
+
+        }
+
+
+</script>
+
+
+  <div data-role="header" data-theme="b">
+    <h1><%= @venue.title %></h1>
+    <%= link_to 'Home', venues_url, "class" => "ui-btn-right" %>
+    <%= link_to 'Back', venues_url, "class" => "ui-btn-left" %>
+  </div>
+   
+  <div data-role="content">
+
+    <% flash.each do |key, value| %>
+            <div class="alert alert-<%= key %>"><%= value %></div>
     <% end %>
+    Venue:<%= @venue.title %>
+    Dirección: <%= @venue.body %>
+
+    
+                <div id="map-canvas" style="width=300px; height:300px; display:none;">
+                </div>          
+
+Click the allow button to let the browser find your location.
+  <button onclick="initialize()">Obtener tu ubicación</button>
+
+
+  <% if signed_in? %>
+
+    <%= link_to('vote up', vote_up_venue_path(@venue), :method => :post) %>
+    <%= link_to('vote down', vote_down_venue_path(@venue), :method => :post) %>
+  <% end %>
+
+    aqui es total en contra 
+
+  <%=  @venue.votes_against%>
+
+
+  y a favor
+
+  <%=  @venue.votes_for%>
+
+  <% if signed_in? %>
+  <%= render 'shared/post_form' %>
+  <% end %>
+
+    <div class="span8">
+      <% if @venue.posts.any? %>
+        <h3>POsts (<%= @venue.posts.count %>)</h3>
+        <ol class="posts">
+          <%= render @posts %>
+        </ol>
+        <%= will_paginate @posts %>
+      <% end %>
+    </div>
+
+
+
+
   </div>
 
 
-
-
-</div>
-
 <div>
+
 
 

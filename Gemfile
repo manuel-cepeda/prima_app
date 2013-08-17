@@ -11,6 +11,8 @@ gem 'bootstrap-will_paginate', '0.0.9'
 gem 'omniauth'
 gem 'omniauth-facebook', '1.4.0'
 gem 'thumbs_up'
+gem 'sunspot_rails'
+gem 'sunspot_solr' # optional pre-packaged Solr distribution for use in development
 
 group :development, :test do
   gem 'sqlite3', '1.3.7'

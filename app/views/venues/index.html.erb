@@ -1,8 +1,11 @@
 <% provide(:title, 'Lugares') %>
+
+<div id="basic_map" data-role="page" data-url="<%= request.path %>">
+
 <div data-role="header">
     <h1><%= full_title('') %></h1>
-    <%= link_to 'Add', new_venue_path, "data-icon" => "plus", "class" => "ui-btn-right" %>
 
+    <%= link_to 'Vote', vote_path, "data-icon" => "plus", "class" => "ui-btn-right"%>
 
     <% if current_user %>
       
@@ -14,6 +17,9 @@
 
   
 </div>
+
+
+
 
 <% flash.each do |key, value| %>
         <div class="alert alert-<%= key %>"><%= value %></div>
@@ -37,13 +43,13 @@
        votes a favor<%= venue.votes_for %>
         votes against <%= venue.votes_against %>
  
-<% if signed_in? %>
-  <% if current_user.admin? || current_user?(venue.user)%>
-    | <%= link_to "delete", venue, method: :delete,
-                                  data: { confirm: "You sure?" } %>
+  <% if signed_in? %>
+    <% if current_user.admin? || current_user?(venue.user)%>
+      | <%= link_to "delete", venue, method: :delete,
+                                    data: { confirm: "You sure?" } %>
 
-      <%= link_to 'edit venue', edit_venue_path(venue), "data-icon" => "gear" %>
-<% end %>
+        <%= link_to 'edit venue', edit_venue_path(venue), "data-icon" => "gear" %>
+    <% end %>
 
 
   <% end %>
@@ -52,4 +58,11 @@
     </li>
     <% end %>
   </ul>
+</div>
+
+
+<div data-role="footer">
+</div>
+
+
 </div>
