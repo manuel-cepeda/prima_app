@@ -11,7 +11,21 @@
   <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
   <script type="text/javascript" src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.js"></script>
 
+  <script type="text/javascript">
+         $( document ).on( "swipeleft swiperight", "#show_venue", function( e ) {
+                // We check if there is no open panel on the page because otherwise
+                // a swipe to close the left panel would also open the right panel (and v.v.).
+                // We do this by checking the data that the framework stores on the page element (panel: open).
+                if ( $.mobile.activePage.jqmData( "panel" ) !== "open" ) {
+                    if ( e.type === "swipeleft"  ) {
+                        $( "#right-panel" ).panel( "open" );
+                    } else if ( e.type === "swiperight" ) {
+                        $( "#left-panel" ).panel( "open" );
+                    }
+                }
+            });
 
+  </script>
 
 
   <%= csrf_meta_tags %>
@@ -22,9 +36,43 @@
 <body>
 
 
+
+
+
+
+<div id="<%= yield(:page) %>" data-role="page" data-url="<%= request.path %>" <%= render 'shared/style' %>>
+<div id="fb-root"></div>
+<script>
+
+  // Load the SDK asynchronously
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/es_LA/all.js#xfbml=1&appId=708728955810882";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
+$(document).bind('pageshow', function() {
+    try{
+        FB.XFBML.parse();
+    } catch(err){}
+});
+</script>
     
 	<%= yield %>
-      <%= debug(params) if Rails.env.development? %>
+  <%= debug(params) if Rails.env.development? %>
+
+
+
+     <%= render 'shared/options' %>
+
+
+
+</div>
+
+
+
 
 </body>
 </html>

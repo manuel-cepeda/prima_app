@@ -1,3 +1,25 @@
+<% provide(:title, "Ingresa") %>
+<% provide(:page, "ingresa") %>
 
 
-<a href="/auth/facebook" data-ajax="false">test</a>
+
+  <div data-role="header" <%= render 'shared/style' %>>
+
+
+
+  </div>
+   
+  <div data-role="content">
+
+    <% flash.each do |key, value| %>
+            <div class="alert alert-<%= key %>"><%= value %></div>
+    <% end %>
+
+
+
+
+<a href="/auth/facebook" data-role="button" data-ajax="false" data-mini="true" data-inline="true" data-icon="grid" data-iconpos="right">Ingresa con Facebook</a>
+        
+
+  </div>
+

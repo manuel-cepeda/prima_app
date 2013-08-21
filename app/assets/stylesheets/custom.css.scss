@@ -12,7 +12,7 @@ aside {
       line-height: 1;
     }
     h1 {
-      font-size: 1.4em;
+      font-size: 2em;
       text-align: left;
       letter-spacing: -1px;
       margin-bottom: 3px;
@@ -21,10 +21,135 @@ aside {
   }
 }
 
-.gravatar {
+a {text-decoration:none} 
+
+.avatar {
   float: left;
   margin-right: 10px;
 }
 
 
 
+h2 {
+    font-size: 1.2em;
+    letter-spacing: -1px;
+    margin-bottom: 3px;
+    margin-top: 0;
+    text-align: left;
+}
+
+.mini_title{
+
+  font-weight: bold;
+}
+
+
+section {
+    border-top: 1px solid #484848;
+    padding: 10px 0;
+}
+
+
+
+.span4 {
+    width: 100%;
+ border-top: 1px solid #484848;
+}
+
+.votes {
+
+    font-size: 0.9em;
+}
+
+.votes.list{
+
+    font-size: 0.8em;
+    padding: 0.7em 15px;
+}
+
+.posts {
+    list-style: none outside none;
+    margin: 10px 0 0;
+}
+.posts li {
+    border-top: 1px solid #E8E8E8;
+    padding: 10px 0;
+}
+
+.content {
+    display: block;
+}
+
+.center {
+
+  text-align:center;
+}
+
+#add_button{
+
+padding: 20px 0 0;
+}
+
+.pic img {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #CCCCCC;
+    padding: 7px;
+}
+
+div#user_info {
+  width: 220px;
+}
+ 
+#user_info h2 {
+  font: 800 25px/1.5 Helvetica, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+ 
+#user_info ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+ 
+#user_info li {
+  font: 200 15px/1.5 Helvetica, Verdana, sans-serif;
+  border-bottom: 1px solid #ccc;
+}
+ 
+#user_info li:last-child {
+  border: none;
+}
+ 
+#user_info li  {
+  text-decoration: none;
+  color: #000;
+  display: block;
+  width: 213px;
+ 
+  -webkit-transition: font-size 0.3s ease, background-color 0.3s ease;
+  -moz-transition: font-size 0.3s ease, background-color 0.3s ease;
+  -o-transition: font-size 0.3s ease, background-color 0.3s ease;
+  -ms-transition: font-size 0.3s ease, background-color 0.3s ease;
+  transition: font-size 0.3s ease, background-color 0.3s ease;
+}
+
+.facebook_comments{
+
+  text-align:center;
+}
+
+.qualification{
+
+ margin-left: 10px;
+ font-size: 1em;
+ background: #DDDDDD;
+ border-radius: 25px;
+ padding: 0 10px;
+}
+
+.title_search{
+
+  margin-top:30px;
+  text-align:center;
+}

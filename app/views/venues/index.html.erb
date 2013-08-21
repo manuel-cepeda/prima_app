@@ -1,68 +1,96 @@
 <% provide(:title, 'Lugares') %>
-
-<div id="basic_map" data-role="page" data-url="<%= request.path %>">
-
-<div data-role="header">
-    <h1><%= full_title('') %></h1>
-
-    <%= link_to 'Vote', vote_path, "data-icon" => "plus", "class" => "ui-btn-right"%>
-
-    <% if current_user %>
-      
-      <%= link_to current_user.name, current_user %>
-      <%= link_to "Log Out", logout_path %>
-    <% else %>
-      <a href="/auth/facebook" data-ajax="false" class="ui-btn-left">Login</a>
-    <% end %>
-
-  
-</div>
+<% provide(:page, "index_venue") %>
 
 
+<div data-role="header" <%= render 'shared/style' %>>
+    <h1>Krowdly - Lugares On Fire</h1>
 
-
+      <%= render 'shared/header_buttons' %>
 <% flash.each do |key, value| %>
         <div class="alert alert-<%= key %>"><%= value %></div>
 <% end %>
 
- <div data-role="navbar">
-  <ul>
-   <li><%= link_to 'Hace 1 hora', venues_path(:time => "1"), "class" => "ui-btn-active ui-state-persist" %></li>
-   <li><%= link_to '1 día', venues_path(:time => "2") %></li>
-   <li><%= link_to 'Siempre', venues_path(:time => "3") %></li>
-  </ul>
-</div><!-- /navbar -->
-<div data-role="content">
+   <div data-role="navbar">
+    <ul>
+
+      <% if (@time != '2') %>
+         <li><%= link_to 'On Fire Ahora', venues_path(:time => "1"), "class" => "ui-btn-active ui-state-persist" %></li>
+         <li><%= link_to 'On Fire Todos los Tiempos', venues_path(:time => "2") %></li>
+      <% else %>
+         <li><%= link_to 'On Fire Ahora', venues_path(:time => "1")%> </li>
+         <li><%= link_to 'On Fire Todos los Tiempos', venues_path(:time => "2"), "class" => "ui-btn-active ui-state-persist"%></li>
+      <% end %>
 
 
-
-  <ul data-role="listview">
-    <% @venues.each do |venue| %>
-    <li>
-      <%= link_to venue.title, venue %>
-       votes a favor<%= venue.votes_for %>
-        votes against <%= venue.votes_against %>
- 
-  <% if signed_in? %>
-    <% if current_user.admin? || current_user?(venue.user)%>
-      | <%= link_to "delete", venue, method: :delete,
-                                    data: { confirm: "You sure?" } %>
-
-        <%= link_to 'edit venue', edit_venue_path(venue), "data-icon" => "gear" %>
-    <% end %>
+    </ul>
+  </div><!-- /navbar -->
+  
+</div>
 
 
+<div data-role="content" <%= render 'shared/style' %>>
+
+  
+  <%= form_tag vote_path, :method => :get do %>
+    <p>
+    <%= text_field_tag :search, params[:search], placeholder: "Buscar Lugar" %>
+    <%= submit_tag "Buscar", :name => nil %>
+    </p>
   <% end %>
 
 
+<div>
+
+  <ul  data-theme="d" data-role="listview">
+    <li class="title_search">Ranking mejores 30 Lugares </li>
+    <% @venues.each do |venue| %>
+    <li>
+
+     <a class="ui-link-inherit" href="<%= venue_url(venue) %>">
+        <p class="ui-li-aside ui-li-desc">
+          <h3 class="ui-li-heading"><%= venue.title %></h3>
+        </p>
+        <p class="ui-li-desc">
+            
+          <% if (@time != '2') %>
+
+            </span>Total Votos Últimas 3 horas</span><strong class="qualification">Puntuación: <%= "#{venue.get_positive_votes.count-venue.get_negative_votes.count}" %></strong>
+            <p class="ui-li-desc">
+
+                <%=" Entretenidos #{venue.get_positive_votes.count}" %>
+                <strong> | </strong>
+                <%="Aburridos #{venue.get_negative_votes.count}" %>              
+
+            </p>
+          <% else %>
+            <span>Total Votos Toda la Eternidad</span><strong class="qualification">Puntuación: <%= "#{venue.plusminus}" %></strong>
+            <p class="ui-li-desc">
+                <%=" Entretenidos #{venue.votes_for}" %>
+                <strong> | </strong>
+                <%="Aburridos #{venue.votes_against}" %>
+            </p>
+
+          <% end  %>
+        </p>
+
+          <% if signed_in? %>
+            <% if current_user.admin? || current_user?(venue.user)%>
+              <%= link_to "delete", venue,  "data-role"=>"button", method: :delete, 
+                                            data: { confirm: "You sure?" } %>
+
+                                            
+                <%= link_to 'edit venue', edit_venue_path(venue), "data-icon" => "gear" %>
+            <% end %>
+          <% end %>
+
+      </a>
     </li>
     <% end %>
   </ul>
 </div>
 
 
-<div data-role="footer">
 </div>
 
 
-</div>
+

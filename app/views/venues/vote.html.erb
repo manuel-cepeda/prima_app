@@ -1,42 +1,72 @@
+<% provide(:title, "Votar Lugar") %>
+<% provide(:page, "vote") %>
+
+
+
+
+<div data-role="header" <%= render 'shared/style' %>>
+
+
+
+<h1>Votar</h1>
+<%= render 'shared/header_buttons' %>
+
+</div>
+
+
+ <div data-role="content">
 
 <%= form_tag vote_path, :method => :get do %>
 <p>
-<%= text_field_tag :search, params[:search], placeholder: "Search Venue" %>
-<%= submit_tag "Search", :name => nil %>
+<%= text_field_tag :search, params[:search], placeholder: "Buscar Lugar" %>
+<%= submit_tag "Buscar", :name => nil %>
 </p>
 <% end %>
 
 
   <% if @venues.empty?&&@search_flag%>
-   No venues found
+   <strong>El lugar que buscas aún no existe en el sistema ;(</strong>
 
-   Add the venue clicking here 
-    <%= link_to 'Add', new_venue_path, "data-icon" => "plus", "class" => "ui-btn-right" %>
   <% else %>
 
-	  <ul data-role="listview">
-	    <% @venues.each do |venue| %>
+	<ul data-role="listview">
+	   <% @venues.each do |venue| %>
+    	<li class="title_search">Resultados de Búsqueda</li>
 	    <li>
-	      <%= link_to venue.title, venue %>
-	       votes a favor<%= venue.votes_for %>
-	        votes against <%= venue.votes_against %>
-	 
-	  <% if signed_in? %>
-	    <% if current_user.admin? || current_user?(venue.user)%>
-	      | <%= link_to "delete", venue, method: :delete,
-	                                    data: { confirm: "You sure?" } %>
+		    <a class="ui-link-inherit" href="<%= venue_url(venue) %>">
+		        <p class="ui-li-aside ui-li-desc">
+		          <h3 class="ui-li-heading"><%= venue.title %></h3>
+		        </p>
+		        <p class="ui-li-desc">
+		            </span>Total Votos Últimas 3 horas</span>
+		            <strong class="qualification">Puntuación: <%= "#{venue.get_positive_votes.count-venue.get_negative_votes.count}" %></strong>
+		            <p class="ui-li-desc">
 
-	        <%= link_to 'edit venue', edit_venue_path(venue), "data-icon" => "gear" %>
-	    <% end %>
+		                <%=" Entretenidos #{venue.get_positive_votes.count}" %>
+		                <strong> | </strong>
+		                <%="Aburridos #{venue.get_negative_votes.count}" %>              
+
+		            </p>
+			    </p>
+		          <% if signed_in? %>
+		            <% if current_user.admin? || current_user?(venue.user)%>
+		              <%= link_to "delete", venue,  "data-role"=>"button", method: :delete, 
+		                                            data: { confirm: "You sure?" } %>                          
+		                <%= link_to 'edit venue', edit_venue_path(venue), "data-icon" => "gear" %>
+		            <% end %>
+		          <% end %>
+		    </a>
+		</li>
+	   <% end %>
+	</ul>
 
 
-	  <% end %>
+   <% end %>
+  
 
-  <% end %>
-    </li>
 
-    No venue you are?
-    add your current venue here:
-    <%= link_to 'Add', new_venue_path, html: {"data-ajax"=>"false"}, "data-icon" => "plus", "class" => "ui-btn-right" %>
-    <% end %>
-  </ul>
+  <div id="add_button">
+	<strong>Si no encontraste el lugar y estás ahí, Agrégalo :)</strong>
+    <%= link_to "Agregar", new_venue_path, "data-role"=>"button", "class"=>"ui-btn-left" %>
+  </div>
+</div>

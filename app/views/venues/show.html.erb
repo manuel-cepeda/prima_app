@@ -1,45 +1,45 @@
 <% provide(:title, @venue.title) %>
-<div id="basic_map" data-role="page" data-url="<%= request.path %>" data-theme="c">
+<% provide(:page, "show_venue") %>
 
-<script type="text/javascript">
+  <div data-role="header" <%= render 'shared/style' %>>
 
-
-        function initialize() {
-
-
-             
-
-document.getElementById('map-canvas').style.display = "";
+  <script type="text/javascript">
 
 
-           // This is the minimum zoom level that we'll allow
-           var minZoomLevel = 15;
-           var latlng = new google.maps.LatLng(<%= @venue.lat %>, <%= @venue.lng %>);
-           var map = new google.maps.Map(document.getElementById('map-canvas'), {
-              zoom: minZoomLevel,
-              center: latlng,
-              mapTypeId: google.maps.MapTypeId.ROADMAP
-           });
-
-          var marker = new google.maps.Marker({
-              position: latlng,
-              map: map,
-              title:"You are here!"
-          });
-
-          
-google.maps.event.trigger(map, 'resize');
-
-        }
 
 
-</script>
+          function initialize() {
 
 
-  <div data-role="header" data-theme="b">
-    <h1><%= @venue.title %></h1>
-    <%= link_to 'Home', venues_url, "class" => "ui-btn-right" %>
-    <%= link_to 'Back', venues_url, "class" => "ui-btn-left" %>
+           
+
+            document.getElementById('map-canvas').style.display = "";
+
+
+             // This is the minimum zoom level that we'll allow
+             var minZoomLevel = 15;
+             var latlng = new google.maps.LatLng(<%= @venue.lat %>, <%= @venue.lng %>);
+             var map = new google.maps.Map(document.getElementById('map-canvas'), {
+                zoom: minZoomLevel,
+                center: latlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+             });
+
+            var marker = new google.maps.Marker({
+                position: latlng,
+                map: map,
+                title:"You are here!"
+            });
+
+            google.maps.event.trigger(map, 'resize');
+          }
+
+
+  </script>
+
+    <h1>Lugar</h1>
+      <%= render 'shared/header_buttons' %>
+
   </div>
    
   <div data-role="content">
@@ -47,53 +47,64 @@ google.maps.event.trigger(map, 'resize');
     <% flash.each do |key, value| %>
             <div class="alert alert-<%= key %>"><%= value %></div>
     <% end %>
-    Venue:<%= @venue.title %>
-    Dirección: <%= @venue.body %>
 
-    
-                <div id="map-canvas" style="width=300px; height:300px; display:none;">
-                </div>          
+    <aside>
+       <section>
 
-Click the allow button to let the browser find your location.
-  <button onclick="initialize()">Obtener tu ubicación</button>
-
-
-  <% if signed_in? %>
-
-    <%= link_to('vote up', vote_up_venue_path(@venue), :method => :post) %>
-    <%= link_to('vote down', vote_down_venue_path(@venue), :method => :post) %>
-  <% end %>
-
-    aqui es total en contra 
-
-  <%=  @venue.votes_against%>
+          <h1> <%= @venue.title %> </h1>
+         
+        </section>
+    </aside>
+    <aside class="span4">
+      <section>
 
 
-  y a favor
+        <div class="stats">
+          <a href=""onclick="initialize()">Ver Mapa</a>
+       <div id="map-canvas" style="width=100%; height:300px; display:none;"></div>  
+          <p>Votos últimas 3 horas </p>
 
-  <%=  @venue.votes_for%>
+          <strong class="votes"><%=" Votos Netos #{@total_votes.count}" %></strong>
+          <strong> | </strong>
+          <strong class="votes"><%=" Entretenidos #{@positive_votes.count}" %></strong>
+          <strong> | </strong>
+          <strong class="votes"><%="Aburridos #{@negative_votes.count}" %></strong>
 
-  <% if signed_in? %>
-  <%= render 'shared/post_form' %>
-  <% end %>
+        </div>
 
-    <div class="span8">
-      <% if @venue.posts.any? %>
-        <h3>POsts (<%= @venue.posts.count %>)</h3>
-        <ol class="posts">
-          <%= render @posts %>
-        </ol>
-        <%= will_paginate @posts %>
+
+      </section>
+
+    </aside>
+
+   
+
+<section class="center">
+      <% if signed_in? %>
+
+      <p>Si estás dentro del lugar, califícalo</p>
+
+      <%= link_to("Entretenido", vote_up_venue_path(@venue), :method => :post, "data-role"=>"button", "data-inline"=>"true", "data-theme"=>"b") %>
+      <%= link_to("Aburrido", vote_down_venue_path(@venue), :method => :post, "data-role"=>"button", "data-inline"=>"true", "data-theme"=>"b") %>
+
       <% end %>
+</section>
+
+<% if signed_in? %>
+    <div class="facebook_comments">
+    <div class="fb-comments" data-href="<%= request.original_url %>" data-width="300"></div>
     </div>
+<% else %>
+<span>Para ver los comentarios de los demás y votar ingresa</span>
+    <a href="/auth/facebook" data-role="button" data-ajax="false" data-mini="true" data-inline="true" data-icon="grid" data-iconpos="right">Ingresar</a>
+<% end %>
 
-
-
+        
 
   </div>
 
 
-<div>
+
 
 
 

@@ -1,5 +1,7 @@
 PrimaApp::Application.routes.draw do
 
+  resources :vote_records
+
   resources :users
   resources :venues
   root :to =>"venues#index"
@@ -8,6 +10,7 @@ PrimaApp::Application.routes.draw do
   match '/auth/failure', :to => 'sessions#failure', via: [:get, :post]
   match '/logout', :to => 'sessions#destroy', via: [:get]
   match '/vote', :to => 'venues#vote', via: [:get]
+
   resources :posts, only: [:create, :destroy]
 
 

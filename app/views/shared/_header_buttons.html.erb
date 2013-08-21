@@ -1,0 +1,15 @@
+
+
+<%= link_to 'Inicio', root_url, "data-role"=>"button", "data-mini"=>"true", "data-inline"=>"true", "data-icon"=>"home", "data-iconpos"=>"right" %>
+  
+  <% if current_user && signed_in? %>
+    <a href="#right-panel" data-role="button" data-mini="true" data-inline="true" data-icon="grid" data-iconpos="right">Opciones</a>
+
+  <% else %>
+
+    <a href="/auth/facebook" data-role="button" data-ajax="false" data-mini="true" data-inline="true" data-icon="grid" data-iconpos="right">Ingresar</a>
+
+  <% end %>
+
+
+

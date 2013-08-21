@@ -1,6 +1,5 @@
 class VenuesController < ApplicationController
   before_action :set_venue, only: [:show, :edit, :update, :destroy]
-  before_action :admin_user,     only: :destroy
   before_action :correct_user,   only: :destroy
   include VenuesHelper
   # GET /venues
@@ -9,6 +8,9 @@ class VenuesController < ApplicationController
     #@venues = Venue.all
 
     @venues = venues_by_plus_minus_vote(params[:time])
+    @time=params[:time]
+
+
 
   end
 
@@ -20,6 +22,9 @@ class VenuesController < ApplicationController
     @posts = @venue.posts.paginate(page: params[:page])
     @post =  current_user.posts.build if signed_in?
     session[:venue_id] = @venue.id
+    @positive_votes=@venue.get_positive_votes
+    @negative_votes=@venue.get_negative_votes
+    @total_votes=@venue.get_total_votes
   end
 
   # GET /venues/new
@@ -138,8 +143,10 @@ class VenuesController < ApplicationController
     end
 
     def correct_user
+
       @venue = current_user.venues.find_by(id: params[:id])
-      redirect_to root_url if @venue.nil?
+      redirect_to(root_url) unless (current_user.admin? || !@venue.nil?)
+
     end
 
 end
