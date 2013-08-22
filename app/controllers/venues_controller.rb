@@ -82,6 +82,17 @@ class VenuesController < ApplicationController
   def vote_up
     begin
       current_user.vote_exclusively_for(@venue = Venue.find(params[:id])) 
+    
+       #send information to user facebook 
+      if session["fb_access_token"].present?
+          @graph = Koala::Facebook::API.new(session["fb_access_token"])
+
+          profile = @graph.get_object("me")
+          @graph.put_connections("me", "feed", :message => "Has votado positivo en #{@venue.title}", :link => "http://www.hola.com")
+
+      end
+
+
      # current_user.vote_for(@venue = Venue.find(params[:id]))
       redirect_to [@venue]
       flash[:success] = "You have voted successfully"
@@ -95,6 +106,14 @@ class VenuesController < ApplicationController
   def vote_down
     begin
       current_user.vote_exclusively_against(@venue = Venue.find(params[:id]))
+       #send information to user facebook 
+      if session["fb_access_token"].present?
+          @graph = Koala::Facebook::API.new(session["fb_access_token"])
+
+          profile = @graph.get_object("me")
+          @graph.put_connections("me", "feed", :message => "Has votado negativo en #{@venue.title}", :link => "http://www.hola.com")
+      end
+
       #current_user.vote_against(@venue = Venue.find(params[:id]))
       redirect_to [@venue]
       flash[:success] = "You have voted successfully"

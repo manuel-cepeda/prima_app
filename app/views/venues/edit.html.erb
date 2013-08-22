@@ -1,9 +1,87 @@
-<div data-role="header">
-  <h1>Editing Venue</h1>
-<%= link_to 'Delete', @post, :method => :delete, "data-icon" => "delete", "class" => "ui-btn-right" %>
-  <%= link_to 'Back', venues_url, "class" => "ui-btn-left" %>
+
+<% provide(:title, @venue.title) %>
+<% provide(:page, "edit_venue") %>
+
+
+
+
+<div data-role="header" <%= render 'shared/style' %>>
+<h1>Editar Lugar</h1>
+<%= render 'shared/header_buttons' %>
+
+    <script type="text/javascript">
+
+    function geolocalize(){
+
+            if(navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position){
+                    initialize(position.coords.latitude,position.coords.longitude);
+                });
+            }
+    }
+
+        $("div:jqmData(role='page'):last").bind('pageinit', function() {
+                initialize(<%= @venue.lat %>,<%= @venue.lng %>);
+        });
+
+    
+
+        function initialize(lat,lng) {
+            var latlng = new google.maps.LatLng(lat, lng);
+            var minZoomLevel = 18;
+            var myOptions = {
+                zoom: minZoomLevel,
+                center: latlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            var map = new google.maps.Map(document.getElementById("map_canvas"),myOptions);
+            var marker = new google.maps.Marker({
+                position: latlng,
+                map: map,
+                title:"You are here!"
+            });
+
+            document.getElementById('venue_lat').value=lat;
+            document.getElementById('venue_lng').value=lng;
+
+        }
+
+    
+
+    </script>
+
+
 </div>
- 
-<div data-role="content">
-  <%= render 'form' %>
-</div>
+
+   
+  <% if signed_in? %>
+	<div data-role="content">
+	<%= form_for @venue do |f|%>
+
+		<%= f.label "Nombre del lugar" %>
+		<%= f.text_field :title, placeholder: "ej: La Cantina de Moe" %>
+		<%= f.label "ACtualizar ubicación? " %><a href="" onclick="geolocalize()">Geolocalizate</a> 
+
+		<%= f.hidden_field :lat, :value => "" %>
+		<%= f.hidden_field :lng, :value => "" %>
+        <div id="map_canvas" style="height:200px; width:100%"></div>
+		<%= f.submit "Actualizar" %>
+
+          <% if signed_in? %>
+            <% if current_user.admin? || current_user?(@venue.user)%>
+              <%= link_to "delete", @venue,  "data-role"=>"button", "data-mini"=>"true", "data-inline"=>"true", "data-icon"=>"home", "data-iconpos"=>"right", method: :delete, 
+                                            data: { confirm: "You sure?" } %>
+            <% end %>
+          <% end %>
+
+    <% end %>
+
+    </div>
+
+
+    <% else %>
+    <span>Para agregar </span>
+        <a href="/auth/facebook" data-role="button" data-ajax="false" data-mini="true" data-inline="true" data-icon="grid" data-iconpos="right">Ingresar</a>
+    <% end %>
+
+

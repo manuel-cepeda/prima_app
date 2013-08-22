@@ -30,8 +30,9 @@
   <% else %>
 
 	<ul data-role="listview">
-	   <% @venues.each do |venue| %>
+
     	<li class="title_search">Resultados de Búsqueda</li>
+    <% @venues.each do |venue| %>
 	    <li>
 		    <a class="ui-link-inherit" href="<%= venue_url(venue) %>">
 		        <p class="ui-li-aside ui-li-desc">

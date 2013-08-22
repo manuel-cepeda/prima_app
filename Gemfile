@@ -13,6 +13,8 @@ gem 'omniauth-facebook', '1.4.0'
 gem 'thumbs_up'
 gem 'sunspot_rails'
 gem 'sunspot_solr' # optional pre-packaged Solr distribution for use in development
+gem "koala", "~> 1.7.0rc1"
+
 
 group :development, :test do
   gem 'sqlite3', '1.3.7'

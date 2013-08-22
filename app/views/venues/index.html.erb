@@ -7,7 +7,7 @@
 
       <%= render 'shared/header_buttons' %>
 <% flash.each do |key, value| %>
-        <div class="alert alert-<%= key %>"><%= value %></div>
+        <div class="flash_message alert alert-<%= key %>"><%= value %></div>
 <% end %>
 
    <div data-role="navbar">

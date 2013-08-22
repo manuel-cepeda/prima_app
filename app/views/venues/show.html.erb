@@ -76,7 +76,13 @@
       </section>
 
     </aside>
-
+          <% if signed_in? %>
+            <% if current_user.admin? || current_user?(@venue.user)%>
+              <%= link_to "delete", @venue,  "data-role"=>"button", "data-mini"=>"true", "data-inline"=>"true", "data-icon"=>"delete", "data-iconpos"=>"right", method: :delete, 
+                                            data: { confirm: "You sure?" } %>
+                <%= link_to 'edit venue', edit_venue_path(@venue), "data-role"=>"button", "data-mini"=>"true", "data-inline"=>"true", "data-icon"=>"gear", "data-iconpos"=>"right" %>
+            <% end %>
+          <% end %>
    
 
 <section class="center">
@@ -84,8 +90,8 @@
 
       <p>Si estás dentro del lugar, califícalo</p>
 
-      <%= link_to("Entretenido", vote_up_venue_path(@venue), :method => :post, "data-role"=>"button", "data-inline"=>"true", "data-theme"=>"b") %>
-      <%= link_to("Aburrido", vote_down_venue_path(@venue), :method => :post, "data-role"=>"button", "data-inline"=>"true", "data-theme"=>"b") %>
+      <%= link_to("Entretenido", vote_up_venue_path(@venue), :method => :post, "data-role"=>"button", "data-inline"=>"true", "data-theme"=>"b", "data-icon"=>"arrow-u", "style"=>"width:150px", "data-iconpos"=>"right") %>
+      <%= link_to("Aburrido", vote_down_venue_path(@venue), :method => :post, "data-role"=>"button", "data-inline"=>"true", "data-theme"=>"b", "data-icon"=>"arrow-d", "style"=>"width:150px") %>
 
       <% end %>
 </section>
