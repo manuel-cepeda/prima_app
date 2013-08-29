@@ -1,6 +1,18 @@
+   <script type="text/javascript">
+		
+        $("div:jqmData(role='page'):last").bind('pageinit', function() {
+			$( "#home_b" ).on( "click", function( event ) {
+			window.location.href = "http://www.krowdly.com";
+	        });
+        });
 
 
-	<%= link_to 'Inicio', root_url, "data-role"=>"button", "data-mini"=>"true", "data-inline"=>"true", "data-icon"=>"home", "data-iconpos"=>"right" %>
+
+
+    </script>
+
+
+	<%= link_to 'Inicio', "#", "data-role"=>"button", "data-mini"=>"true", "data-inline"=>"true", "data-icon"=>"home", "data-iconpos"=>"right", "id"=>"home_b" %>
   
   <% if current_user && signed_in? %>
     <a href="#right-panel" data-role="button" data-mini="true" data-inline="true" data-icon="grid" data-iconpos="right">Opciones</a>
