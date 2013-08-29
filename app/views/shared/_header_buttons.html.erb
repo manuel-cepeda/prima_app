@@ -1,13 +1,6 @@
 
-<% if Rails.env.production? %>
- <a href="http://www.krowdly.com" rel="external" data-role="button" data-mini="true" data-inline="true" data-icon="home", data-iconpos="right">Inicio</a>
-<% else %>
-<%= link_to 'Inicio', root_url, "data-role"=>"button", "data-mini"=>"true", "data-inline"=>"true", "data-icon"=>"home", "data-iconpos"=>"right" %>
 
-<% end %>
-
-
-
+	<%= link_to 'Inicio', root_url, "data-role"=>"button", "data-mini"=>"true", "data-inline"=>"true", "data-icon"=>"home", "data-iconpos"=>"right" %>
   
   <% if current_user && signed_in? %>
     <a href="#right-panel" data-role="button" data-mini="true" data-inline="true" data-icon="grid" data-iconpos="right">Opciones</a>
