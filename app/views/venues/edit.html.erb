@@ -21,7 +21,11 @@
     }
 
 
-   
+        $("div:jqmData(role='page'):last").bind('pageinit', function() {
+                initialize(<%= @venue.lat %>,<%= @venue.lng %>);
+        });
+
+    
 
         function initialize(lat,lng) {
             var latlng = new google.maps.LatLng(lat, lng);

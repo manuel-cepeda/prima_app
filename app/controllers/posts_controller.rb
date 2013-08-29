@@ -7,7 +7,7 @@ class PostsController < ApplicationController
     @post.venue_id=session[:venue_id]
 
     if @post.save
-      flash[:success] = "Post created!"
+      flash[:success] = "Hemos recibido tu comentario!"
  
     else
       flash[:fail] = "Post error!"	

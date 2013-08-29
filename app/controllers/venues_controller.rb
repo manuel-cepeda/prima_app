@@ -45,7 +45,7 @@ class VenuesController < ApplicationController
 
     respond_to do |format|
       if @venue.save
-        format.html { redirect_to @venue, notice: 'Venue was successfully created.' }
+        format.html { redirect_to @venue, notice: 'Lugar exitosamente agregado.' }
         format.json { render action: 'show', status: :created, location: @venue }
       else
         format.html { render action: 'new' }
@@ -59,7 +59,7 @@ class VenuesController < ApplicationController
   def update
     respond_to do |format|
       if @venue.update(venue_params)
-        format.html { redirect_to @venue, notice: 'Venue was successfully updated.' }
+        format.html { redirect_to @venue, notice: 'Lugar exitosamente actualizado.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -88,18 +88,18 @@ class VenuesController < ApplicationController
           @graph = Koala::Facebook::API.new(session["fb_access_token"])
 
           profile = @graph.get_object("me")
-          @graph.put_connections("me", "feed", :message => "Has votado positivo en #{@venue.title}", :link => "http://www.hola.com")
+          @graph.put_connections("me", "feed", :message => "LO está pasando bien en #{@venue.title}", :link => "http://www.hola.com")
 
       end
 
 
      # current_user.vote_for(@venue = Venue.find(params[:id]))
       redirect_to [@venue]
-      flash[:success] = "You have voted successfully"
+      flash[:success] = "Hemos recibido tu voto!"
     rescue ActiveRecord::RecordInvalid
       #Manage this to show user can't vote twice
       redirect_to [@venue]
-      flash[:error] =  "You have already voted"
+      flash[:error] =  "Ya habias votado"
     end      
   end
 
@@ -111,16 +111,16 @@ class VenuesController < ApplicationController
           @graph = Koala::Facebook::API.new(session["fb_access_token"])
 
           profile = @graph.get_object("me")
-          @graph.put_connections("me", "feed", :message => "Has votado negativo en #{@venue.title}", :link => "http://www.hola.com")
+          @graph.put_connections("me", "feed", :message => "Le encantaría estar en un lugar mejor que #{@venue.title}", :link => "http://www.hola.com")
       end
 
       #current_user.vote_against(@venue = Venue.find(params[:id]))
       redirect_to [@venue]
-      flash[:success] = "You have voted successfully"
+      flash[:success] = "Hemos recibido tu voto!"
     rescue ActiveRecord::RecordInvalid
       #Manage this to show user can't vote twice
       redirect_to [@venue]
-      flash[:error] =  "You have already voted"
+      flash[:error] =  "Ya habias votado"
     end      
   end
 
