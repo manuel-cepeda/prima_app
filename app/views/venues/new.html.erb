@@ -61,7 +61,7 @@
    
   <% if signed_in? %>
 	<div data-role="content">
-	<%= form_for @venue do |f|%>
+	<%= form_for @venue , :html => { "data-ajax" => "false" } do |f| %>
 
 		<%= f.label "Nombre del lugar" %>
 		<%= f.text_field :title, placeholder: "ej: La Cantina de Moe" %>
