@@ -96,6 +96,32 @@
       <% end %>
 </section>
 
+
+
+<!--
+<div class="span8">
+      <% if @venue.posts.any? %>
+        <h3>POsts (<%= @venue.posts.count %>)</h3>
+        <ol class="posts">
+          <%= render @posts %>
+        </ol>
+        <%= will_paginate @posts %>
+      <% end %>
+</div>
+
+-->
+
+
+
+
+
+
+
+
+
+
+
+
 <% if signed_in? %>
     <div class="facebook_comments">
     <div class="fb-comments" data-href="<%= request.original_url %>" data-width="300"></div>

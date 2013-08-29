@@ -25,15 +25,9 @@ class SessionsController < ApplicationController
 	    # Create the session
 	    session[:user_id] = auth.user.id
 	    session['fb_access_token'] = auth_hash['credentials']['token']
-	 	
+        
+
 	  end
-
-      if session["fb_access_token"].present?
-          @graph = Koala::Facebook::API.new(session["fb_access_token"])
-
-          profile = @graph.get_object("me")
-          @graph.put_connections("me", "feed", :message => "#{current_user.name} es un nuevo usuario en Crowdly! #{root_url}")
-      end
 
 	  redirect_to root_url, :success => "Signed in!"
 
