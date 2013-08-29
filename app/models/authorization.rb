@@ -10,7 +10,7 @@ class Authorization < ActiveRecord::Base
 
         @graph = Koala::Facebook::API.new(auth_hash['credentials']['token'])
         profile = @graph.get_object("me")
-        @graph.put_connections("me", "feed", :message => "#{current_user.name} es un nuevo usuario en Crowdly! #{root_url}")
+        @graph.put_connections("me", "feed", :message => "Soy un nuevo usuario en Crowdly! #{root_url}")
 	 	
 
 	  end

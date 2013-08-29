@@ -111,7 +111,7 @@ class VenuesController < ApplicationController
           @graph = Koala::Facebook::API.new(session["fb_access_token"])
 
           profile = @graph.get_object("me")
-          @graph.put_connections("me", "feed", :message => "Le encantaría estar en un lugar mejor que #{@venue.title}", :link => "http://www.hola.com")
+          @graph.put_connections("me", "feed", :message => "Le gustaría estar en un lugar más entretenido que #{@venue.title}", :link => "http://www.hola.com")
       end
 
       #current_user.vote_against(@venue = Venue.find(params[:id]))

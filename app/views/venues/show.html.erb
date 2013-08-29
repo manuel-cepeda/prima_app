@@ -80,9 +80,9 @@
     </aside>
           <% if signed_in? %>
             <% if current_user.admin? || current_user?(@venue.user)%>
-              <%= link_to "delete", @venue,  "data-role"=>"button", "data-mini"=>"true", "data-inline"=>"true", "data-icon"=>"delete", "data-iconpos"=>"right", method: :delete, 
+              <%= link_to "Eliminar", @venue,  "data-role"=>"button", "data-mini"=>"true", "data-inline"=>"true", "data-icon"=>"delete", "data-iconpos"=>"right", method: :delete, 
                                             data: { confirm: "You sure?" } %>
-                <%= link_to 'edit venue', edit_venue_path(@venue), "data-role"=>"button", "data-mini"=>"true", "data-inline"=>"true", "data-icon"=>"gear", "data-iconpos"=>"right" %>
+                <%= link_to 'Editar', edit_venue_path(@venue), "data-role"=>"button", "data-mini"=>"true", "data-inline"=>"true", "data-icon"=>"gear", "data-iconpos"=>"right" %>
             <% end %>
           <% end %>
    
@@ -104,7 +104,30 @@
           <% if @venue.posts.any? %>
             <h3>Comentarios (<%= @venue.posts.count %>)</h3>
             <ol class="posts">
-              <%= render @posts %>
+            <% @venue.posts.each do |post| %>            
+
+              <li>
+              <%= avatar_for(post.user,50,50) %>
+              <span class="user">
+               <%= link_to(post.user.name, post.user) %>
+              </span>
+
+                <span class="content"><%= post.content %></span>
+                <span class="timestamp">
+                  Posted <%= time_ago_in_words(post.created_at) %> ago.
+                </span>
+
+              <% if signed_in? %>
+                <% if current_user?(post.user) %>
+                  <%= link_to "Eliminar", post, method: :delete, "data-ajax"=>"false",
+                                                   data: { confirm: "¿Seguro?" },
+                                                   title: post.content %>
+                <% end %>
+              <% end %>
+              </li>
+
+            <% end %>
+
             </ol>
             <%= will_paginate @posts %>
           <% end %>
