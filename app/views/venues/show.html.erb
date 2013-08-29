@@ -60,7 +60,9 @@
 
 
         <div class="stats">
-          <a href=""onclick="initialize()">Ver Mapa</a>
+
+        <%= link_to 'Ver Ubicación', "#", "data-role"=>"button", "data-mini"=>"true", "data-inline"=>"true", "onClick"=>"initialize()" %>
+
        <div id="map-canvas" style="width=100%; height:300px; display:none;"></div>  
           <p>Votos últimas 3 horas </p>
 
@@ -97,29 +99,16 @@
 </section>
 
 
-
-<!--
-<div class="span8">
-      <% if @venue.posts.any? %>
-        <h3>POsts (<%= @venue.posts.count %>)</h3>
-        <ol class="posts">
-          <%= render @posts %>
-        </ol>
-        <%= will_paginate @posts %>
-      <% end %>
-</div>
-
--->
-
-
-
-
-
-
-
-
-
-
+    <%= render 'shared/post_form' if signed_in? %>
+    <div class="span8">
+          <% if @venue.posts.any? %>
+            <h3>Comentarios (<%= @venue.posts.count %>)</h3>
+            <ol class="posts">
+              <%= render @posts %>
+            </ol>
+            <%= will_paginate @posts %>
+          <% end %>
+    </div>
 
 
 <% if signed_in? %>

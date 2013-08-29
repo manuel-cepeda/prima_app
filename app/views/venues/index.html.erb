@@ -73,15 +73,7 @@
           <% end  %>
         </p>
 
-          <% if signed_in? %>
-            <% if current_user.admin? || current_user?(venue.user)%>
-              <%= link_to "delete", venue,  "data-role"=>"button", method: :delete, 
-                                            data: { confirm: "You sure?" } %>
 
-                                            
-                <%= link_to 'edit venue', edit_venue_path(venue), "data-icon" => "gear" %>
-            <% end %>
-          <% end %>
 
       </a>
     </li>

@@ -43,20 +43,7 @@
 <body>
 
 <div id="<%= yield(:page) %>" data-role="page" data-url="<%= request.path %>" <%= render 'shared/style' %>>
-<div id="fb-root"></div>
-<script>
 
-  // Load the SDK asynchronously
-(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/es_LA/all.js#xfbml=1&appId=708728955810882";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-
-
-</script>
     
 	<%= yield %>
   <%= debug(params) if Rails.env.development? %>
