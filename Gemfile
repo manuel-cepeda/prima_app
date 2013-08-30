@@ -14,6 +14,7 @@ gem 'thumbs_up'
 gem 'sunspot_rails'
 gem 'sunspot_solr' # optional pre-packaged Solr distribution for use in development
 gem "koala", "~> 1.7.0rc1"
+gem 'mobylette'
 
 
 group :development, :test do

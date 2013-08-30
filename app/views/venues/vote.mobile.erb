@@ -1,0 +1,73 @@
+<% provide(:title, "Votar Lugar") %>
+<% provide(:page, "vote") %>
+
+
+
+
+<div data-role="header" <%= render 'shared/style' %>>
+
+
+
+<h1>Votar</h1>
+<%= render 'shared/header_buttons' %>
+
+</div>
+
+
+ <div data-role="content">
+
+<%= form_tag vote_path, :method => :get do %>
+<p>
+<%= text_field_tag :search, params[:search], placeholder: "Buscar Lugar" %>
+<%= submit_tag "Buscar", :name => nil %>
+</p>
+<% end %>
+
+
+  <% if @venues.empty?&&@search_flag%>
+   <strong>El lugar que buscas aún no existe en el sistema ;(</strong>
+
+  <% else %>
+
+	<ul data-role="listview">
+
+    	<li class="title_search">Resultados de Búsqueda</li>
+    <% @venues.each do |venue| %>
+	    <li>
+		    <a class="ui-link-inherit" href="<%= venue_url(venue) %>">
+		        <p class="ui-li-aside ui-li-desc">
+		          <h3 class="ui-li-heading"><%= venue.title %></h3>
+		        </p>
+		        <p class="ui-li-desc">
+		            </span>Total Votos Últimas 3 horas</span>
+		            <strong class="qualification">Puntuación: <%= "#{venue.get_positive_votes.count-venue.get_negative_votes.count}" %></strong>
+		            <p class="ui-li-desc">
+
+		                <%=" Entretenidos #{venue.get_positive_votes.count}" %>
+		                <strong> | </strong>
+		                <%="Aburridos #{venue.get_negative_votes.count}" %>              
+
+		            </p>
+			    </p>
+		          <% if signed_in? %>
+		            <% if current_user.admin? || current_user?(venue.user)%>
+		              <%= link_to "delete", venue,  "data-role"=>"button", method: :delete, 
+		                                            data: { confirm: "You sure?" } %>                          
+		                <%= link_to 'edit venue', edit_venue_path(venue), "data-icon" => "gear" %>
+		            <% end %>
+		          <% end %>
+		    </a>
+		</li>
+	   <% end %>
+	</ul>
+
+
+   <% end %>
+  
+
+
+  <div id="add_button">
+	<strong>Si no encontraste el lugar y estás ahí, Agrégalo :)</strong>
+    <%= link_to "Agregar", new_venue_path, "data-role"=>"button", "class"=>"ui-btn-left" %>
+  </div>
+</div>

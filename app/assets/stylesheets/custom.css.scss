@@ -25,7 +25,8 @@ a {text-decoration:none}
 
 .avatar {
   float: left;
-  margin-right: 10px;
+  margin-left:5px;
+ 
 }
 
 
@@ -73,8 +74,33 @@ section {
 }
 .posts li {
     border-top: 1px solid #E8E8E8;
-    padding: 10px 0;
+    margin-top:3px;
+    text-align:top;
+
 }
+
+.posts .user{
+
+    margin-top:-4px;
+    font-size: 16px;
+    
+}
+
+.posts .content {
+
+    font-weight: normal;
+    
+}
+.posts .timestamp {
+
+    font-weight: normal;
+    text-align:bottom;
+}
+.posts .delete {
+
+    font-weight: normal;
+}
+
 
 .content {
     display: block;

@@ -1,0 +1,88 @@
+<% provide(:title, 'Lugares') %>
+<% provide(:page, "index_venue") %>
+
+
+<div data-role="header" <%= render 'shared/style' %>>
+    <h1>Krowdly - Lugares On Fire</h1>
+
+      <%= render 'shared/header_buttons' %>
+<% flash.each do |key, value| %>
+        <div class="flash_message alert alert-<%= key %>"><%= value %></div>
+<% end %>
+
+   <div data-role="navbar">
+    <ul>
+
+      <% if (@time != '2') %>
+         <li><%= link_to 'On Fire Ahora', venues_path(:time => "1"), "class" => "ui-btn-active ui-state-persist" %></li>
+         <li><%= link_to 'On Fire Todos los Tiempos', venues_path(:time => "2") %></li>
+      <% else %>
+         <li><%= link_to 'On Fire Ahora', venues_path(:time => "1")%> </li>
+         <li><%= link_to 'On Fire Todos los Tiempos', venues_path(:time => "2"), "class" => "ui-btn-active ui-state-persist"%></li>
+      <% end %>
+
+
+    </ul>
+  </div><!-- /navbar -->
+  
+</div>
+
+
+<div data-role="content" <%= render 'shared/style' %>>
+
+  
+  <%= form_tag vote_path, :method => :get do %>
+    <p>
+    <%= text_field_tag :search, params[:search], placeholder: "Buscar Lugar" %>
+    <%= submit_tag "Buscar", :name => nil %>
+    </p>
+  <% end %>
+
+
+<div>
+
+  <ul  data-theme="d" data-role="listview">
+    <li class="title_search">Ranking mejores 30 Lugares </li>
+    <% @venues.each do |venue| %>
+    <li>
+
+     <a class="ui-link-inherit" href="<%= venue_url(venue) %>" >
+        <p class="ui-li-aside ui-li-desc">
+          <h3 class="ui-li-heading"><%= venue.title %></h3>
+        </p>
+        <p class="ui-li-desc">
+            
+          <% if (@time != '2') %>
+
+            </span>Total Votos Últimas 3 horas</span><strong class="qualification">Puntuación: <%= "#{venue.get_positive_votes.count-venue.get_negative_votes.count}" %></strong>
+            <p class="ui-li-desc">
+
+                <%=" Entretenidos #{venue.get_positive_votes.count}" %>
+                <strong> | </strong>
+                <%="Aburridos #{venue.get_negative_votes.count}" %>              
+
+            </p>
+          <% else %>
+            <span>Total Votos Toda la Eternidad</span><strong class="qualification">Puntuación: <%= "#{venue.plusminus}" %></strong>
+            <p class="ui-li-desc">
+                <%=" Entretenidos #{venue.votes_for}" %>
+                <strong> | </strong>
+                <%="Aburridos #{venue.votes_against}" %>
+            </p>
+
+          <% end  %>
+        </p>
+
+
+
+      </a>
+    </li>
+    <% end %>
+  </ul>
+</div>
+
+
+</div>
+
+
+
