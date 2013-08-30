@@ -45,7 +45,7 @@ class VenuesController < ApplicationController
 
     respond_to do |format|
       if @venue.save
-        format.mobile { redirect_to @venue, notice: 'Lugar exitosamente agregado.' }
+        format.html { redirect_to @venue, notice: 'Lugar exitosamente agregado.' }
         format.json { render action: 'show', status: :created, location: @venue }
       else
         format.html { render action: 'new' }
