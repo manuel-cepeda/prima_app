@@ -299,7 +299,7 @@
 		progress_delay		:	true,				// Delay after resize before resuming slideshow
 		thumb_page 			: 	false,				// Thumbnail page
 		thumb_interval 		: 	false,				// Thumbnail interval
-		image_path			:	'images/supersized/',				// Default image path
+		image_path			:	'/assets/supersized/',				// Default image path
 													
 		// General Elements							
 		play_button			:	'#pauseplay',		// Play/Pause button

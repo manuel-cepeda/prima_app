@@ -218,7 +218,9 @@
                 jQuery(window).resize(function () {
                     currentWidth = window.innerWidth || document.documentElement.clientWidth;
                     if (currentWidth > meanScreenWidth) {
-                        
+
+                        meanOriginal();
+
                     } else {
                     	meanOriginal();
                     }	

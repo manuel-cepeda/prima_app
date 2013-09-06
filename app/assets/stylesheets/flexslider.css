@@ -92,7 +92,7 @@ html[xmlns] .slides {display: block;}
 
 /* Custom stiles for gallery */
 .entry-content-list .loading {
-	background: #fff url("../images/ajax-loader.gif") no-repeat 50% 50%; 
+	background: #fff url("/assets/ajax-loader.gif") no-repeat 50% 50%; 
 	min-height: 350px;
 }
 
@@ -146,7 +146,7 @@ html[xmlns] .slides {display: block;}
 	height: 40px;
 	margin: 0;
 	display: block;
-	background: #000 url('../images/bg_direction_nav_small.png') no-repeat 0 0;
+	background: #000 url('/assets/bg_direction_nav_small.png') no-repeat 0 0;
 	position: absolute;
 	top: -10px;
 	z-index: 1; 

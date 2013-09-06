@@ -12,9 +12,11 @@ jQuery(document).ready(function(){
 			slide_links				:	'false',	// Individual links for each slide (Options: false, 'num', 'name', 'blank')
 			slides					:
 				[			// Slideshow Images
+
 					{image : '/assets/temp/bg1.jpg', title : '<h1><span>Averigua donde está pasando lo más entretenido</span></h1>'},
 					{image : '/assets/temp/bg2.jpg', title : '<h1>Vota por los mejores lugares en tiempo real</h1>'},
 					{image : '/assets/temp/bg3.jpg', title : '<h1><span>Disfruta tu ciudad con todos</span></h1>'}
+
 				]
 		});
 	});
@@ -26,6 +28,7 @@ jQuery(document).ready(function(){
 
 	/* Toggle for Search form */
 	jQuery(".share-item-icon-search a").click(function () {
+
 		jQuery("#header-searchform").submit();
 	});
 
@@ -44,7 +47,6 @@ jQuery(document).ready(function(){
 	jQuery("#butt").click(function () {
 		jQuery("#edit-form form").submit();
 	});
-
 
 
 	/* FitVids */
