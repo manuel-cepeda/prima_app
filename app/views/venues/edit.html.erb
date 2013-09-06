@@ -1,88 +1,138 @@
-
 <% provide(:title, @venue.title) %>
-<% provide(:page, "edit_venue") %>
+<% provide(:page, "show_venue") %>
+
+<script type="text/javascript">
 
 
 
 
-<div data-role="header" <%= render 'shared/style' %>>
-<h1>Editar Lugar</h1>
-<%= render 'shared/header_buttons' %>
-
-    <script type="text/javascript">
-
-    function geolocalize(){
-
-            if(navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(position){
-                    initialize(position.coords.latitude,position.coords.longitude);
-                });
-            }
-    }
+          jQuery(document).ready(function () {
+              initialize();
+          });
 
 
-        $("div:jqmData(role='page'):last").bind('pageinit', function() {
-                initialize(<%= @venue.lat %>,<%= @venue.lng %>);
-        });
+          function geolocalize(){
 
-    
 
-        function initialize(lat,lng) {
-            var latlng = new google.maps.LatLng(lat, lng);
-            var minZoomLevel = 18;
-            var myOptions = {
+
+                  if(navigator.geolocation) {
+                      navigator.geolocation.getCurrentPosition(function(position){
+                          initialize(position.coords.latitude,position.coords.longitude);
+                      });
+                  }
+          }
+
+
+          function initialize() {
+
+            
+
+
+             // This is the minimum zoom level that we'll allow
+             var minZoomLevel = 15;
+             var latlng = new google.maps.LatLng(<%= @venue.lat %>, <%= @venue.lng %>);
+             var map = new google.maps.Map(document.getElementById('map-canvas'), {
                 zoom: minZoomLevel,
                 center: latlng,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
-            };
-            var map = new google.maps.Map(document.getElementById("map_canvas"),myOptions);
+             });
+
             var marker = new google.maps.Marker({
                 position: latlng,
                 map: map,
                 title:"You are here!"
             });
 
-            document.getElementById('venue_lat').value=lat;
-            document.getElementById('venue_lng').value=lng;
-
-        }
-
-    
-
-    </script>
+         
+          }
 
 
-</div>
+  </script>
 
-   
-  <% if signed_in? %>
-	<div data-role="content">
-	<%= form_for @venue do |f|%>
 
-		<%= f.label "Nombre del lugar" %>
-		<%= f.text_field :title, placeholder: "ej: La Cantina de Moe" %>
-		<%= f.label "ACtualizar ubicación? " %><a href="" onclick="geolocalize()">Geolocalizate</a> 
 
-		<%= f.hidden_field :lat, :value => "" %>
-		<%= f.hidden_field :lng, :value => "" %>
-        <div id="map_canvas" style="height:200px; width:100%"></div>
-		<%= f.submit "Actualizar" %>
 
-          <% if signed_in? %>
-            <% if current_user.admin? || current_user?(@venue.user)%>
-              <%= link_to "delete", @venue,  "data-role"=>"button", "data-mini"=>"true", "data-inline"=>"true", "data-icon"=>"home", "data-iconpos"=>"right", method: :delete, 
-                                            data: { confirm: "You sure?" } %>
-            <% end %>
-          <% end %>
+       
+        <% flash.each do |key, value| %>
+                <div class="alert alert-<%= key %>"><%= value %></div>
+        <% end %>
 
-    <% end %>
+  <div id="progress-back" class="load-item">
+    <div id="progress-bar"></div>
+  </div>
+  <div id="page">
+    <div id="header-bg"></div>
+    <div id="patern"></div>
+    <div id="page-view">
+      
 
+
+      <%= render 'shared/header' %>
+
+          <%= render 'shared/menu' %>
+
+
+      <!-- Main -->
+      <div id="main" class="site-main container_12">
+
+
+          <!-- Left column -->
+        <div id="primary" class="grid_8">
+
+
+          <!-- Posts -->
+        <article class="single-post">
+            <header class="entry-header">
+              <h1 class="entry-title">Actualizar Lugar</h1>
+              <div class="clear"></div>
+            </header>
+ 
+            <div class="entry-meta">
+               <% if signed_in? %>
+                   <div data-role="content-edit" id="edit-form">
+                       <%= form_for @venue  do |f| %>
+                       <%= f.label "Actualizar ubicación", "class"=>"form-label" %><div><span class="geo" onclick="geolocalize()"><i class="icon-map-marker"></i> Geolocalizate</span></div> 
+                      
+
+                      <div id="map-canvas" style="height:200px; width:100%;"></div>
+
+
+                       <p id="place-label"><%= f.label "Nombre del lugar", "class"=>"form-label" %>
+                       <%= f.text_field :title, placeholder: "ej: La Cantina de Moe", "class"=>"text-field-form" %></p>
+                        <%= f.hidden_field :lat, :value => "" %>
+                        <%= f.hidden_field :lng, :value => "" %>
+
+                    </div>
+                <% end %>
+                 <p><a id="butt" href="#">actualizar</a></p>
+               
+                <% else %>
+                    <span>Para agregar </span>
+                    <a href="/auth/facebook" data-role="button" data-ajax="false" data-mini="true" data-inline="true" data-icon="grid" data-iconpos="right">Ingresar</a>
+                <% end %>
+
+
+
+                  <div class="clear"></div>
+            </div>
+            
+
+             
+
+            <div >
+
+
+
+              <div class="clear"></div>
+                <nav></nav>
+            </div>
+
+          </article>          
+
+
+        <div class="clear"></div>
+        </div>
+        </div>
+        <%= render 'shared/footer'%>
     </div>
-
-
-    <% else %>
-    <span>Para agregar </span>
-        <a href="/auth/facebook" data-role="button" data-ajax="false" data-mini="true" data-inline="true" data-icon="grid" data-iconpos="right">Ingresar</a>
-    <% end %>
-
-
+  </div>

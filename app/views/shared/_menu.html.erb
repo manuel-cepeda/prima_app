@@ -1,0 +1,17 @@
+	
+<% if (current_user && signed_in?) %>
+			<!-- Main Menu -->
+			<div class="container_12 main-menu-section">
+
+				<nav role="navigation" class="site-navigation main-navigation grid_12" id="site-navigation">
+					<div class="menu-wplook-main-menu-container">
+						<ul id="menu-wplook-main-menu" class="menu">
+							<li class="menu-item "><%= link_to 'En llamas Ahora', list_path, "target"=>"_parent" %></li>
+							<li class="menu-item "><%= link_to 'Mi Perfil', current_user, "target"=>"_parent" %></li>
+							<li class="menu-item "><%= link_to "Salir", logout_path %></li>
+						</ul>
+					</div>
+				</nav>
+				
+			</div>
+<% end %>

@@ -29,7 +29,7 @@ class SessionsController < ApplicationController
 
 	  end
 
-	  redirect_to root_url, :success => "Signed in!"
+	  redirect_to :controller=>'venues', :action => 'list', :success => "Signed in!"
 
 	end
 

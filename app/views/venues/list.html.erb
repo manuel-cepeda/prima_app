@@ -1,0 +1,54 @@
+	
+	<div id="progress-back" class="load-item">
+		<div id="progress-bar"></div>
+	</div>
+	<div id="page">
+		<div id="header-bg"></div>
+		<div id="patern"></div>
+		<div id="page-view">
+			
+	       			<%= render 'shared/header' %>
+
+					<%= render 'shared/menu' %>
+
+			<!-- Main -->
+			<div id="main" class="site-main container_12">
+				
+
+				
+				<!-- Right Column / Widget area -->
+				<div id="secondary" class="grid_4 widget-area" role="complementary">
+					<!-- Widget list -->
+					<aside id="WPlookCD" class="widget">
+						<header class="entry-header">	
+							<h1 class="entry-title">Top 30 más prendidos</h1>
+							<div class="clear"></div>
+						</header>
+						<ul>
+							<% @venues.each do |venue| %>
+							<li>
+								<a href="<%= venue_url(venue) %>" title="<%= venue.title %>", target="parent">
+									<img src="/assets/temp/80x80.jpg" alt="">
+									<h1 class="entry-title"><%= venue.title %></h1>
+									<h2 class="entry-description"><i class="icon-star"></i> <%= "#{venue.get_positive_votes.count-venue.get_negative_votes.count}" %> Puntos</h2>
+									<h3><i class="icon-fire"></i> <%="#{venue.get_positive_votes.count}" %>
+						                <strong> - </strong>
+						                <i class="icon-trash"></i> <%="#{venue.get_negative_votes.count}" %>  </h3>
+									<div class="clear"></div>
+								</a>
+							</li>
+ 							<% end %>
+
+						</ul>
+					</aside>
+					
+					<!-- Widget CD -->
+
+				</div>
+				
+				<div class="clear"></div>
+			</div>
+
+	       			<%= render 'shared/footer' %>
+		</div>
+	</div>

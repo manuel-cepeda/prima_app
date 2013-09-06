@@ -1,37 +1,58 @@
-<% provide(:title, @user.name) %>
-<div data-role="header" <%= render 'shared/style' %>>
-  <h1>Profile</h1>
-<%= render 'shared/header_buttons' %>
+  <div id="progress-back" class="load-item">
+    <div id="progress-bar"></div>
+  </div>
+  <div id="page">
+    <div id="header-bg"></div>
+    <div id="patern"></div>
+    <div id="page-view">
+      
+              <%= render 'shared/header' %>
 
-</div>
- 
-<div data-role="content">
+          <%= render 'shared/menu' %>
 
+      <!-- Main -->
+      <div id="main" class="site-main container_12">
+        
 
+        
+        <!-- Right Column / Widget area -->
+        <div id="secondary" class="grid_4 widget-area" role="complementary">
+          <!-- Widget list -->
+          <aside id="WPlookCD" class="widget">
+            <header class="entry-header"> 
+              <h1 class="entry-title">Perfil Usuario</h1>
+              <div class="clear"></div>
+            </header>
+            <ul>
+             
+              <li>
+                <a href="<%= user_url(@user) %>" title="<%= @user.name %>">
+                   <%= avatar_for(@user,80,80) %>
+                  <h1 class="entry-title"><%= @user.name %></h1>
+                  <h2 class="entry-description">Total Votos: <%= @user.vote_count(:all) %></h2>
+                  <h3>
+                    <i class="icon-fire"></i> <%= @user.vote_count(:up) %>
+                    <strong> / </strong>
+                    <i class="icon-trash"></i> <%= @user.vote_count(:down) %>  
+                  </h3>
+                  <h3>
+                  Total Comentarios: <%= @user.posts.count %>
+                  </h3>
+                  <div class="clear"></div>
+                </a>
+              </li>
+             
 
-<aside class="span3">
-    <section style="float:left">
-      <div class="pic">
-          <%= avatar_for(@user,170,170) %>
+            </ul>
+          </aside>
+          
+          <!-- Widget CD -->
+
+        </div>
+        
+        <div class="clear"></div>
       </div>
 
-      <div id="user_info">
-        <h2><%= @user.name %></h2>
-        <ul>
-          <li>Votos Totales: <strong><%= @user.vote_count(:all) %></strong></li>
-          <li>Votos Positivos: <strong><%= @user.vote_count(:up) %></strong></li>
-          <li>Votos Negativos: <strong><%= @user.vote_count(:down) %></strong></li>
-          <li>Comentarios: <strong><%= @user.posts.count %></strong></li>
-          <li></li>
-        </ul>
-      </div>
-
-
-    </section>
-
-  </aside>
-
-
-
-</div>
-
+              <%= render 'shared/footer' %>
+    </div>
+  </div>

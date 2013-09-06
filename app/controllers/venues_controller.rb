@@ -7,19 +7,29 @@ class VenuesController < ApplicationController
   def index
     #@venues = Venue.all
 
-    @venues = venues_by_plus_minus_vote(params[:time])
-    @time=params[:time]
 
 
 
   end
+
+  def list
+    #@venues = Venue.all
+
+    @venues = venues_by_plus_minus_vote(params[:time])
+
+
+
+
+  end
+
+
 
   # GET /venues/1
   # GET /venues/1.json
   def show
 
     @venue = Venue.find(params[:id])
-    @posts = @venue.posts.paginate(page: params[:page])
+    @posts = @venue.posts.paginate(page: params[:page], :per_page => 30)
     @post =  current_user.posts.build if signed_in?
     session[:venue_id] = @venue.id
     @positive_votes=@venue.get_positive_votes

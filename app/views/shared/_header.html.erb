@@ -1,0 +1,27 @@
+<!-- Header -->
+<header id="branding" class="site-header" role="banner">
+	<div class="container_12">
+		<!-- Site title and description -->
+		<div class="fleft grid_4 branding">
+			<h1 id="site-title">				<%= link_to raw("<i class=icon-fire></i> Krowd<span>LY</span></a></h1>"), list_path, "target"=>"_parent", "rel"=>"home", "title"=>"Krowdly" %></h1>
+			<h2 id="site-description">Siente el ritmo de la ciudad</h2>
+		</div>
+
+  <% if !(current_user && signed_in?) %>
+		<div class="grid_8 socialnetworking">
+			<ul class="share-items">
+				<li class="share-item-icon-facebook"><a target="_blank" title="Ingresa con Facebook" href="/auth/facebook">INGRESA  <i class="icon-facebook"></i></a></li>
+			</ul>
+			  <%= link_to 'En llamas ahora', list_path, "target"=>"_parent", "id"=>"skip" %>
+		</div>
+
+  <% end %>
+
+ <%= render 'shared/search' %>
+
+
+
+
+		<div class="clear"></div>
+	</div>
+</header>

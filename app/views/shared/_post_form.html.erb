@@ -1,7 +1,11 @@
+
+<%= avatar_for(current_user,80,80) %>
+<div >
 <%= form_for @post do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
-  <div class="field">
-    <%= f.text_area :content, placeholder: "Comenta lo que sucede en el lugar..." %>
-  </div>
-  <%= f.submit "Enviar", class: "btn btn-large btn-primary" %>
+  <%= f.text_area :content, placeholder: "Comentar", "id"=>"s_comment", "class"=>"comment-box" %>
 <% end %>
+ <p><a id="butt" href="#">Comentar</a></p>
+ </div>
+
+                                

@@ -24,6 +24,9 @@
     
 
         function initialize(lat,lng) {
+
+
+            document.getElementById('map-canvas').style.display = "";
             var latlng = new google.maps.LatLng(lat, lng);
             var minZoomLevel = 18;
             var myOptions = {
@@ -43,7 +46,7 @@
 
         }
 
-    
+    initialize(0,0);
 
     </script>
 
@@ -69,7 +72,7 @@
 
 		<%= f.hidden_field :lat, :value => "" %>
 		<%= f.hidden_field :lng, :value => "" %>
-        <div id="map_canvas" style="height:200px; width:100%"></div>
+        <div id="map_canvas" style="height:200px; width:100%; display:none;"></div>
 		<%= f.submit "Agregar" %>
 
        

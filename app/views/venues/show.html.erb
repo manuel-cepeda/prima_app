@@ -1,17 +1,9 @@
 <% provide(:title, @venue.title) %>
 <% provide(:page, "show_venue") %>
 
-  <div data-role="header" <%= render 'shared/style' %>>
-
-  <script type="text/javascript">
-
-
-
+<script type="text/javascript">
 
           function initialize() {
-
-
-
 
             document.getElementById('map-canvas').style.display = "";
 
@@ -33,113 +25,166 @@
 
             google.maps.event.trigger(map, 'resize');
           }
-
+       
 
   </script>
 
-    <h1>Lugar</h1>
-      <%= render 'shared/header_buttons' %>
+    
+        <% flash.each do |key, value| %>
+                <div class="alert alert-<%= key %>"><%= value %></div>
+        <% end %>
 
+  <div id="progress-back" class="load-item">
+    <div id="progress-bar"></div>
   </div>
-   
-  <div data-role="content">
-
-    <% flash.each do |key, value| %>
-            <div class="alert alert-<%= key %>"><%= value %></div>
-    <% end %>
-
-    <aside>
-       <section>
-
-          <h1> <%= @venue.title %> </h1>
-         
-        </section>
-    </aside>
-    <aside class="span4">
-      <section>
-
-
-        <div class="stats">
-
-        <%= link_to 'Ver Ubicación', "#", "data-role"=>"button", "data-mini"=>"true", "data-inline"=>"true", "onClick"=>"initialize()" %>
-
-       <div id="map-canvas" style="width=100%; height:300px; display:none;"></div>  
-          <p>Votos últimas 3 horas </p>
-
-          <strong class="votes"><%=" Votos Netos #{@total_votes.count}" %></strong>
-          <strong> | </strong>
-          <strong class="votes"><%=" Entretenidos #{@positive_votes.count}" %></strong>
-          <strong> | </strong>
-          <strong class="votes"><%="Aburridos #{@negative_votes.count}" %></strong>
-
-        </div>
-
-
-      </section>
-
-    </aside>
-          <% if signed_in? %>
-            <% if current_user.admin? || current_user?(@venue.user)%>
-              <%= link_to "Eliminar", @venue,  "data-role"=>"button", "data-mini"=>"true", "data-inline"=>"true", "data-icon"=>"delete", "data-iconpos"=>"right", method: :delete, 
-                                            data: { confirm: "You sure?" } %>
-                <%= link_to 'Editar', edit_venue_path(@venue), "data-role"=>"button", "data-mini"=>"true", "data-inline"=>"true", "data-icon"=>"gear", "data-iconpos"=>"right" %>
-            <% end %>
-          <% end %>
-   
-
-<section class="center">
-      <% if signed_in? %>
-
-      <p>Si estás dentro del lugar, califícalo</p>
-
-      <%= link_to("Entretenido", vote_up_venue_path(@venue), :method => :post, "data-role"=>"button", "data-inline"=>"true", "data-theme"=>"b", "data-icon"=>"arrow-u", "style"=>"width:150px", "data-iconpos"=>"right") %>
-      <%= link_to("Aburrido", vote_down_venue_path(@venue), :method => :post, "data-role"=>"button", "data-inline"=>"true", "data-theme"=>"b", "data-icon"=>"arrow-d", "style"=>"width:150px") %>
-
-      <% end %>
-</section>
-
-
-    <%= render 'shared/post_form' if signed_in? %>
-
-          <% if @venue.posts.any? %>
-            <h3>Comentarios (<%= @venue.posts.count %>)</h3>
-     <ul data-role="listview" class="posts" >
-            <% @venue.posts.each do |post| %>            
-
-              <li data-icon="false" style="height:64px">
-              <%= avatar_for(post.user,64,64) %>
-              <div style="margin-top: -6px;">
-              <span class="user">
-               <%= link_to(post.user.name, post.user) %>
-              </span>
-
-                <span class="content"><%= post.content %></span>
-                <span class="timestamp">
-                  Posted <%= time_ago_in_words(post.created_at) %> ago.
-                </span>
-                <% if signed_in? %>
-                  <% if current_user?(post.user) %>
-                 
-                    <%= link_to "Eliminar", post, method: :delete, "data-ajax"=>"false", "class" =>"delete", data: { confirm: "¿Seguro?" }, title: post.content %>
-                                                 
-                  <% end %>
-                <% end %>
-
-                </div>
-
-              </li>
-
-            <% end %>
-
-     </ul>
-            <%= will_paginate @posts %>
-          <% end %>
+  <div id="page">
+    <div id="header-bg"></div>
+    <div id="patern"></div>
+    <div id="page-view">
       
 
+          <%= render 'shared/header' %>
+
+          <%= render 'shared/menu' %>
+   
+
+
+      <!-- Main -->
+      <div id="main" class="site-main container_12">
+
+
+          <!-- Left column -->
+        <div id="primary" class="grid_8">
+          
+          <!-- Posts -->
+          <article class="single-post">
+            <header class="entry-header">
+              <h1 class="entry-title"><%= @venue.title %></h1>
+              <div class="clear"></div>
+            </header>
+
+            <div class="entry-meta">
+                <div style="display:block" class="category-selected fleft map"><span class="geo" onclick="initialize()"><i class="icon-map-marker"></i> Ver Ubicación</span></div>
+                <div id="map-canvas" style="width=100%; height:300px; display:none;"></div>  
+                <div id="score">Calificación últimas 3 horas: </div>
+
+                <div>
+
+                <span class="likes fright"><i class="icon-star"></i> <%="#{@positive_votes.count- @negative_votes.count}" %> puntos  </span>
+
+                <span class="views fright"> = <i class="icon-fire"></i> <%="#{@positive_votes.count}" %></span>
+                <span class="views fright"> - <i class="icon-trash"></i> <%="#{@negative_votes.count}" %></span>
+              </div>
+
+
+              <div class="clear"></div>
+            </div>
+            
+
+             
+
+            <div >
+
+
+
+              <div class="clear"></div>
+
+             <% if signed_in? %>
+              <div style="text-align:Center;">
+                 <div> 
+              <% if signed_in? %>
+                <% if current_user.admin? || current_user?(@venue.user)%>
+                  <%= link_to "Eliminar", @venue,  "data-role"=>"button", method: :delete, 
+                                                data: { confirm: "You sure?" } %>                          
+                    <%= link_to 'Editar', edit_venue_path(@venue), "data-icon" => "gear" %>
+                <% end %>
+              <% end %>
+
+                  <p id="data-vote" style="color:#888888; display: clear;">SI estás en este lugar, Vota!</p>
+                  <%= link_to(raw("<i class=icon-fire></i> En Llamas"), vote_up_venue_path(@venue), :method => :post, "id"=>"vote_up", "class"=>"button-custom") %>
+                  <%= link_to(raw("<i class=icon-trash></i> Aburrido"), vote_down_venue_path(@venue), :method => :post, "id"=>"vote_down", "class"=>"button-custom") %>
+                  </div>
+              </div>
+             <% end %>
+
+                <nav></nav>
+            </div>
+
+          </article>
+          <!-- Widget CD -->
+
+          <aside id="WPlookCD" class="widget">
+            <header class="entry-header"> 
+              <h1 class="entry-title">Comentarios (<%= @venue.posts.count %>)</h1>
+              <div class="clear"></div>
+           
+            </header>
+            <ul>
+
+              <% if signed_in? %>
+              <li class="comment-box-li" style="background:#333333; text-align:top;  ">
+               
+                  <%= render 'shared/post_form'%>
+              
+              </li>
+             <% end %>
+
+          <% if @posts.any? %>
+
+            <% @posts.each do |post| %>   
+    
+              <li>
+                <a href="#" title="CD Title">
+                  <%= avatar_for(post.user,80,80) %>
+                  <h1 class="entry-title"><%= link_to(post.user.name, post.user) %></h1>
+                  <h2 class="entry-description"><%= post.content %></h2>
+                  <h3> Posted <%= time_ago_in_words(post.created_at) %> ago.</h3>
+                  <h3>
+                    <% if signed_in? %>
+                      <% if current_user?(post.user) %>
+                     
+                        <%= link_to "Eliminar", post, method: :delete, "class" =>"delete", data: { confirm: "¿Seguro?" }, title: post.content %>
+                                                     
+                      <% end %>
+                    <% end %>
+                  </h3>
+
+
+
+                  <div class="clear"></div>
+                </a>
+              </li>
+            <% end %>
+
+          <% end %>
+             
+              
+              <div class="clear"></div>
+
+                <nav class="entry-pagination" id="nav-posts">
+                  
+
+
+                  <div class="clear"></div>
+
+                </nav><!-- #nav -->           
+            </ul>
+
+          </aside>
+          
+
+          <!-- Widget  -->
+        </div>
+
+        </div>  <!-- Main  -->
+
+<footer class="site-footer container_12">
+  <div id="site-info" class="grid_12"><div class="margins"> <%= will_paginate @posts %></div></div>
+</footer>
+
+
+
+        <div class="clear"></div>
+        <%= render 'shared/footer' %>
+    </div>
   </div>
-
-
-
-
-
-

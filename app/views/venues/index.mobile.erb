@@ -2,87 +2,64 @@
 <% provide(:page, "index_venue") %>
 
 
-<div data-role="header" <%= render 'shared/style' %>>
-    <h1>Krowdly - Lugares On Fire</h1>
-
-      <%= render 'shared/header_buttons' %>
-<% flash.each do |key, value| %>
-        <div class="flash_message alert alert-<%= key %>"><%= value %></div>
-<% end %>
-
-   <div data-role="navbar">
-    <ul>
-
-      <% if (@time != '2') %>
-         <li><%= link_to 'On Fire Ahora', venues_path(:time => "1"), "class" => "ui-btn-active ui-state-persist" %></li>
-         <li><%= link_to 'On Fire Todos los Tiempos', venues_path(:time => "2") %></li>
-      <% else %>
-         <li><%= link_to 'On Fire Ahora', venues_path(:time => "1")%> </li>
-         <li><%= link_to 'On Fire Todos los Tiempos', venues_path(:time => "2"), "class" => "ui-btn-active ui-state-persist"%></li>
-      <% end %>
 
 
-    </ul>
-  </div><!-- /navbar -->
-  
-</div>
+
+  <div id="progress-back" class="load-item">
+    <div id="progress-bar"></div>
+  </div>
+  <div id="page">
+    <div id="header-bg"></div>
+    <div id="patern"></div>
+    <div id="page-view">
+      
+<header id="branding" class="site-header" role="banner">
+  <div class="container_12">
+    <!-- Site title and description -->
+    <div class="fleft grid_4 branding">
+      <h1 id="site-title">
+        <%= link_to raw("<i class=icon-fire></i> Krowd<span>LY</span></a></h1>"), list_path, "target"=>"_parent", "rel"=>"home", "title"=>"Krowdly" %>
+        </h1>
+      <h2 id="site-description">Siente el ritmo de la ciudad</h2>
+    </div>
 
 
-<div data-role="content" <%= render 'shared/style' %>>
+  <% if !(current_user && signed_in?) %>
+    <div class="grid_8 socialnetworking">
+      <ul class="share-items">
+        <li class="share-item-icon-facebook"><a target="_parent" title="Ingresa con Facebook" href="/auth/facebook">INGRESA  <i class="icon-facebook"></i></a></li>
 
-  
-  <%= form_tag vote_path, :method => :get do %>
-    <p>
-    <%= text_field_tag :search, params[:search], placeholder: "Buscar Lugar" %>
-    <%= submit_tag "Buscar", :name => nil %>
-    </p>
+      </ul>
+
+
+      <%= link_to 'Saltar', list_path, "target"=>"_parent", "id"=>"skip" %>
+    </div>
+
+  <%else %>
+
+  <%= link_to 'En llamas ahora', list_path, "target"=>"_parent", "id"=>"skip" %>
   <% end %>
 
 
-<div>
-
-  <ul  data-theme="d" data-role="listview">
-    <li class="title_search">Ranking mejores 30 Lugares </li>
-    <% @venues.each do |venue| %>
-    <li>
-
-     <a class="ui-link-inherit" href="<%= venue_url(venue) %>" >
-        <p class="ui-li-aside ui-li-desc">
-          <h3 class="ui-li-heading"><%= venue.title %></h3>
-        </p>
-        <p class="ui-li-desc">
-            
-          <% if (@time != '2') %>
-
-            </span>Total Votos Últimas 3 horas</span><strong class="qualification">Puntuación: <%= "#{venue.get_positive_votes.count-venue.get_negative_votes.count}" %></strong>
-            <p class="ui-li-desc">
-
-                <%=" Entretenidos #{venue.get_positive_votes.count}" %>
-                <strong> | </strong>
-                <%="Aburridos #{venue.get_negative_votes.count}" %>              
-
-            </p>
-          <% else %>
-            <span>Total Votos Toda la Eternidad</span><strong class="qualification">Puntuación: <%= "#{venue.plusminus}" %></strong>
-            <p class="ui-li-desc">
-                <%=" Entretenidos #{venue.votes_for}" %>
-                <strong> | </strong>
-                <%="Aburridos #{venue.votes_against}" %>
-            </p>
-
-          <% end  %>
-        </p>
+    <div class="clear"></div>
+  </div>
+</header>
 
 
+      <!-- Teaser Text -->
+      <div class="container_12 teaser">
 
-      </a>
-    </li>
-    <% end %>
-  </ul>
-</div>
+        <div id="slidecaption" class="grid_12"></div>
 
+        <div class="grid_12 margin-battom slider-arrow">
+          <a id="prevslide" class="load-item"></a>
+          <a id="nextslide" class="load-item"></a>
+          <div class="clear"></div>
+        </div>
+        <div class="celar"></div>
+      </div>
 
-</div>
-
-
+              <%= render 'shared/footer' %>
+    </div>
+  </div>
 
