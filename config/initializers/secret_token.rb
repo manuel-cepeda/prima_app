@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-PrimaApp::Application.config.secret_key_base = '1b8ca1135f3283b4dd2fef1bec3041e65903e7365ed4065163dad88420fcafbc0209acda251bda4abb51018f54eaa21f071fc7513ad847e41e7fbe9ed4e40f73'
+PrimaApp::Application.config.secret_key_base = '119b7927a23631e0c81e2fc1f6bce07e748a5267c98ab2eac95450ff180c0d1223e99365de0a74e6314920c2c1764ad50eb82bba0a366a7d3957dbf51e78260f'
