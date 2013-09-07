@@ -38,10 +38,6 @@ jQuery(document).ready(function(){
 	});
 
 
-	/* Toggle for comment form */
-	jQuery("#butt").click(function () {
-		jQuery("#new_venue").submit();
-	});
 
 	/* Toggle for comment form */
 	jQuery("#butt").click(function () {

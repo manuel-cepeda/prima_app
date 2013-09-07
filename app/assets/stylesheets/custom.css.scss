@@ -1,3 +1,5 @@
+@import "bootstrap";
+
 .button-title {
 
 text-align:right;
@@ -91,19 +93,13 @@ color: #66CDAA;
   width: 6em;  
   padding: 0.2em;
   line-height: 1.4;
-  background-color: #FFBA00;
   border: 0;
-  color: #ffffff;
   text-decoration: none;
   text-align: center;
   float:right;
   margin-top:0.5em;
 }
 
-#butt:hover {
- background-color: #FFBA00;
- color: #ffffff;
-}
 
 #score{
 
@@ -223,3 +219,55 @@ font-size: 0.9em;
 }
 
 
+
+
+@mixin box_sizing {
+  -moz-box-sizing: border-box; 
+  -webkit-box-sizing: border-box; 
+  box-sizing: border-box;
+}
+
+
+input, select, .uneditable-input {
+  border: 1px solid #bbb;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  @include box_sizing;
+}
+
+.btn-sample {
+  color: #FFFFFF;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: #888888;
+  *background-color: #888888;
+  background-image: -moz-linear-gradient(top, #888888, #888888);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#888888), to(#888888));
+  background-image: -webkit-linear-gradient(top, #888888, #888888);
+  background-image: -o-linear-gradient(top, #888888, #888888);
+  background-image: linear-gradient(to bottom, #888888, #888888);
+  background-repeat: repeat-x;
+  border-color: #888888;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#888888', endColorstr='#888888', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+}
+.btn-sample:hover,
+.btn-sample:active,
+.btn-sample.active,
+.btn-sample.disabled,
+.btn-sample[disabled] {
+  color: #FFFFFF;
+  background-color: #888888;
+  *background-color: #003bb3;
+}
+
+.comment-item h2, h3 {
+
+line-height: 20px;
+}
+
+#s_comment{
+
+  margin-top:0;
+}

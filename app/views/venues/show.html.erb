@@ -34,9 +34,7 @@
                 <div class="alert alert-<%= key %>"><%= value %></div>
         <% end %>
 
-  <div id="progress-back" class="load-item">
-    <div id="progress-bar"></div>
-  </div>
+
   <div id="page">
     <div id="header-bg"></div>
     <div id="patern"></div>
@@ -101,8 +99,16 @@
               <% end %>
 
                   <p id="data-vote" style="color:#888888; display: clear;">SI estás en este lugar, Vota!</p>
-                  <%= link_to(raw("<i class=icon-fire></i> En Llamas"), vote_up_venue_path(@venue), :method => :post, "id"=>"vote_up", "class"=>"button-custom", "target"=>"_parent") %>
-                  <%= link_to(raw("<i class=icon-trash></i> Aburrido"), vote_down_venue_path(@venue), :method => :post, "id"=>"vote_down", "class"=>"button-custom", "target"=>"_parent") %>
+                  <div>
+                    <%= form_tag vote_up_venue_path(@venue), :name => "voteUpForm" do %>
+                    <button id="vote_up" class="vote_button btn btn-large btn-primary btn-sample"><i class=icon-fire></i> En Llamas</button>
+                    <% end %>
+
+                    <%= form_tag vote_down_venue_path(@venue), :name => "voteDownForm" do %>
+                    <button id="vote_down" class="vote_button btn btn-large btn-primary btn-sample"><i class=icon-trash></i> Aburrido</button>
+                    <% end %>
+                  </div>
+
                   </div>
               </div>
              <% end %>
@@ -133,13 +139,13 @@
 
             <% @posts.each do |post| %>   
     
-              <li>
-                <a href="#" title="CD Title">
+              <li class="comment-item">
+                <a href="#" title="Comentario">
                   <%= avatar_for(post.user,80,80) %>
                   <h1 class="entry-title"><%= link_to(post.user.name, post.user) %></h1>
-                  <h2 class="entry-description"><%= post.content %></h2>
-                  <h3> Posted <%= time_ago_in_words(post.created_at) %> ago.</h3>
-                  <h3>
+                  <h2 class="entry-description" ><%= post.content %></h2>
+                  <h3 > Posted <%= time_ago_in_words(post.created_at) %> ago.</h3>
+                  <h3 >
                     <% if signed_in? %>
                       <% if current_user?(post.user) %>
                      

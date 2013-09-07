@@ -81,7 +81,7 @@
  
             <div class="entry-meta">
                <% if signed_in? %>
-                   <div data-role="content-edit">
+                   <div >
                        <%= form_for @venue  do |f| %>
                        <%= f.label "¿Estás en el lugar? ", "class"=>"form-label" %><div><span class="geo" onclick="geolocalize()"><i class="icon-map-marker"></i> Geolocalizate</span></div> 
                       
@@ -93,10 +93,10 @@
                        <%= f.text_field :title, placeholder: "ej: La Cantina de Moe", "class"=>"text-field-form" %></p>
                         <%= f.hidden_field :lat, :value => "" %>
                         <%= f.hidden_field :lng, :value => "" %>
-
+                        <%= f.submit "Agregar",  class: "btn btn-large btn-primary btn-sample", "id"=>"butt" %>
                     </div>
                 <% end %>
-                 <p><a id="butt" href="#">Agregar</a></p>
+
                
                 <% else %>
                     <span>Para agregar </span>
