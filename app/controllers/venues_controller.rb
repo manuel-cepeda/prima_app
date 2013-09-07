@@ -99,7 +99,7 @@ class VenuesController < ApplicationController
           @graph = Koala::Facebook::API.new(session["fb_access_token"])
 
           profile = @graph.get_object("me")
-          @graph.put_connections("me", "feed", :message => "Lo está pasando bien en #{@venue.title} #{venue_url(@venue)}", :link => "#{root_url}")
+          @graph.put_connections("me", "feed", :message => "Lo está pasando bien en #{@venue.title}", :link => "#{root_url}")
 
       end
 
