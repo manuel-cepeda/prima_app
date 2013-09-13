@@ -24,6 +24,18 @@ jQuery(document).ready(function(){
 	/* Mobile Menu */
 	jQuery(document).ready(function () {
 		jQuery('nav.site-navigation').meanmenu();
+
+	 $("#menu-button").click(function(e) {
+	 	  e.preventDefault(); 
+	      $(".meanmenu-reveal").click();
+	    });
+
+	 $("#search-button").click(function(e) {
+	 	  e.preventDefault(); 
+	      $("#search-bar").fadeIn();
+	
+	    });
+
 	});
 
 	/* Toggle for Search form */

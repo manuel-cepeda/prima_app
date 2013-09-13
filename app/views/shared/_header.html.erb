@@ -3,8 +3,18 @@
 	<div class="container_12">
 		<!-- Site title and description -->
 		<div class="fleft grid_4 branding">
-			<h1 id="site-title">				<%= link_to raw("<i class=icon-fire></i> Krowd<span>LY</span></a></h1>"), list_path, "target"=>"_parent", "rel"=>"home", "title"=>"Krowdly" %></h1>
-			<h2 id="site-description">Siente el ritmo de la ciudad</h2>
+
+			<ul class="share-items" style="float:left;">
+				<li style="width:40px" class="menu-option"><a id="menu-button" style="width:40px"  target="_blank" title="Twitter" href="#nav"><i class="icon-th-list"></i></a></li>
+
+			</ul>
+			<h1 style="display:inline" id="site-title">				<%= link_to raw("<i class=icon-fire></i> Krowd<span>LY</span></a></h1>"), list_path, "target"=>"_parent", "rel"=>"home", "title"=>"Krowdly" %></h1>
+			<ul class="share-items" style="float:right;">
+
+				<li style="width:40px" class="search-option"><a id="search-button" style="width:40px" target="_blank" title="Google +" href="#"><i class="icon-search"></i></a></li>
+			</ul>
+
+						
 		</div>
 
   <% if !(current_user && signed_in?) %>

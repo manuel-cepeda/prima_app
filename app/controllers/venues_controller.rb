@@ -39,6 +39,7 @@ class VenuesController < ApplicationController
 
   # GET /venues/new
   def new
+    @search_value=params[:search_value]
     @venue = Venue.new
   end
 
@@ -150,9 +151,9 @@ class VenuesController < ApplicationController
           @venues = @search.results
           @search_flag=true
       end
-
+      @search_value=params[:search]
       @venues
-
+      
 
   end 
 

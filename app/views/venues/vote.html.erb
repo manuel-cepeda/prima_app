@@ -13,6 +13,8 @@
 					<%= render 'shared/menu' %>
 
 
+
+
 			
 			<!-- Main -->
 			<div id="main" class="site-main container_12">
@@ -29,7 +31,7 @@
 						</header>
 						<ul>
 					<% if @venues.empty?&&@search_flag%>
-					   <li><strong>Aún no han llegado los Krowdlers al lugar que buscas...</strong></li>
+					   <li><strong>Aún no han llegado los Krowdlers a "<%= @search_value %>"...</strong></li>
 
 					<% else %>
 
@@ -58,7 +60,7 @@
 				<div class="grid_12 dark-box">
 					<div class="margins">
 						Si no encontraste el lugar, 
-						<%= link_to "Agrégalo!", new_venue_path, "target"=>"_parent" %>
+						<%= link_to "Agrégalo!", new_venue_path(:search_value => @search_value), "target"=>"_parent" %>
 					</div>
 			   </div>	
 

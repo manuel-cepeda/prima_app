@@ -79,6 +79,7 @@
               <div class="clear"></div>
             </header>
  
+
             <div class="entry-meta">
                <% if signed_in? %>
                    <div >
@@ -90,7 +91,7 @@
 
 
                        <p id="place-label"><%= f.label "Nombre del lugar", "class"=>"form-label" %>
-                       <%= f.text_field :title, placeholder: "ej: La Cantina de Moe", "class"=>"text-field-form" %></p>
+                       <%= f.text_field :title, :value => @search_value, placeholder: "ej: La Cantina de Moe", "class"=>"text-field-form" %></p>
                         <%= f.hidden_field :lat, :value => "" %>
                         <%= f.hidden_field :lng, :value => "" %>
                         <%= f.submit "Agregar",  class: "btn btn-large btn-primary btn-sample", "id"=>"butt" %>

@@ -132,7 +132,7 @@
                 	meanMenuExist = true;
                 	// add class to body so we don't need to worry about media queries here, all CSS is wrapped in '.mean-container'
                 	jQuery(meanContainer).addClass("mean-container");
-                	jQuery('.mean-container').prepend('<div class="mean-bar"><a href="#nav" class="meanmenu-reveal" style="'+meanStyles+'">Show Navigation</a><nav class="mean-nav"></nav></div>');
+                	jQuery('.mean-container').prepend('<div style="display:none" class="mean-bar"><a href="#nav" class="meanmenu-reveal" style="'+meanStyles+'">Show Navigation</a><nav class="mean-nav"></nav></div>');
                     
                     //push meanMenu navigation into .mean-nav
                     var meanMenuContents = jQuery(meanMenu).html();
@@ -195,14 +195,19 @@
                     jQuery($navreveal).click(function(e){
                     	e.preventDefault();
 	            		if(menuOn == false) {
+                            $(".mean-bar").css("display", "");
 	                        $navreveal.css("text-align", "center");
 	                        $navreveal.css("text-indent", "0");
 	                        $navreveal.css("font-size", meanMenuCloseSize);
 	                        jQuery('.mean-nav ul:first').slideDown(); 
 	                        menuOn = true;
+                            
+
+
 	                    } else {
 	                    	jQuery('.mean-nav ul:first').slideUp();
 	                    	menuOn = false;
+                            $(".mean-bar").css("display", "none");
 	                    }    
                         $navreveal.toggleClass("meanclose");
                         meanInner();

@@ -21,7 +21,7 @@
 					<!-- Widget list -->
 					<aside id="WPlookCD" class="widget">
 						<header class="entry-header">	
-							<h1 class="entry-title">Top 30 más prendidos</h1>
+							<h1 class="entry-title">Ranking más prendidos</h1>
 							<div class="clear"></div>
 						</header>
 						<ul>
@@ -30,11 +30,20 @@
 								<a href="<%= venue_url(venue) %>" title="<%= venue.title %>", target="parent">
 									<img src="/assets/temp/80x80.jpg" alt="">
 									<h1 class="entry-title"><%= venue.title %></h1>
-									<h2 class="entry-description"><i class="icon-star"></i> <%= "#{venue.get_positive_votes.count-venue.get_negative_votes.count}" %> Puntos</h2>
-									<h3><i class="icon-fire"></i> <%="#{venue.get_positive_votes.count}" %>
-						                <strong> - </strong>
-						                <i class="icon-trash"></i> <%="#{venue.get_negative_votes.count}" %>  </h3>
+									<h2 class="entry-description">
+										<i class="icon-star"></i>
+										 <span><%= "#{venue.get_positive_votes.count-venue.get_negative_votes.count}" %> Puntos 
+										 </span>
+										 <span  style="float:right">
+										 	<i class="icon-expand"></i> Vota
+										 </span>
+									</h2>
+									<h2 class="entry-description">
+										<i class="icon-comment"></i>
+										 <span><%= " #{venue.posts.count}" %> Comentarios</span>
+									</h2>
 									<div class="clear"></div>
+
 								</a>
 							</li>
  							<% end %>
