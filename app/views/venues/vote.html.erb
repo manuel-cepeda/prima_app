@@ -29,6 +29,7 @@
 							<h1 class="entry-title">Resultado de Búsqueda</h1>
 							<div class="clear"></div>
 						</header>
+
 						<ul>
 					<% if @venues.empty?&&@search_flag%>
 					   <li><strong>Aún no han llegado los Krowdlers a "<%= @search_value %>"...</strong></li>
@@ -36,20 +37,30 @@
 					<% else %>
 
 							
-								<% @venues.each do |venue| %>
-								<li>
-									<a href="<%= venue_url(venue) %>" title="<%= venue.title %>">
-										<img src="/assets/temp/80x80.jpg" alt="">
-										<h1 class="entry-title"><%= venue.title %></h1>
-										<h2 class="entry-description">Puntuación: <%= "#{venue.get_positive_votes.count-venue.get_negative_votes.count}" %></h2>
-										<h3><%="#{venue.get_positive_votes.count}" %>
-							                <strong> | </strong>
-							                <%="#{venue.get_negative_votes.count}" %>  </h3>
-										<div class="clear"></div>
-									</a>
-								</li>
-								<% end %>
-							</ul>
+					<% @venues.each do |venue| %>
+					<li>
+						<a href="<%= venue_url(venue) %>" title="<%= venue.title %>", target="parent">
+							<img src="/assets/temp/80x80.jpg" alt="">
+							<h1 class="entry-title"><%= venue.title %></h1>
+							<h2 class="entry-description">
+								<i class="icon-star"></i>
+								 <span><%= "#{venue.get_positive_votes.count-venue.get_negative_votes.count}" %> Puntos 
+								 </span>
+								 <span  style="float:right">
+								 	<i class="icon-expand"></i> Vota
+								 </span>
+							</h2>
+							<h2 class="entry-description">
+								<i class="icon-comment"></i>
+								 <span><%= " #{venue.posts.count}" %> Comentarios</span>
+							</h2>
+							<div class="clear"></div>
+
+						</a>
+					</li>
+						<% end %>
+
+						</ul>
 
 
 	 				<% end %>
