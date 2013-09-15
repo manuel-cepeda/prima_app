@@ -39,11 +39,12 @@ class Venue < ActiveRecord::Base
 	def self.load_venues
 	    book = Spreadsheet.open 'lib/venues.xls'
 	    sheet1 = book.worksheet 0
-	    i=0
+	    
 	    sheet1.each do |row|
-
+			
 	        #add venues from excel
-	      Venue.create(:title => "#{row[0]}", :address => "#{row[1]}, #{row[4]},Santiago, Chile")     
+	      Venue.create(:title => "#{row[0]}", :address => "#{row[1]}, #{row[4]},Santiago, Chile")
+	      sleep 1.5     
 	    end	
 	end	
 
