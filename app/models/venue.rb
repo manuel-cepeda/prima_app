@@ -44,7 +44,8 @@ class Venue < ActiveRecord::Base
 			
 	        #add venues from excel
 	      Venue.create(:title => "#{row[0]}", :address => "#{row[1]}, #{row[4]},Santiago, Chile")
-	      sleep 1.5     
+		  #Not overload Google API
+	      sleep 0.25     
 	    end	
 	end	
 
