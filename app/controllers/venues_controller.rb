@@ -2,6 +2,7 @@ class VenuesController < ApplicationController
   before_action :set_venue, only: [:show, :edit, :update, :destroy]
   before_action :correct_user,   only: :destroy
   include VenuesHelper
+
   # GET /venues
   # GET /venues.json
   def index
@@ -23,9 +24,6 @@ class VenuesController < ApplicationController
   end
 
 
-
-  # GET /venues/1
-  # GET /venues/1.json
   def show
 
     @venue = Venue.find(params[:id])

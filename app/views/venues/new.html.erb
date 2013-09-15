@@ -32,8 +32,8 @@
             title:"You are here!"
         });
 
-        document.getElementById('venue_lat').value=lat;
-        document.getElementById('venue_lng').value=lng;
+        document.getElementById('venue_latitude').value=lat;
+        document.getElementById('venue_longitude').value=lng;
         $('#map_canvas').show();
     }
 
@@ -92,8 +92,8 @@
 
                        <p id="place-label"><%= f.label "Nombre del lugar", "class"=>"form-label" %>
                        <%= f.text_field :title, :value => @search_value, placeholder: "ej: La Cantina de Moe", "class"=>"text-field-form" %></p>
-                        <%= f.hidden_field :lat, :value => "" %>
-                        <%= f.hidden_field :lng, :value => "" %>
+                        <%= f.hidden_field :latitude, :value => "" %>
+                        <%= f.hidden_field :longitude, :value => "" %>
                         <%= f.submit "Agregar",  class: "btn btn-large btn-primary btn-sample", "id"=>"butt" %>
                     </div>
                 <% end %>

@@ -30,7 +30,7 @@
 
              // This is the minimum zoom level that we'll allow
              var minZoomLevel = 15;
-             var latlng = new google.maps.LatLng(<%= @venue.lat %>, <%= @venue.lng %>);
+             var latlng = new google.maps.LatLng(<%= @venue.latitude %>, <%= @venue.longitude%>);
              var map = new google.maps.Map(document.getElementById('map-canvas'), {
                 zoom: minZoomLevel,
                 center: latlng,
@@ -99,8 +99,8 @@
 
                        <p id="place-label"><%= f.label "Nombre del lugar", "class"=>"form-label" %>
                        <%= f.text_field :title, placeholder: "ej: La Cantina de Moe", "class"=>"text-field-form" %></p>
-                        <%= f.hidden_field :lat, :value => "" %>
-                        <%= f.hidden_field :lng, :value => "" %>
+                        <%= f.hidden_field :latitude, :value => "" %>
+                        <%= f.hidden_field :longitude, :value => "" %>
 
                     </div>
                 <% end %>
