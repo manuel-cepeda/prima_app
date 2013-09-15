@@ -27,7 +27,7 @@
 						<ul>
 							<% @venues.each do |venue| %>
 							<li>
-								<a href="<%= venue_url(venue) %>" title="<%= venue.title %>", target="parent">
+								<a href="<%= venue_url(venue) %>" title="<%= venue.title %>", target="self">
 									<img src="/assets/temp/80x80.jpg" alt="">
 									<h1 class="entry-title"><%= venue.title %></h1>
 									<h2 class="entry-description">

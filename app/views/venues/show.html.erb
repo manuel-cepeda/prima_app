@@ -10,7 +10,7 @@
 
              // This is the minimum zoom level that we'll allow
              var minZoomLevel = 15;
-             var latlng = new google.maps.LatLng(<%= @venue.lat %>, <%= @venue.lng %>);
+             var latlng = new google.maps.LatLng(<%= @venue.latitude %>, <%= @venue.longitude %>);
              var map = new google.maps.Map(document.getElementById('map-canvas'), {
                 zoom: minZoomLevel,
                 center: latlng,
