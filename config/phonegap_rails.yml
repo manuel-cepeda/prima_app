@@ -1,0 +1,9 @@
+##
+##  General settings
+##
+phonegap_path:             '~/Development/phonegap-2.9.0'
+api_server:                'http://krowdly.com'
+
+##  Android settings
+android:
+   package:                'com.prima.krowdly'

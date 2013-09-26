@@ -13,6 +13,7 @@ PrimaApp::Application.routes.draw do
   match '/vote', :to => 'venues#vote', via: [:get]
   match '/list', :to => 'venues#list', via: [:get]
   match '/spreadsheet', :to => 'venues#spreadsheet', via: [:get]
+  match '/data', :to => 'venues#data', via: [:get, :post]
   resources :posts, only: [:create, :destroy]
 
 

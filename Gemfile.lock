@@ -157,6 +157,7 @@ GEM
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
     pg (0.15.1)
+    phonegap-rails (0.0.12)
     polyglot (0.3.3)
     pr_geohash (1.0.0)
     pry (0.9.12.2)
@@ -291,6 +292,7 @@ DEPENDENCIES
   omniauth
   omniauth-facebook (= 1.4.0)
   pg (= 0.15.1)
+  phonegap-rails
   rails (= 4.0.0)
   rails_12factor (= 0.0.2)
   rspec-rails (= 2.13.1)

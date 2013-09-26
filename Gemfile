@@ -17,7 +17,7 @@ gem "koala", "~> 1.7.0rc1"
 gem 'mobylette'
 gem 'spreadsheet'
 gem 'geocoder'
-
+gem 'phonegap-rails'
 
 
 group :development, :test do

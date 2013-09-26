@@ -1,0 +1,85 @@
+<% provide(:title, "data") %>
+<% provide(:page, "data") %>
+
+
+
+
+
+       
+        <% flash.each do |key, value| %>
+                <div class="alert alert-<%= key %>"><%= value %></div>
+        <% end %>
+
+  <div id="progress-back" class="load-item">
+    <div id="progress-bar"></div>
+  </div>
+  <div id="page">
+    <div id="header-bg"></div>
+    <div id="patern"></div>
+    <div id="page-view">
+      
+
+
+      <%= render 'shared/header' %>
+
+          <%= render 'shared/menu' %>
+
+
+      <!-- Main -->
+      <div id="main" class="site-main container_12">
+
+
+          <!-- Left column -->
+        <div id="primary" class="grid_8">
+
+
+          <!-- Posts -->
+        <article class="single-post">
+            <header class="entry-header">
+              <h1 class="entry-title">Agregar Lugar</h1>
+              <div class="clear"></div>
+            </header>
+ 
+
+            <div class="entry-meta">
+               <% if signed_in? %>
+               <span style="color:#ffffff">votos positivos hasta 30, votos negativos hasta 30</span>
+                  <%= form_tag  do %>
+                  <span style="color:#ffffff">id del lugar</span>
+                  <p><%= text_field_tag :id %></p>
+                 <span style="color:#ffffff"> votos positivos</span>
+                 </p> <%= text_field_tag :votes_number_positive %></p>
+                  <span style="color:#ffffff">votos negativos</span>
+                 </p> <%= text_field_tag :votes_number_negative %></p>
+                    <div><%= submit_tag 'Guardar' %></div>
+                  <% end -%>
+                <% end %>
+
+               
+
+
+
+
+                  <div class="clear"></div>
+            </div>
+            
+
+             
+
+            <div >
+
+
+
+              <div class="clear"></div>
+                <nav></nav>
+            </div>
+
+          </article>          
+
+
+        <div class="clear"></div>
+        </div>
+        </div>
+        <%= render 'shared/footer'%>
+    </div>
+  </div>

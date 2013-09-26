@@ -127,11 +127,42 @@ class VenuesController < ApplicationController
       #current_user.vote_against(@venue = Venue.find(params[:id]))
       redirect_to [@venue]
       flash[:success] = "Hemos recibido tu voto!"
-    rescue ActiveRecord::RecordInvalid
+      rescue ActiveRecord::RecordInvalid
       #Manage this to show user can't vote twice
       redirect_to [@venue]
       flash[:error] =  "Ya habias votado"
     end      
+  end
+
+  def data
+
+    votes_number_positive=0
+    votes_number_negative=0
+
+    if(params.has_key?(:id))
+
+      
+
+      votes_number_positive=params[:votes_number_positive]
+      votes_number_negative=params[:votes_number_negative]
+
+       votes_number_positive=votes_number_positive.to_i
+      votes_number_negative=votes_number_negative.to_i
+
+      i = 0
+      until i == votes_number_positive
+        i += 1
+        User.find(i+7).vote_exclusively_for(@venue = Venue.find(params[:id]))
+      end
+
+      i = 0
+      until i == votes_number_negative
+        i += 1
+        User.find(i+30).vote_exclusively_against(@venue = Venue.find(params[:id]))
+      end
+
+    end
+ 
   end
 
 
