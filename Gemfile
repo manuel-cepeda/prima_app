@@ -18,6 +18,7 @@ gem 'mobylette'
 gem 'spreadsheet'
 gem 'geocoder'
 gem 'phonegap-rails'
+gem 'unicorn'
 
 
 group :development, :test do
