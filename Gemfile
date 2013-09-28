@@ -19,7 +19,7 @@ gem 'spreadsheet'
 gem 'geocoder'
 gem 'phonegap-rails'
 gem 'unicorn'
-
+gem 'newrelic_rpm'
 
 group :development, :test do
   gem 'sqlite3', '1.3.7'
