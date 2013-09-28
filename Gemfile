@@ -20,6 +20,7 @@ gem 'geocoder'
 gem 'phonegap-rails'
 gem 'unicorn'
 gem 'newrelic_rpm'
+gem 'whenever', :require => false
 
 group :development, :test do
   gem 'sqlite3', '1.3.7'

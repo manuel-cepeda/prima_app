@@ -47,6 +47,37 @@ class Venue < ActiveRecord::Base
 		  #Not overload Google API
 	      sleep 0.25     
 	    end	
-	end	
+	end
+
+
+
+	def self.vote_venues
+
+		20.times 
+			  venue_id=rand(1..1200).to_i
+		      votes_number_positive=rand(1..10).to_i
+		      votes_number_negative=rand(1..5).to_i
+
+		      i = 0
+		      until i == votes_number_positive
+		        i += 1
+		        User.find(i+7).vote_exclusively_for(@venue = Venue.find(venue_id))
+		      end
+
+		      i = 0
+		      until i == votes_number_negative
+		        i += 1
+		        User.find(i+30).vote_exclusively_against(@venue = Venue.find(venue_id))
+		      end
+		end
+
+
+
+
+
+
+
+	end
+
 
 end

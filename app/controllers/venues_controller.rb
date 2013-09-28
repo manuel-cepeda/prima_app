@@ -135,7 +135,7 @@ class VenuesController < ApplicationController
   end
 
   def data
-
+ 
     votes_number_positive=0
     votes_number_negative=0
 
@@ -152,6 +152,8 @@ class VenuesController < ApplicationController
       i = 0
       until i == votes_number_positive
         i += 1
+
+        #7 due production database had 7 user when this was implemented
         User.find(i+7).vote_exclusively_for(@venue = Venue.find(params[:id]))
       end
 
