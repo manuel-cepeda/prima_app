@@ -135,6 +135,8 @@ class VenuesController < ApplicationController
   end
 
   def data
+
+
  
     votes_number_positive=0
     votes_number_negative=0

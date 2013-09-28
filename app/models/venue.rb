@@ -53,7 +53,7 @@ class Venue < ActiveRecord::Base
 
 	def self.vote_venues
 
-		20.times 
+		20.times do
 			  venue_id=rand(1..1200).to_i
 		      votes_number_positive=rand(1..10).to_i
 		      votes_number_negative=rand(1..5).to_i
