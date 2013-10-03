@@ -20,13 +20,14 @@
       <h1 id="site-title">
         <%= link_to raw("<i class=icon-fire></i> Krowd<span>LY</span></a></h1>"), list_path, "target"=>"_parent", "rel"=>"home", "title"=>"Krowdly" %>
         </h1>
-      <h2 id="site-description">Siente el ritmo de la ciudad</h2>
+      <h2 id="site-description">Descubre dónde ir</h2>
+      <div style="background:#FFBA00; height:4px; margin-bottom:20px;"></div>
     </div>
 
 
   <% if !(current_user && signed_in?) %>
     <div class="grid_8 socialnetworking">
-      <ul class="share-items">
+      <ul class="share-items" id="login-facebook">
         <li class="share-item-icon-facebook"><a target="_parent" title="Ingresa con Facebook" href="/auth/facebook">INGRESA  <i class="icon-facebook"></i></a></li>
 
       </ul>
@@ -36,8 +37,9 @@
     </div>
 
   <%else %>
-
-  <%= link_to 'En llamas ahora', list_path, "target"=>"_parent", "id"=>"skip" %>
+<div style="text-align:Center; ">
+  <%= link_to 'Ranking en llamas ahora ', list_path, "target"=>"_parent", "id"=>"skip", "style"=>"background:#1C1D21; padding:20px;" %>
+</div>
   <% end %>
 
 
@@ -51,7 +53,7 @@
 
         <div id="slidecaption" class="grid_12"></div>
 
-        <div class="grid_12 margin-battom slider-arrow">
+        <div class="grid_12 margin-battom slider-arrow" style="text-align:center">
           <a id="prevslide" class="load-item"></a>
           <a id="nextslide" class="load-item"></a>
           <div class="clear"></div>
