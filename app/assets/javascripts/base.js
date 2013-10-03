@@ -13,9 +13,9 @@ jQuery(document).ready(function(){
 			slides					:
 				[			// Slideshow Images
 
-					{image : '/assets/temp/bg1.jpg', title : '<h1><span>Averigua donde está pasando lo más entretenido</span></h1>'},
-					{image : '/assets/temp/bg2.jpg', title : '<h1>Vota por los mejores lugares en tiempo real</h1>'},
-					{image : '/assets/temp/bg3.jpg', title : '<h1><span>Disfruta tu ciudad con todos</span></h1>'}
+					{image : '/assets/temp/bg1.jpg', title : '<h1><span>Vota por los lugares más entretenidos en este momento</span></h1>'},
+					{image : '/assets/temp/bg2.jpg', title : '<h1>Averigua dónde está el lugar más prendido en tiempo real</h1>'},
+					{image : '/assets/temp/bg3.jpg', title : '<h1><span>Disfruta tu ciudad con otros Krowdlers</span></h1>'}
 
 				]
 		});

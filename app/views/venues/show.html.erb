@@ -58,27 +58,28 @@
           <article class="single-post">
             <header class="entry-header">
               <h1 class="entry-title"><%= @venue.title %></h1>
+
+                <span style="float:right; margin-top:5px;"> 
+                  <% @votes=@positive_votes.count- @negative_votes.count %>
+
+                  <% if @votes>0%>
+                  +
+                  <% end %>
+                  <%="#{@positive_votes.count- @negative_votes.count}" %> 
+
+                  <i class="icon-fire"></i>  </span>
+
+
               <div class="clear"></div>
             </header>
+            <div style="height:40px; margin-bottom:20px; background:#888888">
+                <div ><span style="float:Left; color: #ffffff; margin-top:10px;" > Estás en este lugar?, Vota!</span></div>
+                <div ><span style="float:Right;" class="geo" onclick="initialize()"><i class="icon-map-marker"></i> Ver Ubicación</span></div>
 
-            <div class="entry-meta">
-                <div style="display:block" class="category-selected fleft map"><span class="geo" onclick="initialize()"><i class="icon-map-marker"></i> Ver Ubicación</span></div>
-                <div id="map-canvas" style="width=100%; height:300px; display:none;"></div>  
-                <div id="score">Calificación últimas 3 horas: </div>
-
-                <div>
-
-                <span class="likes fright"><i class="icon-star"></i> <%="#{@positive_votes.count- @negative_votes.count}" %> puntos  </span>
-
-                <span class="views fright"> = <i class="icon-fire"></i> <%="#{@positive_votes.count}" %></span>
-                <span class="views fright"> - <i class="icon-trash"></i> <%="#{@negative_votes.count}" %></span>
-              </div>
-
-
-              <div class="clear"></div>
             </div>
-            
 
+            
+            <div id="map-canvas" style="width=100%; height:300px; display:none; margin-bottom:20px;"></div>  
              
 
             <div >
@@ -98,16 +99,18 @@
                 <% end %>
               <% end %>
 
-                  <p id="data-vote" style="color:#888888; display: clear;">SI estás en este lugar, Vota!</p>
+
                   <div>
                     <%= form_tag vote_up_venue_path(@venue), :name => "voteUpForm" do %>
-                    <button id="vote_up" class="vote_button btn btn-large btn-primary btn-sample"><i class=icon-fire></i> En Llamas</button>
+                    <button id="vote_up" class="vote_button btn btn-large btn-primary btn-sample"><i class=icon-fire></i> En Llamas <div style="text-align:right; font-size:15px;">+<%="#{@positive_votes.count}" %> votos</div></button>
                     <% end %>
 
                     <%= form_tag vote_down_venue_path(@venue), :name => "voteDownForm" do %>
-                    <button id="vote_down" class="vote_button btn btn-large btn-primary btn-sample"><i class=icon-trash></i> Aburrido</button>
+                    <button id="vote_down" class="vote_button btn btn-large btn-primary btn-sample">_ Apagados<div style="text-align:right; font-size:15px;">-<%="#{@negative_votes.count}" %> votos</div></button>
                     <% end %>
                   </div>
+
+
 
                   </div>
               </div>

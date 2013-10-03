@@ -140,7 +140,7 @@ font-weight: bold;
 }
 
 #vote_up{
-margin-right:10px;
+
   color: #ffffff;
     float:left;
 }
@@ -207,15 +207,16 @@ display: inline-block;
 }
 
 .geo {
-cursor:pointer; color: #FF9900; text-decoration:underline;  
+cursor:pointer; color: #ffffff;  
+margin:10px 5px 0 0;
 
 }
 
 #skip{
 text-align:right;
 clear:both;
-float:right;
-font-size: 0.9em;
+
+font-size: 1.5em;
 }
 
 
@@ -296,4 +297,15 @@ padding: 0 0 0 20px;
   -webkit-border-radius: 0 !important;
      -moz-border-radius: 0 !important;
           border-radius: 0 !important;
+}
+
+.entry-header h1{
+
+  font-size:20px;
+}
+
+#site-info .pagination ul > li > a, .pagination ul > li > span {
+
+    background-color: #000000;
+
 }
