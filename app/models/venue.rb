@@ -72,9 +72,27 @@ class Venue < ActiveRecord::Base
 		end
 
 
+	end
 
+	def self.vote_slow_days_venues
 
+		20.times do
+			  venue_id=rand(1..1200).to_i
+		      votes_number_positive=rand(1..2).to_i
+		      votes_number_negative=rand(1..5).to_i
 
+		      i = 0
+		      until i == votes_number_positive
+		        i += 1
+		        User.find(i+7).vote_exclusively_for(@venue = Venue.find(venue_id))
+		      end
+
+		      i = 0
+		      until i == votes_number_negative
+		        i += 1
+		        User.find(i+30).vote_exclusively_against(@venue = Venue.find(venue_id))
+		      end
+		end
 
 
 	end
