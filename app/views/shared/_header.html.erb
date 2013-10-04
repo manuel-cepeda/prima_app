@@ -17,15 +17,18 @@
 						
 		</div>
 
-  <% if !(current_user && signed_in?) %>
-		<div class="grid_8 socialnetworking">
-			<ul class="share-items">
-				<li class="share-item-icon-facebook"><a target="_blank" title="Ingresa con Facebook" href="/auth/facebook">INGRESA  <i class="icon-facebook"></i></a></li>
-			</ul>
-			  <%= link_to 'En llamas ahora', list_path, "target"=>"_parent", "id"=>"skip" %>
-		</div>
+<% if !(current_user && signed_in?) %>
+    <div class="grid_8 socialnetworking">
+      <ul class="share-items" id="login-facebook">
+        <li class="share-item-icon-facebook"><a target="_parent" title="Ingresa con Facebook" href="/auth/facebook">INGRESA  <i class="icon-facebook"></i></a></li>
 
-  <% end %>
+      </ul>
+
+
+      
+    </div>
+
+  <%end %>
 
  <%= render 'shared/search' %>
 
