@@ -79,6 +79,6 @@ PrimaApp::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
 
-   config.assets.precompile += %w( iphone.js )
-   config.assets.precompile += %w( iphone.css )
+  config.assets.precompile += %w( iphone.js )
+  config.assets.precompile += %w( iphone.css )
 end
