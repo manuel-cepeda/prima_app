@@ -797,11 +797,17 @@ img { border:none; }
 .entry-header {
 	background: #ffba00;
 	color: #fff;
-	padding: 8px 20px;
+	padding: 10px 20px;
 }
 	.entry-header .entry-title {
 		float: left;
+
 	}
+
+.entry-header h1{
+
+  font-size:25px;
+}
 
 	.entry-header .more-options {
 		float: right;
