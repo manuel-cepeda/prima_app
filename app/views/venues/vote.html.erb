@@ -38,26 +38,42 @@
 
 							
 					<% @venues.each do |venue| %>
-					<li>
-						<a href="<%= venue_url(venue) %>" title="<%= venue.title %>", target="parent">
-							<img src="/assets/temp/80x80.jpg" alt="">
-							<h1 class="entry-title"><%= venue.title %></h1>
-							<h2 class="entry-description">
-								<i class="icon-star"></i>
-								 <span><%= "#{venue.get_positive_votes.count-venue.get_negative_votes.count}" %> Puntos 
-								 </span>
-								 <span  style="float:right">
-								 	<i class="icon-expand"></i> Vota
-								 </span>
-							</h2>
-							<h2 class="entry-description">
-								<i class="icon-comment"></i>
-								 <span><%= " #{venue.posts.count}" %> Comentarios</span>
-							</h2>
-							<div class="clear"></div>
+							<li>
+								<div >
+								<a href="<%= venue_url(venue) %>" title="<%= venue.title %>", target="self">		
 
-						</a>
-					</li>
+					            <img src="/assets/temp/80x80.jpg" alt="">
+
+	
+								<table border="1" style="width:75%">
+								<tr >
+								<td ><%= truncate(venue.title , length: 20, :separator => ' ')%></td>
+								<td style="height:30px; text-align:right">
+
+								<% @votes=venue.get_positive_votes.count-venue.get_negative_votes.count %>
+
+              				    <% if @votes>0%>
+                 					 +
+                 				 <% end %>
+                  				
+
+
+										 <span><%= @votes %>  <i style="color:#FFBA00;" class="icon-fire"></i>
+										 </span></td>
+								</tr>
+								<tr>
+								<td><i class="icon-comment"></i>
+										 <span><%= " #{venue.posts.count}" %> Comentarios</span></td>
+								<td style="text-align:right; font-size:22px; "> <span>
+										 	ver <i class="icon-hand-right"></i> 
+										 </span></td>
+								</tr>
+								</table> 
+
+								</a>
+								</div>
+							</li>
+
 						<% end %>
 
 						</ul>
