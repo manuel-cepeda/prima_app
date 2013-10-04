@@ -2,7 +2,7 @@ module ApplicationHelper
   
 	def full_title(page_title)
 
-		base_title="Lugares prendidos en tiempo real!"
+		base_title="Krowdly - Lugares prendidos en tiempo real!"
 		if page_title.empty?
 			base_title
 		else
