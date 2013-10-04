@@ -39,8 +39,8 @@
 	
 								<table border="1" style="width:75%">
 								<tr >
-								<td ><%= truncate(venue.title , length: 20, :separator => ' ')%></td>
-								<td style="height:30px; text-align:right">
+								<td style="font-size: 17px;" ><%= truncate(venue.title , length: 20, :separator => ' ')%></td>
+								<td style="height:30px; text-align:right; font-size: 17px;">
 
 								<% @votes=venue.get_positive_votes.count-venue.get_negative_votes.count %>
 

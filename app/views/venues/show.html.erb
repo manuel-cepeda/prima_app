@@ -59,7 +59,7 @@
             <header class="entry-header">
               <h1 class="entry-title"><%= @venue.title %></h1>
 
-                <span style="float:right; margin-top:5px;"> 
+                <span style="float:right; margin-top:5px; font-size:20px;"> 
                   <% @votes=@positive_votes.count- @negative_votes.count %>
 
                   <% if @votes>0%>
@@ -73,7 +73,12 @@
               <div class="clear"></div>
             </header>
             <div style="height:40px; margin-bottom:20px; background:#888888">
-                <div ><span style="float:Left; color: #ffffff; margin-top:10px;" > Estás en este lugar?, Vota!</span></div>
+               
+                 <% if signed_in? %>
+                  <div ><span style="float:Left; color: #ffffff; margin-top:10px;" > Estás en este lugar?, Vota!</span>
+                  </div>
+              <% end %>
+
                 <div ><span style="float:Right;" class="geo" onclick="initialize()"><i class="icon-map-marker"></i> Ver Ubicación</span></div>
 
             </div>
@@ -106,7 +111,7 @@
                     <% end %>
 
                     <%= form_tag vote_down_venue_path(@venue), :name => "voteDownForm" do %>
-                    <button id="vote_down" class="vote_button btn btn-large btn-primary btn-sample">__ Apagados<div style="text-align:right; font-size:15px;">-<%="#{@negative_votes.count}" %> votos</div></button>
+                    <button id="vote_down" class="vote_button btn btn-large btn-primary btn-sample"><i class=icon-thumbs-down></i> Apagados<div style="text-align:right; font-size:15px;">-<%="#{@negative_votes.count}" %> votos</div></button>
                     <% end %>
                   </div>
 
