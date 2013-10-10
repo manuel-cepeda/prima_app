@@ -21,6 +21,8 @@ gem 'phonegap-rails'
 gem 'unicorn'
 gem 'newrelic_rpm'
 gem 'whenever', :require => false
+gem 'foreman'
+gem 'puma'
 
 group :development, :test do
   gem 'sqlite3', '1.3.7'
