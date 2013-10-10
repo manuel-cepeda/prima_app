@@ -1,0 +1,24 @@
+  <div id="progress-back" class="load-item">
+    <div id="progress-bar"></div>
+  </div>
+  <div id="page">
+    <div id="header-bg"></div>
+    <div id="patern"></div>
+    <div id="page-view">
+      
+              <%= render 'shared/header' %>
+
+          <%= render 'shared/menu' %>
+
+<h1 style="color: #FFBA00; font-size:14px">Cómo podemos mejorar Krowdly?</h1>
+
+<%= form_for @feedback, url: {action: "create"}, html: {class: "nifty_form"} do |f| %>
+  <%= f.text_area :description, size: "15x6", placeholder: "Escribir feedback.." %>
+  <%= f.submit "Enviar feedback", :class => 'normal-button'%>
+<% end %>
+
+
+
+
+    </div>
+  </div>

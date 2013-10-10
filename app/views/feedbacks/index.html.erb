@@ -1,0 +1,27 @@
+<h1>Listing feedbacks</h1>
+
+<table style="color:#ffffff">
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Description</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @feedbacks.each do |feedback| %>
+      <tr>
+        <td><%= feedback.user_id %></td>
+        <td><%= feedback.description %></td>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Feedback', new_feedback_path %>

@@ -1,9 +1,11 @@
 PrimaApp::Application.routes.draw do
 
+
   resources :vote_records
 
   resources :users
   resources :venues
+  resources :feedbacks
   root :to =>"venues#index"
   get '/login', :to => 'sessions#new', :as => :login
   get '/logins' => 'sessions#logins'

@@ -1,0 +1,60 @@
+
+
+
+
+
+  <div id="progress-back" class="load-item">
+    <div id="progress-bar"></div>
+  </div>
+  <div id="page">
+    <div id="header-bg"></div>
+    <div id="patern"></div>
+    <div id="page-view">
+      
+              <%= render 'shared/header' %>
+
+          <%= render 'shared/menu' %>
+
+      <!-- Main -->
+      <div id="main" class="site-main container_12">
+        
+
+        
+        <!-- Right Column / Widget area -->
+        <div id="secondary" class="grid_4 widget-area" role="complementary">
+          <!-- Widget list -->
+          <aside id="WPlookCD" class="widget">
+            <header class="entry-header"> 
+              <h1 class="entry-title">Perfil Usuario</h1>
+              <div class="clear"></div>
+            </header>
+            <ul>
+             
+              <li>
+                  <p>
+
+                    <% if @feedback.user_id?  %>
+                    <%= "Gracias #{@feedback.user.name}!, a darlo todo!" %>
+
+                    <% else  %>
+                     <%= notice %>
+                    <% end  %>
+
+                   <%= link_to 'Volver a lista de más prendidos', list_path %>
+                  </p>
+               </li>
+             
+
+            </ul>
+          </aside>
+          
+          <!-- Widget CD -->
+
+        </div>
+        
+        <div class="clear"></div>
+      </div>
+
+              <%= render 'shared/footer' %>
+    </div>
+  </div>
