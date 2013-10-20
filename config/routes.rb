@@ -1,11 +1,13 @@
 PrimaApp::Application.routes.draw do
 
 
+  match '/rate' => 'rater#create', :as => 'rate', via: [:get, :post]
   resources :vote_records
 
   resources :users
   resources :venues
   resources :feedbacks
+  resources :ratings, only: :update
   root :to =>"venues#index"
   get '/login', :to => 'sessions#new', :as => :login
   get '/logins' => 'sessions#logins'

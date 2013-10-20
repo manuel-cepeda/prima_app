@@ -29,6 +29,40 @@
 
   </script>
 
+
+<script>
+
+$( document ).ready(function() {
+
+  $('#star').raty({
+    readOnly: true,
+    score: <%= @venue.average_rating %>,
+ 
+    path: '/assets/mini'
+  });
+
+<% if !@rating.blank? %>
+  $('#user_star').raty({
+    score: <%= @rating.score %>,
+    width:250,
+    path: '/assets',
+    click: function(score, evt) {
+      $.ajax({
+        url: '/ratings/' + <%= @rating.id %>,
+        type: 'PATCH',
+        data: { score: score }
+      });
+    }
+  });
+
+<% end %>
+
+});
+
+</script>
+
+
+
     
         <% flash.each do |key, value| %>
                 <div class="alert alert-<%= key %>"><%= value %></div>
@@ -59,16 +93,16 @@
             <header class="entry-header">
               <h1 class="entry-title"><%= @venue.title %></h1>
 
-                <span style="float:right; margin-top:5px; font-size:20px;"> 
-                  <% @votes=@positive_votes.count- @negative_votes.count %>
 
-                  <% if @votes>0%>
-                  +
-                  <% end %>
-                  <%="#{@positive_votes.count- @negative_votes.count}" %> 
 
-                  <i class="icon-fire"></i>  </span>
 
+
+
+
+
+
+            
+<div style="float:right; margin-top:5px;" id="star"></div>
 
               <div class="clear"></div>
             </header>
@@ -95,7 +129,7 @@
 
              <% if signed_in? %>
               <div style="text-align:Center;">
-                 <div> 
+                 <div style="text-align:center;"> 
               <% if signed_in? %>
                 <% if current_user.admin? || current_user?(@venue.user)%>
                   <%= link_to "Eliminar", @venue,  "data-role"=>"button", method: :delete, 
@@ -105,19 +139,14 @@
               <% end %>
 
 
-                  <div>
-                    <%= form_tag vote_up_venue_path(@venue), :name => "voteUpForm" do %>
-                    <button id="vote_up" class="vote_button btn btn-large btn-primary btn-sample"><i class=icon-fire></i> En Llamas <div style="text-align:right; font-size:15px;">+<%="#{@positive_votes.count}" %> votos</div></button>
-                    <% end %>
+ 
 
-                    <%= form_tag vote_down_venue_path(@venue), :name => "voteDownForm" do %>
-                    <button id="vote_down" class="vote_button btn btn-large btn-primary btn-sample"><i class=icon-thumbs-down></i> Apagados<div style="text-align:right; font-size:15px;">-<%="#{@negative_votes.count}" %> votos</div></button>
-                    <% end %>
-                  </div>
+                <div id="user_star"></div>
+         
 
 
 
-                  </div>
+
               </div>
              <% end %>
 
@@ -181,7 +210,6 @@
 
                 <nav class="entry-pagination" id="nav-posts">
                   
-
 
                   <div class="clear"></div>
 

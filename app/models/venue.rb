@@ -1,12 +1,13 @@
 class Venue < ActiveRecord::Base
+
 	geocoded_by :address
 	after_validation :geocode, :if => :address_changed?
 	acts_as_voteable
 	has_many :posts, dependent: :destroy
 	has_many :vote_records
+	has_many :ratings
 	belongs_to :user
 	validates :title, presence: true, length: {maximum: 60}
-
 	searchable  do
 		
 		text :title
@@ -96,6 +97,11 @@ class Venue < ActiveRecord::Base
 
 
 	end
+
+	def average_rating
+
+	  ratings.where('updated_at > ?', 3.minutes.ago).sum(:score) / ratings.size
+    end  
 
 
 end

@@ -24,6 +24,8 @@ class VenuesController < ApplicationController
   end
 
 
+
+
   def show
 
     @venue = Venue.find(params[:id])
@@ -33,6 +35,38 @@ class VenuesController < ApplicationController
     @positive_votes=@venue.get_positive_votes
     @negative_votes=@venue.get_negative_votes
     @total_votes=@venue.get_total_votes
+
+
+    if current_user
+        @ratings = Rating.where(venue_id: @venue.id, user_id: current_user.id)
+        
+       
+        if @ratings.empty?
+            @rating = Rating.create(venue_id: @venue.id, user_id: current_user.id, score: 0)
+        
+        else
+          @rating =  @ratings.where('updated_at > ?', 3.minutes.ago).first
+
+          if @rating.blank?
+          @rating=@ratings.first
+          @rating.update_attributes(score: 0)
+          end
+        end   
+
+
+    else
+
+      @rating
+
+    end
+
+    
+
+
+
+
+
+    
   end
 
   # GET /venues/new
@@ -188,7 +222,9 @@ class VenuesController < ApplicationController
       @venues
       
 
-  end 
+  end
+
+
 
 
   private

@@ -23,6 +23,9 @@ gem 'newrelic_rpm'
 gem 'whenever', :require => false
 gem 'foreman'
 gem 'puma'
+gem 'letsrate'
+gem 'ajaxful_rating', '3.0.0.beta8'
+
 
 group :development, :test do
   gem 'sqlite3', '1.3.7'
