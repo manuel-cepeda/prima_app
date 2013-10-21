@@ -52,20 +52,7 @@
 
 										<div class="list-star" id="star_<%= venue.id %>"></div>
 
-								</td>
-								</tr>
-								<tr>
-								<td><i class="icon-comment"></i>
-										 <span><%= " #{venue.posts.count}" %> Comentarios</span></td>
-								<td style="text-align:right; font-size:22px; "> <span>
-										 	ver <i class="icon-hand-right"></i> 
-										 </span></td>
-								</tr>
-								</table> 
 
-								</a>
-								</div>
-							</li>
 
 							<script>
 
@@ -82,7 +69,24 @@
 
 							});
 
-							</script>
+							</script>	
+
+								</td>
+								</tr>
+								<tr>
+								<td><i class="icon-comment"></i>
+										 <span><%= " #{venue.posts.count}" %> Comentarios</span></td>
+								<td style="text-align:right; font-size:22px; "> <span>
+										 	ver <i class="icon-hand-right"></i> 
+										 </span></td>
+								</tr>
+								</table> 
+
+								</a>
+								</div>
+							</li>
+
+
 
 						<% end %>
 
