@@ -48,7 +48,7 @@ class VenuesController < ApplicationController
             @rating = Rating.create(venue_id: @venue.id, user_id: current_user.id, score: 0)
         
         else
-          @rating =  @ratings.where('updated_at > ?', 3.minutes.ago).first
+          @rating =  @ratings.where('updated_at > ?', 3.hours.ago).first
 
           if @rating.blank?
           @rating=@ratings.first
