@@ -18,7 +18,7 @@ class VenuesController < ApplicationController
 
 @venues=Venue.joins(:ratings)
   .select("venues.id, venues.title, AVG(ratings.score) as average")
-  .where('ratings.updated_at > ?', 10.hours.ago)
+  .where('ratings.updated_at > ?', 3.hours.ago)
   .group("venues.id, venues.title")
   .order("average")
 

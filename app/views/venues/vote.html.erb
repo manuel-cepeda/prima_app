@@ -48,18 +48,11 @@
 								<table border="1" style="width:75%">
 								<tr >
 								<td ><%= truncate(venue.title , length: 20, :separator => ' ')%></td>
-								<td style="height:30px; text-align:right">
+								<td style="float:right;">
 
-								<% @votes=venue.get_positive_votes.count-venue.get_negative_votes.count %>
+										<div class="list-star" id="star_<%= venue.id %>"></div>
 
-              				    <% if @votes>0%>
-                 					 +
-                 				 <% end %>
-                  				
-
-
-										 <span><%= @votes %>  <i style="color:#FFBA00;" class="icon-fire"></i>
-										 </span></td>
+								</td>
 								</tr>
 								<tr>
 								<td><i class="icon-comment"></i>
@@ -73,6 +66,23 @@
 								</a>
 								</div>
 							</li>
+
+							<script>
+
+							$( document ).ready(function() {
+
+							  $('#star_'+<%= venue.id %>).raty({
+							    readOnly: true,
+							    score: <%= venue.average_rating %>,
+							  
+							    path: '/assets'
+							  });
+
+
+
+							});
+
+							</script>
 
 						<% end %>
 

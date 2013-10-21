@@ -62,22 +62,22 @@
 							</li>
 
 
-<script>
+							<script>
 
-$( document ).ready(function() {
+							$( document ).ready(function() {
 
-  $('#star_'+<%= venue.id %>).raty({
-    readOnly: true,
-    score: <%= venue.average_rating %>,
-  
-    path: '/assets'
-  });
+							  $('#star_'+<%= venue.id %>).raty({
+							    readOnly: true,
+							    score: <%= venue.average_rating %>,
+							  
+							    path: '/assets'
+							  });
 
 
 
-});
+							});
 
-</script>
+							</script>
 
 
  							<% end %>
