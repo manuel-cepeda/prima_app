@@ -1,3 +1,6 @@
+
+
+
 	
 	<div id="progress-back" class="load-item">
 		<div id="progress-bar"></div>
@@ -40,18 +43,10 @@
 								<table border="1" style="width:75%">
 								<tr >
 								<td style="font-size: 17px;" ><%= truncate(venue.title , length: 20, :separator => ' ')%></td>
-								<td style="height:30px; text-align:right; font-size: 17px;">
+								<td style="float:right;">
 
-								<% @votes=venue.get_positive_votes.count-venue.get_negative_votes.count %>
-
-              				    <% if @votes>0%>
-                 					 +
-                 				 <% end %>
-                  				
-
-
-										 <span><%= @votes %>  <i style="color:#FFBA00;" class="icon-fire"></i>
-										 </span></td>
+								<div class="list-star" id="star_<%= venue.id %>"></div>
+								</td>
 								</tr>
 								<tr>
 								<td><i class="icon-comment"></i>
@@ -67,7 +62,22 @@
 							</li>
 
 
+<script>
 
+$( document ).ready(function() {
+
+  $('#star_'+<%= venue.id %>).raty({
+    readOnly: true,
+    score: <%= venue.average_rating %>,
+  
+    path: '/assets'
+  });
+
+
+
+});
+
+</script>
 
 
  							<% end %>

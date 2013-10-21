@@ -16,8 +16,11 @@ class VenuesController < ApplicationController
   def list
     #@venues = Venue.all
 
-    @venues = venues_by_plus_minus_vote(params[:time])
-
+@venues=Venue.joins(:ratings)
+  .select("venues.id, venues.title, AVG(ratings.score) as average")
+  .where('ratings.updated_at > ?', 10.hours.ago)
+  .group("venues.id, venues.title")
+  .order("average")
 
 
 

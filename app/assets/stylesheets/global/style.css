@@ -1759,6 +1759,19 @@ img.alignright {
 	padding: 0 5px 0 0;
 }
 
+
+#WPlookCD .list-star{
+margin-right:-22px;
+
+}
+
+#WPlookCD .list-star img{
+
+  padding:0;
+  width: 15%;
+}
+
+
 #WPlookCD ul .entry-title, 
 .residentdj ul .entry-title{
 	font-size: 18px;
