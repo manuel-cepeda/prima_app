@@ -15,18 +15,25 @@ class VenuesController < ApplicationController
 
   def list
     #@venues = Venue.all
+   @record =false
+    @venues=Venue.joins(:ratings)
+    .select("venues.id, venues.title, AVG(ratings.score) as average")
+    .where('ratings.updated_at > ?', 3.hours.ago)
+    .group("venues.id, venues.title")
+    .order("average DESC")
 
-@venues=Venue.joins(:ratings)
-  .select("venues.id, venues.title, AVG(ratings.score) as average")
-  .where('ratings.updated_at > ?', 3.hours.ago)
-  .group("venues.id, venues.title")
-  .order("average DESC")
 
+    @venues.each do |venue|
+        @record=true
+        next
+    end
 
+    if !@record
+      @venues=Venue.find(:all).sample(50)
+    end
+        
 
   end
-
-
 
 
   def show
@@ -35,9 +42,7 @@ class VenuesController < ApplicationController
     @posts = @venue.posts.paginate(page: params[:page], :per_page => 30)
     @post =  current_user.posts.build if signed_in?
     session[:venue_id] = @venue.id
-    @positive_votes=@venue.get_positive_votes
-    @negative_votes=@venue.get_negative_votes
-    @total_votes=@venue.get_total_votes
+
 
 
     if current_user
@@ -64,11 +69,6 @@ class VenuesController < ApplicationController
     end
 
     
-
-
-
-
-
     
   end
 
