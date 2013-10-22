@@ -15,22 +15,13 @@ class VenuesController < ApplicationController
 
   def list
     #@venues = Venue.all
-   @record =false
+ 
     @venues=Venue.joins(:ratings)
     .select("venues.id, venues.title, AVG(ratings.score) as average")
     .where('ratings.updated_at > ?', 3.hours.ago)
     .group("venues.id, venues.title")
     .order("average DESC")
 
-
-    @venues.each do |venue|
-        @record=true
-        next
-    end
-
-    if !@record
-      @venues=Venue.find(:all).sample(50)
-    end
         
 
   end
