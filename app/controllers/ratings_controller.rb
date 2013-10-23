@@ -13,7 +13,7 @@ class RatingsController < ApplicationController
 	          @graph = Koala::Facebook::API.new(session["fb_access_token"])
 
 	          profile = @graph.get_object("me")
-	          @graph.put_connections("me", "feed", :message => "Voto que #{@venue.title} #{params[:score]}", :link => "#{root_url}", :picture => "http://www.krowdly.com/assets/good.png")
+	          @graph.put_connections("me", "feed", :message => "Voto que #{@venue.title} #{phrases(params[:score])}", :link => "#{root_url}", :picture => "http://www.krowdly.com/assets/good.png")
 
 	      end
 
