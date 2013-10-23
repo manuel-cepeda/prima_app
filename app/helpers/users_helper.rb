@@ -9,25 +9,20 @@ module UsersHelper
 
 	def phrases(score)
 
-     switch (score) {
-         case (1):
-          'Aburrido como ostra'
-         break;
-         case (2):
-         'Prefiero contar ovejas'
-         break;
-         case (3):
-         'Está que prende'
-         break;
-         case (4):
-         'Tan bueno que me quemo'
-         break;
-         case (5):
-         '¡Traigan agua que está en llamas!'
-         break;
-         default:
-         'Si estás en este lugar, vota!'
-     }
+			case score # a_variable is the variable we want to compare
+			when 1    #compare to 1
+			  "it was 1" 
+			when 2    #compare to 2
+			  "it was 2"
+			when 3    #compare to 2
+			  "it was 2"
+			when 4    #compare to 2
+			  "it was 2"
+			when 5    #compare to 2
+			  "it was 2"
+			else
+			  "it was something else"
+			end
 	end
 
 end
