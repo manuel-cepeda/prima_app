@@ -18,7 +18,7 @@ class VenuesController < ApplicationController
  
     @venues=Venue.joins(:ratings)
     .select("venues.id, venues.title, AVG(ratings.score) as average")
-    .where('ratings.updated_at > ?', 3.hours.ago)
+    .where('ratings.updated_at > ?', 5.hours.ago)
     .group("venues.id, venues.title")
     .order("average DESC")
 
@@ -43,7 +43,7 @@ class VenuesController < ApplicationController
             @rating = Rating.create(venue_id: @venue.id, user_id: current_user.id, score: 0)
         
         else
-          @rating =  @ratings.where('updated_at > ?', 3.hours.ago).first
+          @rating =  @ratings.where('updated_at > ?', 5.hours.ago).first
 
           if @rating.blank?
           @rating=@ratings.first
