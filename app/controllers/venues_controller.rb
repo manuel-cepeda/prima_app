@@ -22,7 +22,6 @@ class VenuesController < ApplicationController
     .group("venues.id, venues.title")
     .order("average DESC")
 
-        
 
   end
 

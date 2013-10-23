@@ -1,5 +1,5 @@
 class Venue < ActiveRecord::Base
-
+  include SessionsHelper
 	geocoded_by :address
 	after_validation :geocode, :if => :address_changed?
 	acts_as_voteable
@@ -109,6 +109,19 @@ class Venue < ActiveRecord::Base
 
 	  ratings.where('updated_at > ?', 3.hours.ago).sum(:score) / rating_size
     end  
+
+
+	def current_user_rating(current_user_id)
+
+		ratings.where(:user_id => current_user_id, :venue_id => self.id).first.score
+
+ 			
+
+    end  
+
+
+
+
 
 
 end

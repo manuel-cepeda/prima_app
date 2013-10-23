@@ -32,12 +32,40 @@
 
 <script>
 
+
+ function set_score_comment(score_value) {
+
+     switch (score_value) {
+         case (1):
+          $('#vote-message').text('Aburrido como ostra');
+         break;
+         case (2):
+          $('#vote-message').text('Prefiero contar ovejas');
+         break;
+         case (3):
+          $('#vote-message').text('Está que prende');
+         break;
+         case (4):
+          $('#vote-message').text('Tan bueno que me quemo');
+         break;
+         case (5):
+          $('#vote-message').text('¡Traigan agua que está en llamas!');
+         break;
+         default:
+          $('#vote-message').text('Si estás en este lugar, vota!');
+      }
+
+
+ }
+
 $( document ).ready(function() {
+  <% if signed_in? %>
+  set_score_comment(<%= @venue.current_user_rating(current_user.id)%>);
+  <% end %> 
 
   $('#star').raty({
     readOnly: true,
     score: <%= @venue.average_rating %>,
- 
     path: '/assets/mini'
   });
 
@@ -52,6 +80,11 @@ $( document ).ready(function() {
         type: 'PATCH',
         data: { score: score }
       });
+
+
+        set_score_comment(score);
+
+
     }
   });
 
@@ -101,7 +134,7 @@ $( document ).ready(function() {
             <div style="height:40px; margin-bottom:20px; background:#888888">
                
                  <% if signed_in? %>
-                  <div ><span style="float:Left; color: #ffffff; margin-top:10px;" > Estás en este lugar?, Vota!</span>
+                  <div ><span style="float:Left; color: #ffffff; margin-top:10px; margin-left:10px;" >Tu voto</span>
                   </div>
               <% end %>
 
@@ -134,7 +167,7 @@ $( document ).ready(function() {
  
 
                 <div id="user_star"></div>
-         <span>hola</span>
+                 <span id="vote-message"></span>
 
 
 
