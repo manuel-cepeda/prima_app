@@ -1,5 +1,5 @@
 class RatingsController < ApplicationController
-  include UserssHelper
+  include UsersHelper
   def update
     @rating = Rating.find(params[:id])
     @venue= @rating.venue
