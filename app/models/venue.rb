@@ -107,7 +107,7 @@ class Venue < ActiveRecord::Base
 
 		end
 
-	  ratings.where('updated_at > ?', 3.hours.ago).sum(:score) / rating_size
+	  ratings.where('updated_at > ?', 5.hours.ago).sum(:score) / rating_size
     end  
 
 
