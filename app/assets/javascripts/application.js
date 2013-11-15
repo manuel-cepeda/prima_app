@@ -13,7 +13,19 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require_tree ./global
 //= require jquery.raty.min.js
+//= require_tree ./global
 
+
+
+
+//= require handlebars
+//= require ember
+//= require ember-data
+//= require_self
+//= require prima_app
+
+
+// for more details see: http://emberjs.com/guides/application/
+PrimaApp = Ember.Application.create();
 

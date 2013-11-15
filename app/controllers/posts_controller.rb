@@ -1,4 +1,4 @@
-class PostsController < ApplicationController
+class VenuesController < ApplicationController
   before_action :signed_in_user, only: [:create, :destroy, :update]
   before_action :correct_user,   only: :destroy
   def create

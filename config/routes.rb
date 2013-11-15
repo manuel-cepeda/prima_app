@@ -1,5 +1,13 @@
 PrimaApp::Application.routes.draw do
 
+  namespace :api do
+    namespace :v1 do
+      resources :venues
+    end
+  end
+
+
+  get "ember/start"
 
   match '/rate' => 'rater#create', :as => 'rate', via: [:get, :post]
   resources :vote_records
@@ -20,13 +28,6 @@ PrimaApp::Application.routes.draw do
   match '/data', :to => 'venues#data', via: [:get, :post]
   resources :posts, only: [:create, :destroy]
 
-
-  resources :venues do
-    member do
-      post :vote_up
-      post :vote_down
-    end
-  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
