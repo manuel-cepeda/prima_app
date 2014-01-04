@@ -25,8 +25,10 @@ gem 'foreman'
 gem 'puma'
 gem 'letsrate'
 gem 'ajaxful_rating', '3.0.0.beta8'
-gem "ember-rails"
 gem "foreman"
+gem 'ember-rails', '~> 0.13' # ember framework
+gem 'ember-data-source', '>= 1.0.0.beta.3', '< 2.0' # ember-data not yet out of beta
+
 
 group :development, :test do
   gem 'sqlite3', '1.3.7'

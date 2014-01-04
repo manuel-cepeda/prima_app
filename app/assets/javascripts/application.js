@@ -12,16 +12,13 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
 //= require jquery.raty.min.js
 //= require_tree ./global
-
-
-
-
+//= require turbolinks
 //= require handlebars
 //= require ember
 //= require ember-data
+//= require ember-simple-auth
 //= require_self
 //= require prima_app
 

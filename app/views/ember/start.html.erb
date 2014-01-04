@@ -1,2 +1,304 @@
-<h1>Ember#start</h1>
-<p>Find me in app/views/ember/start.html.erb</p>
+
+<script type="text/x-handlebars" id="home">
+
+<% provide(:title, 'Inicio') %>
+<% provide(:page, "index_venue") %>
+
+
+
+ 
+
+  <div id="progress-back" class="load-item">
+    <div id="progress-bar"></div>
+  </div>
+  <div id="page">
+    <div id="header-bg"></div>
+    <div id="patern"></div>
+    <div id="page-view">
+      
+<header id="branding" class="site-header" role="banner">
+  <div class="container_12">
+    <!-- Site title and description -->
+    <div class="fleft grid_4 branding">
+      <h1 id="site-title">
+        <%= link_to raw("<i class=icon-fire></i> Krowd<span>LY</span></a></h1>"), list_path, "target"=>"_parent", "rel"=>"home", "title"=>"Krowdly" %>
+        </h1>
+      <h2 id="site-description">Descubre dónde ir</h2>
+      <div style="background:#FFBA00; height:4px; margin-bottom:20px;"></div>
+    </div>
+
+
+  <% if !(current_user && signed_in?) %>
+    <div class="grid_8 socialnetworking">
+      <ul class="share-items" id="login-facebook">
+        <li class="share-item-icon-facebook"><a target="_parent" title="Ingresa con Facebook" href="/auth/facebook">INGRESA  <i class="icon-facebook"></i></a></li>
+
+      </ul>
+
+      {{#linkTo 'main'}}lista{{/linkTo}}
+      
+    </div>
+
+  <%else %>
+<div style="text-align:Center; ">
+  <%= link_to 'Ranking en llamas ahora ', list_path, "target"=>"_parent", "id"=>"skip", "style"=>"background:#1C1D21; padding:20px;" %>
+</div>
+  <% end %>
+
+
+    <div class="clear"></div>
+  </div>
+</header>
+
+
+      <!-- Teaser Text -->
+      <div class="container_12 teaser">
+
+        <div id="slidecaption" class="grid_12"></div>
+
+        <div class="grid_12 margin-battom slider-arrow" style="text-align:center">
+          <a id="prevslide" class="load-item"></a>
+          <a id="nextslide" class="load-item"></a>
+          <div class="clear"></div>
+        </div>
+        <div class="celar"></div>
+      </div>
+
+
+<div style="text-align:center;">
+<%= link_to image_tag("android_badge1.png", :border=>0), 
+'/resource/krowdly.apk'%>
+</div>
+
+
+              <%= render 'shared/footer' %>
+    </div>
+  </div>
+
+
+
+
+</script>
+
+
+<script type="text/x-handlebars" id="main">
+
+  
+  <div id="progress-back" class="load-item">
+    <div id="progress-bar"></div>
+  </div>
+  <div id="page">
+    <div id="header-bg"></div>
+    <div id="patern"></div>
+    <div id="page-view">
+      
+              <%= render 'shared/header' %>
+
+          <%= render 'shared/menu' %>
+
+
+{{outlet}}
+
+
+
+
+
+              <%= render 'shared/footer' %>
+    </div>
+  </div>
+
+ 
+</script>
+
+
+
+
+<script type="text/x-handlebars" id="venues">
+
+
+      <!-- Main -->
+      <div id="main" class="site-main container_12">
+        
+
+        
+        <!-- Right Column / Widget area -->
+        <div id="secondary" class="grid_4 widget-area" role="complementary">
+          <!-- Widget list -->
+          <aside id="WPlookCD" class="widget">
+            <header class="entry-header"> 
+              <h1 class="entry-title">Lugares en llamas ahora</h1>
+              <div class="clear"></div>
+            </header>
+           
+           <h1>Venues</h1>
+
+          <ul>
+
+
+            {{#each controller}}
+           
+
+            {{view PrimaApp.RatyView}}
+
+              <div class="list-star" id="star_{{unbound id}}"></div>
+
+              <li>
+              {{#linkTo "venue" this}}{{title}}{{/linkTo}}
+
+              <br>
+              a continuacion posts
+              <br>
+
+                  {{#each post in posts}}
+
+                                {{post.content}}
+                  {{/each}}              
+                
+              </li>
+            {{else}}
+              <li>There are no venues.</li>
+
+              
+
+
+
+              
+
+
+            {{/each}}
+          </ul>             
+                                  
+
+        {{outlet}}
+          </aside>
+          
+          <!-- Widget CD -->
+
+        </div>
+        
+        <div class="clear"></div>
+      </div>
+
+
+</script>
+
+
+
+
+<script type="text/x-handlebars" id="venue">
+    
+
+              <h1 class="entry-title">{{title}}</h1>
+
+      <!-- Main -->
+      <div id="main" class="site-main container_12">
+
+
+          <!-- Left column -->
+        <div id="primary" class="grid_8">
+          
+          <!-- Posts -->
+          <article class="single-post">
+            <header class="entry-header">
+              <h1 class="entry-title">{{title}}</h1>
+
+            
+            <div style="float:right; margin-top:5px;" id="star"></div>
+
+            <div class="clear"></div>
+            </header>
+            <div style="height:40px; margin-bottom:20px; background:#888888">
+               
+                 <% if signed_in? %>
+                  <div ><span style="float:Left; color: #ffffff; margin-top:10px; margin-left:10px;" >Tu voto</span>
+                  </div>
+              <% end %>
+
+                <div ><span style="float:Right;" class="geo" onclick="initialize()"><i class="icon-map-marker"></i> Ver Ubicación</span></div>
+
+            </div>
+
+            
+            <div id="map-canvas" style="width=100%; height:300px; display:none; margin-bottom:20px;"></div>  
+             
+
+            <div >
+
+
+
+              <div class="clear"></div>
+
+             <% if signed_in? %>
+              <div style="text-align:Center;">
+                 <div style="text-align:center;"> 
+              <% if signed_in? %>
+                <% if current_user.admin? || current_user?(@venue.user)%>
+                  <%= link_to "Eliminar", @venue,  "data-role"=>"button", method: :delete, 
+                                                data: { confirm: "You sure?" } %>                          
+                    <%= link_to 'Editar', edit_venue_path(@venue), "data-icon" => "gear" %>
+                <% end %>
+              <% end %>
+
+
+ 
+
+                <div id="user_star"></div>
+                 <span id="vote-message"></span>
+
+
+
+
+              </div>
+             <% end %>
+
+                <nav></nav>
+            </div>
+
+          </article>
+          <!-- Widget CD -->
+
+          <aside id="WPlookCD" class="widget">
+            <header class="entry-header"> 
+              <h1 class="entry-title">Comentarios 3</h1>
+              <div class="clear"></div>
+           
+            </header>
+            <ul>
+
+              <% if signed_in? %>
+              <li class="comment-box-li" style="background:#333333; text-align:top; margin-bottom:20px; ">
+               
+                  <%= render 'shared/post_form'%>
+              
+              </li>
+             <% end %>
+
+         
+              
+       
+            </ul>
+
+
+              <div class="clear"></div>
+
+                <nav class="entry-pagination" id="nav-posts">
+                  
+
+                  <div class="clear"></div>
+
+                </nav><!-- #nav -->    
+
+
+          </aside>
+          
+
+          <!-- Widget  -->
+        </div>
+
+        </div>  <!-- Main  -->
+
+<footer class="site-footer container_12">
+
+</footer>
+
+</script>
