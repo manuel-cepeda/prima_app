@@ -100,14 +100,15 @@ class Venue < ActiveRecord::Base
 
 	def average_rating
 
-		if ratings.size == 0
-			rating_size=1;
-		else
-			rating_size = ratings.size
+		rating=ratings.where('updated_at > ?', 5.hours.ago)
+		ratings_count = rating.count
 
+
+		if ratings_count == 0
+			ratings_count=1;
 		end
 
-	  ratings.where('updated_at > ?', 5.hours.ago).sum(:score) / rating_size
+	  rating.sum(:score) / ratings_count
     end  
 
 
@@ -118,6 +119,10 @@ class Venue < ActiveRecord::Base
  			
 
     end  
+
+
+
+  
 
 
 

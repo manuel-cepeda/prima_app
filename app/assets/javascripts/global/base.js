@@ -1,4 +1,7 @@
 jQuery(document).ready(function(){
+
+    moment.lang('es');
+
 	"use strict";
 
 	jQuery(function(jQuery){
@@ -21,14 +24,25 @@ jQuery(document).ready(function(){
 		});
 	});
 
+
+
+
+
+
 	/* Mobile Menu */
 	jQuery(document).ready(function () {
 		jQuery('nav.site-navigation').meanmenu();
+
+
+
 
 	 $("#menu-button").click(function(e) {
 	 	  e.preventDefault(); 
 	      $(".meanmenu-reveal").click();
 	    });
+
+
+
 
 	 $("#search-button").click(function(e) {
 	 	  e.preventDefault(); 

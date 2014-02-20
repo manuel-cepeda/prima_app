@@ -1,2 +1,16 @@
-<h1>Sessions#create</h1>
-<p>Find me in app/views/sessions/create.html.erb</p>
+<html>
+<head></head>
+<body>
+  <script>
+      document.cookie = 'accountId=' + '<%= @session_user_id %>';
+      window.opener.Ember.SimpleAuth.externalLoginSucceeded({ access_token: "<%= @session_token %>" });
+//window.opener.Ember.PrimaApp.ApplicationController.set('currentUser',2);
+ //   @session_user_id
+
+//alert(window.opener.PrimaApp.ApplicationController.get('currentUser'));
+
+    window.close();
+  </script>
+</body>
+</html>
+

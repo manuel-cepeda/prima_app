@@ -1,0 +1,14 @@
+<!-- Search and Share icons -->
+<div style="display:none" id="search-bar" class="grid_8 socialnetworking">
+	<ul id="search-ul" class="share-items">
+		<li style="float:right" id="search-li" class="share-item-icon-search">
+			<a id="search-link" {{action "executeQuery" }}  title="Search"><i class="icon-search"></i></a>
+			<!-- Search Form -->
+			<div class="header-search-form">
+
+						{{input type="text" placeholder="Buscar lugar" value=query action="executeQuery"}}
+
+			</div>
+		</li>
+	</ul>
+</div>

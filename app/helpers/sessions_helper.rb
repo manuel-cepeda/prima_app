@@ -44,5 +44,13 @@ module SessionsHelper
     session[:return_to] = request.url
   end
 
+  def is_authenticated?
+     if request.headers["HTTP_AUTHORIZATION"] == 'Bearer '+session['fb_access_token']
+       true
+      else
+       false
+      end
+  end
+
 
 end

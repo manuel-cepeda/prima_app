@@ -76,12 +76,15 @@ float:right;
 }
 
 .comment-box{
-width:68%;
+width:75%;
  height:4em;
 float:right;
-margin-top:-1.5em;
+}
+
+.comment-box-li #photo-comment{
 
 }
+
 
 .comment-box{
 color: #66CDAA;
@@ -213,12 +216,7 @@ margin:10px 5px 0 0;
 
 }
 
-#skip{
-text-align:right;
-clear:both;
 
-font-size: 1.5em;
-}
 
 
 
@@ -333,3 +331,20 @@ color: #FF9900;
 
 }
 
+#skip{
+text-align:right;
+clear:both;
+
+font-size: 1.5em;
+
+background:#1C1D21;
+ padding:20px;
+}
+
+.gmnoprint img { max-width: none; }
+
+.custom-label{
+
+color: #ffffff;
+
+}

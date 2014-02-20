@@ -18,11 +18,14 @@
 //= require handlebars
 //= require ember
 //= require ember-data
-//= require ember-simple-auth
+
 //= require_self
+//= require ember-simple-auth.min.js
 //= require prima_app
 
 
 // for more details see: http://emberjs.com/guides/application/
-PrimaApp = Ember.Application.create();
-
+PrimaApp = Ember.Application.create({
+  LOG_ACTIVE_GENERATION: true,
+  LOG_VIEW_LOOKUPS: true
+});

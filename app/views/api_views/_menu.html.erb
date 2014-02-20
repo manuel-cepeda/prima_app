@@ -1,0 +1,29 @@
+
+
+<!-- start if is sign in, check when user logout menu do not disppear, to improve it -->
+
+			<div class="container_12 main-menu-section">
+
+				<nav role="navigation" class="site-navigation main-navigation grid_12" id="site-navigation">
+					<div class="menu-wplook-main-menu-container">
+						<ul id="menu-wplook-main-menu" class="menu">
+						
+						{{#if session.isAuthenticated}}
+
+
+							<li class="menu-item ">{{#link-to "venues"}}En llamas ahora{{/link-to}}</li>
+
+
+							<li class="menu-item ">{{#link-to "user" 1}}Mi Perfil{{/link-to}}</li>
+							<li class="menu-item "><a {{ action 'logout' }} style="cursor: pointer;">Logout</a></li>
+
+
+       					 {{else}}
+      						 <li class="menu-item "> <a {{ action 'login' }} style="cursor: pointer;">Login</a></li>
+						{{/if}}
+						</ul>
+					</div>
+				</nav>
+				
+			</div>
+

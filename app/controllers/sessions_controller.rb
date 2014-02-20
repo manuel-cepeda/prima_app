@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
 
 	    user=User.find(session[:user_id]);
 	    auth = user.add_provider(auth_hash)
-	   
+	    
         
         
 	  else
@@ -29,9 +29,15 @@ class SessionsController < ApplicationController
 
 	  end
 
-	  redirect_to :controller=>'venues', :action => 'list', :success => "Signed in!"
 
+		
+		@session_token= session['fb_access_token']
+		@session_user_id=session[:user_id]
+		#@user_id=session[:user_id]
 	end
+
+
+
 
 	def failure
 	  render :text => "Sorry, but you didn't allow access to our app!"
@@ -39,9 +45,13 @@ class SessionsController < ApplicationController
 
 	def destroy
 	  sign_out
+	 
       redirect_to root_url, :success => "Signed out!"
 	end
 
 
 
+
+
 end
+

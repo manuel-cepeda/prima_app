@@ -21,29 +21,45 @@
     <!-- Site title and description -->
     <div class="fleft grid_4 branding">
       <h1 id="site-title">
-        <%= link_to raw("<i class=icon-fire></i> Krowd<span>LY</span></a></h1>"), list_path, "target"=>"_parent", "rel"=>"home", "title"=>"Krowdly" %>
+            {{#link-to "venues"}}<i class=icon-fire></i> Krowd<span>LY</span>{{/link-to}}
         </h1>
       <h2 id="site-description">Descubre dónde ir</h2>
       <div style="background:#FFBA00; height:4px; margin-bottom:20px;"></div>
     </div>
 
 
-  <% if !(current_user && signed_in?) %>
+
+
+
+  {{#if session.isAuthenticated}}
+
+    <div style="text-align:Center; ">
+
+    {{#link-to 'venues' id="skip"}}Ranking en llamas ahora{{/link-to}}
+
+    </div>  
+
+    
+
+  {{else}}
+
     <div class="grid_8 socialnetworking">
       <ul class="share-items" id="login-facebook">
-        <li class="share-item-icon-facebook"><a target="_parent" title="Ingresa con Facebook" href="/auth/facebook">INGRESA  <i class="icon-facebook"></i></a></li>
+        <li class="share-item-icon-facebook">
+
+        <a {{ action 'login' }} class="alert-link" style="cursor: pointer;">INGRESA <i class="icon-facebook"></i></a>
+
+
+        </li>
 
       </ul>
 
-      {{#linkTo 'main'}}lista{{/linkTo}}
+      {{#link-to 'venues'}}lista{{/link-to}}
       
     </div>
 
-  <%else %>
-<div style="text-align:Center; ">
-  <%= link_to 'Ranking en llamas ahora ', list_path, "target"=>"_parent", "id"=>"skip", "style"=>"background:#1C1D21; padding:20px;" %>
-</div>
-  <% end %>
+
+  {{/if}}
 
 
     <div class="clear"></div>
@@ -56,7 +72,7 @@
 
         <div id="slidecaption" class="grid_12"></div>
 
-        <div class="grid_12 margin-battom slider-arrow" style="text-align:center">
+        <div class="grid_12 margin-battom slider-arrow">
           <a id="prevslide" class="load-item"></a>
           <a id="nextslide" class="load-item"></a>
           <div class="clear"></div>
@@ -71,7 +87,7 @@
 </div>
 
 
-              <%= render 'shared/footer' %>
+              <%= render 'api_views/footer' %>
     </div>
   </div>
 
@@ -83,7 +99,7 @@
 
 <script type="text/x-handlebars" id="main">
 
-  
+
   <div id="progress-back" class="load-item">
     <div id="progress-bar"></div>
   </div>
@@ -92,18 +108,15 @@
     <div id="patern"></div>
     <div id="page-view">
       
-              <%= render 'shared/header' %>
+              <%= render 'api_views/header' %>
 
-          <%= render 'shared/menu' %>
+          <%= render 'api_views/menu' %>
 
 
 {{outlet}}
 
 
-
-
-
-              <%= render 'shared/footer' %>
+              <%= render 'api_views/footer' %>
     </div>
   </div>
 
@@ -113,72 +126,9 @@
 
 
 
-<script type="text/x-handlebars" id="venues">
+<script type="text/x-handlebars" id="venues/index">
 
-
-      <!-- Main -->
-      <div id="main" class="site-main container_12">
-        
-
-        
-        <!-- Right Column / Widget area -->
-        <div id="secondary" class="grid_4 widget-area" role="complementary">
-          <!-- Widget list -->
-          <aside id="WPlookCD" class="widget">
-            <header class="entry-header"> 
-              <h1 class="entry-title">Lugares en llamas ahora</h1>
-              <div class="clear"></div>
-            </header>
-           
-           <h1>Venues</h1>
-
-          <ul>
-
-
-            {{#each controller}}
-           
-
-            {{view PrimaApp.RatyView}}
-
-              <div class="list-star" id="star_{{unbound id}}"></div>
-
-              <li>
-              {{#linkTo "venue" this}}{{title}}{{/linkTo}}
-
-              <br>
-              a continuacion posts
-              <br>
-
-                  {{#each post in posts}}
-
-                                {{post.content}}
-                  {{/each}}              
-                
-              </li>
-            {{else}}
-              <li>There are no venues.</li>
-
-              
-
-
-
-              
-
-
-            {{/each}}
-          </ul>             
-                                  
-
-        {{outlet}}
-          </aside>
-          
-          <!-- Widget CD -->
-
-        </div>
-        
-        <div class="clear"></div>
-      </div>
-
+    {{partial "venues"}}
 
 </script>
 
@@ -188,7 +138,9 @@
 <script type="text/x-handlebars" id="venue">
     
 
-              <h1 class="entry-title">{{title}}</h1>
+
+   {{#view PrimaApp.MapView}}
+
 
       <!-- Main -->
       <div id="main" class="site-main container_12">
@@ -208,13 +160,15 @@
             <div class="clear"></div>
             </header>
             <div style="height:40px; margin-bottom:20px; background:#888888">
-               
-                 <% if signed_in? %>
+
+   
+              {{#if session.isAuthenticated}}
                   <div ><span style="float:Left; color: #ffffff; margin-top:10px; margin-left:10px;" >Tu voto</span>
                   </div>
-              <% end %>
+              {{/if}}
 
-                <div ><span style="float:Right;" class="geo" onclick="initialize()"><i class="icon-map-marker"></i> Ver Ubicación</span></div>
+                <div ><span style="float:Right;" class="geo" {{action mapClick target="view"}}><i class="icon-map-marker"></i> Ver Ubicación</span></div>
+
 
             </div>
 
@@ -226,56 +180,100 @@
 
 
 
+
               <div class="clear"></div>
 
-             <% if signed_in? %>
+              {{#if session.isAuthenticated}}
+                <div style="text-align:Center;">
+                   <div style="text-align:center;"> 
+
+            
               <div style="text-align:Center;">
                  <div style="text-align:center;"> 
-              <% if signed_in? %>
-                <% if current_user.admin? || current_user?(@venue.user)%>
-                  <%= link_to "Eliminar", @venue,  "data-role"=>"button", method: :delete, 
-                                                data: { confirm: "You sure?" } %>                          
-                    <%= link_to 'Editar', edit_venue_path(@venue), "data-icon" => "gear" %>
-                <% end %>
-              <% end %>
+                {{#ifCond session.account this.user}}
+                    {{#link-to "venues.edit" this}}Editar{{/link-to}}
 
+                    <a href="" {{action "removeVenue"}}>Eliminar</a>
+                {{/ifCond}}            
 
- 
+                    {{view PrimaApp.RatingUserView}}
+                    {{view PrimaApp.RatingView}}
 
-                <div id="user_star"></div>
-                 <span id="vote-message"></span>
+                  <div id="user_star"></div>
+                   <span id="vote-message"></span>
 
 
 
 
+                </div>
               </div>
-             <% end %>
-
+              {{/if}}
                 <nav></nav>
-            </div>
+            
 
           </article>
           <!-- Widget CD -->
 
           <aside id="WPlookCD" class="widget">
             <header class="entry-header"> 
-              <h1 class="entry-title">Comentarios 3</h1>
+              <h1 class="entry-title">Comentarios ({{totalCount}})</h1>
               <div class="clear"></div>
-           
+         
             </header>
             <ul>
 
-              <% if signed_in? %>
+              
+
+
               <li class="comment-box-li" style="background:#333333; text-align:top; margin-bottom:20px; ">
-               
-                  <%= render 'shared/post_form'%>
+
+                
+                       {{profile-picture session.account.fb_id}}
+
+
+
+
+              <div >
+                {{input id="comment-box" class="comment-box" type="TextArea" value=newContent action="savePost" placeholder="¿Qué sucede en el lugar?"}}
+
+               <button {{action 'savePost'}} id="butt" class="btn btn-large btn-primary btn-sample">Comentar</button>
+
+               </div>
+
               
               </li>
-             <% end %>
 
-         
-              
-       
+
+                {{#each post in posts itemController="post"}}
+
+                    <li class="comment-item">
+                      <a href="#" title="Comentario">
+                      {{profile-picture user.fb_id}}
+                        <h1 class="entry-title">{{user.name}}</h1>
+                        <h2 class="entry-description" >{{content.content}}</h2>
+                        <h3 >{{format-date created_at}}</h3>
+
+
+                        {{#if session.isAuthenticated}}
+
+
+                          {{#ifCond session.account user}}
+                                <h3 >
+                                <a href="" {{action "removePost" post}}>Eliminar</a>
+                                </h3>
+                          {{/ifCond}}
+
+                        {{/if}}
+
+
+                        <div class="clear"></div>
+                      </a>
+                    </li>
+
+
+                {{/each}}
+
+
             </ul>
 
 
@@ -297,8 +295,346 @@
 
         </div>  <!-- Main  -->
 
-<footer class="site-footer container_12">
+    {{/view}}
 
-</footer>
+</script>
 
+
+<script type="text/x-handlebars" id="user">
+
+
+
+      <!-- Main -->
+      <div id="main" class="site-main container_12">
+        
+
+        
+        <!-- Right Column / Widget area -->
+        <div id="secondary" class="grid_4 widget-area" role="complementary">
+          <!-- Widget list -->
+          <aside id="WPlookCD" class="widget">
+            <header class="entry-header"> 
+              <h1 class="entry-title">Perfil Usuario</h1>
+              <div class="clear"></div>
+            </header>
+            <ul>
+             
+              <li>
+                <a href="">
+                {{profile-picture fb_id}}
+                  <h1 class="entry-title">{{name}}</h1>
+                  <h2 class="entry-description">Calificaciones últimas 5 horas: 
+                      <p> <i class="icon-fire"></i> {{totalRatingCount}}</p>
+                  </h2>
+                  <h3>
+                  Comentarios Totales:
+                   <p><i class="icon-comment"></i> {{totalPostCount}}</p>
+                  </h3>
+                  <div class="clear"></div>
+                </a>
+              </li>
+             
+
+            </ul>
+          </aside>
+          
+          <!-- Widget CD -->
+
+        </div>
+        
+        <div class="clear"></div>
+      </div>
+
+
+
+
+</script>
+
+
+
+<script type="text/x-handlebars" id="account">
+
+
+
+      <div id="main" class="site-main container_12">
+        
+        
+        <!-- Right Column / Widget area -->
+        <div id="secondary" class="grid_4 widget-area" role="complementary">
+          <!-- Widget list -->
+          <aside id="WPlookCD" class="widget">
+            <header class="entry-header"> 
+              <h1 class="entry-title">Perfil Usuario</h1>
+              <div class="clear"></div>
+            </header>
+            <ul>
+             
+              <li>
+                <a href="#" title=nombre de usuario>
+                  {{user_id}}
+                  <h1 class="entry-title">{{user_id}}</h1>
+                  <h2 class="entry-description">Total Votos: 3 %></h2>
+                  <h3>
+                    <i class="icon-fire"></i> 2 eto no va %>
+                    <strong> / </strong>
+                    <i class="icon-trash"></i> 3 esto no va %>  
+                  </h3>
+                  <h3>
+                  Total Comentarios: 33
+                  </h3>
+                  <div class="clear"></div>
+                </a>
+              </li>
+             
+
+            </ul>
+          </aside>
+          
+        
+
+        </div>
+        
+        <div class="clear"></div>
+      </div>
+
+
+
+
+
+
+</script>
+
+<script type="text/x-handlebars" id="feedbacks/index">
+    
+
+
+
+          <ul>
+
+            {{#each}}
+           
+              <li>
+              {{#link-to "feedback" this}}{{description}}{{/link-to}}              
+              </li>
+            {{else}}
+              <li>There are no feedbacks.</li>
+            {{/each}}
+          </ul>  
+              
+
+
+</script>
+
+
+<script type="text/x-handlebars" id="feedbacks/new">
+
+
+<h1 style="color: #FFBA00; font-size:14px">¿Cómo podemos mejorar Krowdly?</h1>
+
+  {{partial 'feedback/edit'}}
+  <div style="text-align:right">
+    <button {{action 'save'}} class='btn'>Enviar</button>
+    <button {{action cancel}} class='btn'>Cancelar</button>
+  </div>
+    </div>
+  </div>
+
+</script>
+
+
+<script type="text/x-handlebars" id="feedback/_edit">
+  <p>{{view Ember.TextArea valueBinding='description' cols="20" rows="3" placeholder="Escribir feedback.."}}</p>
+</script>
+
+
+
+
+<script type="text/x-handlebars" id="feedback">
+              <h1 class="entry-title">{{description}}</h1>
+</script>
+
+
+<script type="text/x-handlebars" data-template-name="facebooktemplate">
+  template facebook
+<img elementid="photo-comment" alt="avatar" class="ember-view" id="photo-comment" src="https://graph.facebook.com/{{unbound view.firstName}}/picture?width=80&amp;height=80">
+  {{view.firstName}}
+</script>
+
+<script type="text/x-handlebars" id="component/if-equal">
+    {{#if isEqual}}
+      {{yield}}
+    {{/if}}
+</script>
+
+<script type="text/x-handlebars" id="search">
+    {{partial "venues"}}
+
+    <div class="grid_12 dark-box">
+    <div class="margins">
+       ¿No encontraste lo que buscabas?, 
+      {{#link-to "venues.new"}}Agregalo aqui!{{/link-to}} 
+    </div>
+   </div> 
+
+
+</script>
+
+<script type="text/x-handlebars" id="venues/new">
+
+
+  {{partial 'venue/edit'}}
+ 
+
+</script>
+
+<script type="text/x-handlebars" id="venues/edit">
+
+
+  {{partial 'venue/edit'}}
+ 
+
+</script>
+
+<script type="text/x-handlebars" id="venue/_edit">
+     <!-- Main -->
+      <div id="main" class="site-main container_12">
+
+
+          <!-- Left column -->
+        <div id="primary" class="grid_8">
+
+
+          <!-- Posts -->
+        <article class="single-post">
+            <header class="entry-header">
+              <h1 class="entry-title">Agregar Lugar</h1>
+              <div class="clear"></div>
+            </header>
+ 
+
+            <div class="entry-meta">
+              {{#if session.isAuthenticated}}
+                          <div >
+                           
+                                {{#view PrimaApp.MapSaveView}}
+
+
+                                
+                                 <p id="place-label">  <label class="custom-label" for="venue">Nombre del lugar</label>
+                                 {{view Ember.TextArea valueBinding='title' rows="1" placeholder="Ej, La Cantina de Moe"}}</p>
+
+                                 <p>  <label class="custom-label" for="venue">Posiciona el lugar en el mapa</label>
+                                  <button {{action 'geolocalize' target="view"}} class='btn'> <i class="icon-map-marker"></i> Geolocalizate</button>
+
+                               
+
+                                <div id="map-canvas" style="height:200px; width:100%; display:none; margin-bottom:30px;"></div>
+                                {{/view}}
+                           </div>
+
+
+                            <button {{action 'save'}} class='btn' style="float:right;">Guardar lugar</button>                       
+
+              {{/if}}
+
+    
+
+                  <div class="clear"></div>
+            </div>
+            
+
+             
+
+            <div >
+
+
+
+              <div class="clear"></div>
+                <nav></nav>
+            </div>
+
+          </article>          
+
+
+        <div class="clear"></div>
+        </div>
+
+
+    </div>
+
+</script>
+
+
+
+<script type="text/x-handlebars" data-template-name='_venues'>
+
+      <!-- Main -->
+      <div id="main" class="site-main container_12">
+   
+
+        
+        <!-- Right Column / Widget area -->
+        <div id="secondary" class="grid_4 widget-area" role="complementary">
+          <!-- Widget list -->
+          <aside id="WPlookCD" class="widget">
+            <header class="entry-header"> 
+              <h1 class="entry-title">Lugares en llamas ahora</h1>
+              <div class="clear"></div>
+            </header>
+           
+
+            <ul>
+
+              
+              {{#each controller}}
+
+              {{view PrimaApp.RatyView}}
+
+                <li>
+                <div >
+
+                    {{#view PrimaApp.SeeView}}
+                    <a  {{action "daClick" target="view"}} href="">   
+
+                          <img src="/assets/temp/80x80.jpg" alt="">
+
+      
+                    <table border="1" style="width:75%">
+                    <tr >
+                    <td style="font-size: 17px;" >{{#link-to "venue" this}}{{title}}{{/link-to}}</td>
+                    <td style="float:right;">
+
+                    <div class="list-star" id="star_{{unbound id}}"></div>
+                    </td>
+                    </tr>
+                    <tr>
+                    <td><i class="icon-comment"></i>
+                         <span>{{totalCount}} Comentarios</span></td>
+                    <td style="text-align:right; font-size:22px; "> <span>
+                          ver <i class="icon-hand-right"></i> 
+                         </span></td>
+                    </tr>
+                    </table> 
+
+                    </a>
+                  {{/view}}
+                </div>
+                </li>
+  
+              {{/each}}
+
+
+            </ul>
+          
+                                  
+
+        {{outlet}}
+          </aside>
+          
+          <!-- Widget CD -->
+
+        </div>
+        
+        <div class="clear"></div>
+      </div>
 </script>

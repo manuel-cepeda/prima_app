@@ -3,6 +3,13 @@ PrimaApp::Application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :venues
+      resources :users
+      resources :feedbacks
+      resources :ratings
+      resources :posts
+      match '/search', :to => 'venues#search', via: [:get]
+      match '/account', :to => 'users#account', via: [:get]
+      match '/venues/:id/rating', :to => 'venues#rating', via: [:get]
     end
   end
 
@@ -27,6 +34,7 @@ PrimaApp::Application.routes.draw do
   match '/spreadsheet', :to => 'venues#spreadsheet', via: [:get]
   match '/data', :to => 'venues#data', via: [:get, :post]
   resources :posts, only: [:create, :destroy]
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

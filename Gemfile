@@ -11,8 +11,8 @@ gem 'bootstrap-will_paginate', '0.0.9'
 gem 'omniauth'
 gem 'omniauth-facebook', '1.4.0'
 gem 'thumbs_up'
-gem 'sunspot_rails'
-gem 'sunspot_solr' # optional pre-packaged Solr distribution for use in development
+gem 'sunspot_rails', '2.0.0'
+gem "sunspot_solr", '2.0.0'
 gem "koala", "~> 1.7.0rc1"
 gem 'mobylette'
 gem 'spreadsheet'
@@ -26,8 +26,9 @@ gem 'puma'
 gem 'letsrate'
 gem 'ajaxful_rating', '3.0.0.beta8'
 gem "foreman"
-gem 'ember-rails', '~> 0.13' # ember framework
-gem 'ember-data-source', '>= 1.0.0.beta.3', '< 2.0' # ember-data not yet out of beta
+gem 'ember-rails'
+gem 'ember-data-source'
+gem 'progress_bar'
 
 
 group :development, :test do
@@ -58,9 +59,9 @@ group :test do
   # gem 'win32console', '1.3.2'
 end
 
-gem 'sass-rails', '4.0.0'
+gem 'sass-rails'
 gem 'uglifier', '2.1.1'
-gem 'coffee-rails', '4.0.0'
+gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'turbolinks', '1.1.1'
 gem 'jbuilder', '1.0.2'

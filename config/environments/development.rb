@@ -28,4 +28,6 @@ PrimaApp::Application.configure do
   config.assets.debug = true
   config.ember.variant = :development
 
+
+
 end
