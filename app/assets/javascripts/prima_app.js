@@ -98,7 +98,7 @@
         //change for development: 
         // https://www.facebook.com/dialog/oauth?client_id=1417372111822319&scope=email,publish_stream&redirect_uri=http://localhost:3000/auth/facebook/callback
         window.open(
-          'https://www.facebook.com/dialog/oauth?client_id=1417372111822319&scope=email,publish_stream&redirect_uri=http://www.krowdly.com/auth/facebook/callback',
+          'https://www.facebook.com/dialog/oauth?client_id=1417372111822319&scope=email,publish_stream&redirect_uri=http://krowdly.com/auth/facebook/callback',
           '_blank',
           'menubar=no,status=no,height=400,width=800'
         );
