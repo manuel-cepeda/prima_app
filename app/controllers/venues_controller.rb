@@ -20,7 +20,7 @@ class VenuesController < ApplicationController
     .select("venues.id, venues.title, AVG(ratings.score) as average")
     .where('ratings.updated_at > ?', 5.hours.ago)
     .group("venues.id, venues.title")
-    .order("average DESC")
+    .order("average DESC").latest(10)
 
 
   end
