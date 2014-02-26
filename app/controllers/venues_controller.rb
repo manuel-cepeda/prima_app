@@ -6,7 +6,7 @@ class VenuesController < ApplicationController
   # GET /venues
   # GET /venues.json
   def index
-    @venues = Venue.all.latest(10)
+    #@venues = Venue.all
 
 
 
@@ -20,7 +20,7 @@ class VenuesController < ApplicationController
     .select("venues.id, venues.title, AVG(ratings.score) as average")
     .where('ratings.updated_at > ?', 5.hours.ago)
     .group("venues.id, venues.title")
-    .order("average DESC").latest(10)
+    .order("average DESC")
 
 
   end
