@@ -24,7 +24,7 @@ class Api::V1::VenuesController < ApplicationController
 
     else
 
-    respond_with Venue.all.latest(10)
+    respond_with Venue.limit(10)
     
     end  
 
