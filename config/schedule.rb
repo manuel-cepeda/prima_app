@@ -7,6 +7,9 @@
 #
 # set :output, "/path/to/my/cron_log.log"
 #
-every :minute do # Many shortcuts available: :hour, :day, :month, :year, :reboot
-  runner "Venue.vote_venues"
-end
+
+
+
+#every :minute do # Many shortcuts available: :hour, :day, :month, :year, :reboot
+#  runner "Venue.vote_venues"
+#end
