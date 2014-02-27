@@ -25,7 +25,6 @@ gem 'foreman'
 gem 'puma'
 gem 'letsrate'
 gem 'ajaxful_rating', '3.0.0.beta8'
-gem "foreman"
 gem 'ember-rails'
 gem 'ember-data-source'
 gem 'progress_bar'
