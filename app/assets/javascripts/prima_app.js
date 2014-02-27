@@ -31,7 +31,7 @@
           this.set('accountId', accountId);
           this.set('account', container.lookup('store:main').find('user', this.get('accountId')));
 
-          
+
 
         },
         setup: function(serverSession) {
@@ -258,6 +258,8 @@ PrimaApp.VenuesNewRoute = Ember.Route.extend({
   model: function() {
 
     var account = this.get('session').get('account');
+
+    
 
     return PrimaApp.Venue.createRecord({
       user: account
