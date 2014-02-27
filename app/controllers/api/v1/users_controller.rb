@@ -11,5 +11,19 @@ class Api::V1::UsersController < ApplicationController
 
   end
 
+  def account
+
+   if is_authenticated?
+
+      respond_with do |format|
+        format.json {
+          render :json => { "user_id" => session[:user_id] }
+        }
+      end
+
+    end
+
+
+  end
 
 end

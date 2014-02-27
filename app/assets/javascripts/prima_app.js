@@ -31,6 +31,8 @@
           this.set('accountId', accountId);
           this.set('account', container.lookup('store:main').find('user', this.get('accountId')));
 
+          
+
         },
         setup: function(serverSession) {
           this._super(serverSession);
@@ -97,8 +99,10 @@
         // (get '/7-external-oauth/callback') in the runner file
         //change for development: 
         // https://www.facebook.com/dialog/oauth?client_id=1417372111822319&scope=email,publish_stream&redirect_uri=http://localhost:3000/auth/facebook/callback
+        //this for production
+        //https://www.facebook.com/dialog/oauth?client_id=708728955810882&scope=email,publish_stream&redirect_uri=http://www.krowdly.com/auth/facebook/callback
         window.open(
-          'https://www.facebook.com/dialog/oauth?client_id=708728955810882&scope=email,publish_stream&redirect_uri=http://www.krowdly.com/auth/facebook/callback',
+          'https://www.facebook.com/dialog/oauth?client_id=1417372111822319&scope=email,publish_stream&redirect_uri=http://localhost:3000/auth/facebook/callback',
           '_blank',
           'menubar=no,status=no,height=400,width=800'
         );
@@ -445,6 +449,8 @@ actions: {
 
       //transition to update after save ordered by id
       var self = this;
+
+
       post.save();
 
 
@@ -738,10 +744,12 @@ Handlebars.registerHelper('ifCond', function(v1, v2, options) {
 
     var obj1 = Ember.get(this, v1);
     var obj2 = Ember.get(this, v2);
+
+
+
     var var1 = obj1.get("id");
     var var2 = obj2.get("id");
    
-
 
   if(var1 === var2) {
     return options.fn(this);

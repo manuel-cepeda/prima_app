@@ -24,7 +24,13 @@ class Api::V1::VenuesController < ApplicationController
 
     else
 
-    respond_with Venue.limit(10)
+    @venues=Venue.joins(:ratings)
+    .select("venues.id, venues.title, AVG(ratings.score) as average")
+    .where('ratings.updated_at > ?', 5.hours.ago)
+    .group("venues.id, venues.title")
+    .order("average DESC").limit(5)
+
+    respond_with @venues
     
     end  
 
