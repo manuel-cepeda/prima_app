@@ -53,7 +53,7 @@ class Api::V1::VenuesController < ApplicationController
 
   def create
 
-    @venue = Venue.build(venue_params)
+    @venue = Venue.create(venue_params)
     @venue.user_id=session[:user_id]
     @venue.save
 
