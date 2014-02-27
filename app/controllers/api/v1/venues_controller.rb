@@ -25,13 +25,15 @@ class Api::V1::VenuesController < ApplicationController
     else
 
     @venues=Venue.joins(:ratings)
-    .select("venues.id, venues.title, AVG(ratings.score) as average")
+    .select("venues.id, venues.title, venues.body,
+     venues.latitude, venues.longitude, venues.user_id,
+     AVG(ratings.score) as average")
     .where('ratings.updated_at > ?', 5.hours.ago)
     .group("venues.id, venues.title")
     .order("average DESC").limit(5)
 
     respond_with @venues
-    
+
     end  
 
     
