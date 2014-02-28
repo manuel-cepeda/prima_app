@@ -30,7 +30,7 @@ class Api::V1::VenuesController < ApplicationController
      AVG(ratings.score) as average")
     .where('ratings.updated_at > ?', 5.hours.ago)
     .group("venues.id, venues.title")
-    .order("average DESC").limit(5)
+    .order("average DESC").limit(10).all
 
     respond_with @venues
 

@@ -37,6 +37,7 @@ class Venue < ActiveRecord::Base
 	end	
 
 	#for security reason check if is safe to run this with rails runner 
+	#heroku run rails runner Venue.load_venues 
 	def self.load_venues
 	    book = Spreadsheet.open 'lib/venues.xls'
 	    sheet1 = book.worksheet 0
