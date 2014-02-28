@@ -44,8 +44,8 @@ class Venue < ActiveRecord::Base
 	    sheet1.each do |row|
 			user=User.find(1)
 	        #add venues from excel
-	        user.venues.build(:title => "#{row[0]}", :address => "#{row[1]}, #{row[4]},Santiago, Chile")
-	     
+	        @venue = user.venues.build(:title => "#{row[0]}", :address => "#{row[1]}, #{row[4]},Santiago, Chile")
+	     	@venue.save
 		  #Not overload Google API
 	      sleep 1     
 	    end	
