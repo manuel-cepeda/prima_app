@@ -70,6 +70,7 @@
 
 
           if (!Ember.isEmpty(accountId)) {
+            alert(accountId);
             this.set('account', container.lookup('store:main').find('user', accountId));
           }
         }.property('accountId'),
@@ -259,7 +260,7 @@ PrimaApp.VenuesNewRoute = Ember.Route.extend({
 
     var account = this.get('session').get('account');
 
-    
+
 
     return PrimaApp.Venue.createRecord({
       user: account
