@@ -29,8 +29,7 @@
 
           
           this.set('accountId', accountId);
-          alert("aqui init");
-            alert(accountId);
+
           this.set('account', container.lookup('store:main').find('user', this.get('accountId')));
 
 
@@ -65,8 +64,7 @@
           //save accountId in a session cookie so it survives a page reload (Ember.SimpleAuth.Session
           //does this out of the box for authToken)
           document.cookie = 'accountId=' + this.get('accountId');
-          alert("aqui account id change");
-            alert(accountId);
+
           this.set('account', container.lookup('store:main').find('user', accountId));
         }.observes('accountId'),
         account: function() {
@@ -74,8 +72,7 @@
 
 
           if (!Ember.isEmpty(accountId)) {
-            alert("aqui account");
-            alert(accountId);
+
             this.set('account', container.lookup('store:main').find('user', accountId));
           }
         }.property('accountId'),
