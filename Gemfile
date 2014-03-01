@@ -14,7 +14,6 @@ gem 'thumbs_up'
 gem 'sunspot_rails', '2.0.0'
 gem "sunspot_solr", '2.0.0'
 gem "koala", "~> 1.7.0rc1"
-gem 'mobylette'
 gem 'spreadsheet'
 gem 'geocoder'
 gem 'phonegap-rails'
