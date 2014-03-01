@@ -63,7 +63,8 @@
         accountIdChanged: function() {
           //save accountId in a session cookie so it survives a page reload (Ember.SimpleAuth.Session
           //does this out of the box for authToken)
-          document.cookie = 'accountId=' + this.get('accountId');
+         // document.cookie = 'accountId=' + this.get('accountId');
+         var accountId = (document.cookie.match(/accountId=([^;]+)/) || [])[1];
 
           this.set('account', container.lookup('store:main').find('user', accountId));
         }.observes('accountId'),
@@ -105,7 +106,7 @@
         //this for production
         //https://www.facebook.com/dialog/oauth?client_id=708728955810882&scope=email,publish_stream&redirect_uri=http://www.krowdly.com/auth/facebook/callback
         window.open(
-          'https://www.facebook.com/dialog/oauth?client_id=708728955810882&scope=email,publish_stream&redirect_uri=http://www.krowdly.com/auth/facebook/callback',
+          'https://www.facebook.com/dialog/oauth?client_id=1417372111822319&scope=email,publish_stream&redirect_uri=http://localhost:3000/auth/facebook/callback',
           '_blank',
           'menubar=no,status=no,height=400,width=800'
         );

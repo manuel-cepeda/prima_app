@@ -11134,3 +11134,61 @@ Feb 28, 2014 2:40:47 PM org.apache.solr.update.processor.LogUpdateProcessor fini
 INFO: {add=[Venue 2749]} 0 0
 Feb 28, 2014 2:40:47 PM org.apache.solr.core.SolrCore execute
 INFO: [] webapp=/solr path=/update params={wt=ruby} status=0 QTime=0 
+Mar 01, 2014 1:09:48 AM org.apache.solr.core.SolrCore execute
+INFO: [] webapp=/solr path=/select params={fl=*+score&start=0&q=test&qf=title_text&wt=ruby&fq=type:Venue&defType=dismax&rows=30} hits=0 status=0 QTime=2 
+Mar 01, 2014 1:09:55 AM org.apache.solr.update.processor.LogUpdateProcessor finish
+INFO: {add=[Venue 2750]} 0 0
+Mar 01, 2014 1:09:55 AM org.apache.solr.core.SolrCore execute
+INFO: [] webapp=/solr path=/update params={wt=ruby} status=0 QTime=0 
+Mar 01, 2014 1:09:56 AM org.apache.solr.update.DirectUpdateHandler2 commit
+INFO: start commit(optimize=false,waitFlush=false,waitSearcher=true,expungeDeletes=false)
+Mar 01, 2014 1:09:56 AM org.apache.solr.core.SolrDeletionPolicy onCommit
+INFO: SolrDeletionPolicy.onCommit: commits:num=2
+	commit{dir=/home/manuel/Development/rails_projects/prima_app/solr/data/development/index,segFN=segments_19,version=1392502661258,generation=45,filenames=[_1a.fdx, _1a.prx, _1a.tis, _1a.frq, _1a.nrm, _1a.tii, _1a.fnm, _1a.fdt, segments_19]
+	commit{dir=/home/manuel/Development/rails_projects/prima_app/solr/data/development/index,segFN=segments_1a,version=1392502661260,generation=46,filenames=[_1a.fdx, _1a.tis, _1b.tii, _1a.frq, _1b.fnm, _1a.tii, _1b.prx, _1a.fdt, _1a.fnm, segments_1a, _1a.prx, _1b.nrm, _1a.nrm, _1b.tis, _1b.fdt, _1b.frq, _1b.fdx]
+Mar 01, 2014 1:09:56 AM org.apache.solr.core.SolrDeletionPolicy updateCommits
+INFO: newest commit = 1392502661260
+Mar 01, 2014 1:09:56 AM org.apache.solr.search.SolrIndexSearcher <init>
+INFO: Opening Searcher@631abe3 main
+Mar 01, 2014 1:09:56 AM org.apache.solr.update.DirectUpdateHandler2 commit
+INFO: end_commit_flush
+Mar 01, 2014 1:09:56 AM org.apache.solr.search.SolrIndexSearcher warm
+INFO: autowarming Searcher@631abe3 main from Searcher@436ae706 main
+	fieldValueCache{lookups=0,hits=0,hitratio=0.00,inserts=0,evictions=0,size=0,warmupTime=0,cumulative_lookups=0,cumulative_hits=0,cumulative_hitratio=0.00,cumulative_inserts=0,cumulative_evictions=0}
+Mar 01, 2014 1:09:56 AM org.apache.solr.search.SolrIndexSearcher warm
+INFO: autowarming result for Searcher@631abe3 main
+	fieldValueCache{lookups=0,hits=0,hitratio=0.00,inserts=0,evictions=0,size=0,warmupTime=0,cumulative_lookups=0,cumulative_hits=0,cumulative_hitratio=0.00,cumulative_inserts=0,cumulative_evictions=0}
+Mar 01, 2014 1:09:56 AM org.apache.solr.search.SolrIndexSearcher warm
+INFO: autowarming Searcher@631abe3 main from Searcher@436ae706 main
+	filterCache{lookups=1,hits=0,hitratio=0.00,inserts=1,evictions=0,size=1,warmupTime=0,cumulative_lookups=5,cumulative_hits=3,cumulative_hitratio=0.60,cumulative_inserts=2,cumulative_evictions=0}
+Mar 01, 2014 1:09:56 AM org.apache.solr.search.SolrIndexSearcher warm
+INFO: autowarming result for Searcher@631abe3 main
+	filterCache{lookups=0,hits=0,hitratio=0.00,inserts=0,evictions=0,size=0,warmupTime=0,cumulative_lookups=5,cumulative_hits=3,cumulative_hitratio=0.60,cumulative_inserts=2,cumulative_evictions=0}
+Mar 01, 2014 1:09:56 AM org.apache.solr.search.SolrIndexSearcher warm
+INFO: autowarming Searcher@631abe3 main from Searcher@436ae706 main
+	queryResultCache{lookups=1,hits=0,hitratio=0.00,inserts=1,evictions=0,size=1,warmupTime=0,cumulative_lookups=9,cumulative_hits=4,cumulative_hitratio=0.44,cumulative_inserts=5,cumulative_evictions=0}
+Mar 01, 2014 1:09:56 AM org.apache.solr.search.SolrIndexSearcher warm
+INFO: autowarming result for Searcher@631abe3 main
+	queryResultCache{lookups=0,hits=0,hitratio=0.00,inserts=0,evictions=0,size=0,warmupTime=0,cumulative_lookups=9,cumulative_hits=4,cumulative_hitratio=0.44,cumulative_inserts=5,cumulative_evictions=0}
+Mar 01, 2014 1:09:56 AM org.apache.solr.search.SolrIndexSearcher warm
+INFO: autowarming Searcher@631abe3 main from Searcher@436ae706 main
+	documentCache{lookups=0,hits=0,hitratio=0.00,inserts=0,evictions=0,size=0,warmupTime=0,cumulative_lookups=2,cumulative_hits=1,cumulative_hitratio=0.50,cumulative_inserts=1,cumulative_evictions=0}
+Mar 01, 2014 1:09:56 AM org.apache.solr.search.SolrIndexSearcher warm
+INFO: autowarming result for Searcher@631abe3 main
+	documentCache{lookups=0,hits=0,hitratio=0.00,inserts=0,evictions=0,size=0,warmupTime=0,cumulative_lookups=2,cumulative_hits=1,cumulative_hitratio=0.50,cumulative_inserts=1,cumulative_evictions=0}
+Mar 01, 2014 1:09:56 AM org.apache.solr.core.QuerySenderListener newSearcher
+INFO: QuerySenderListener sending requests to Searcher@631abe3 main
+Mar 01, 2014 1:09:56 AM org.apache.solr.core.QuerySenderListener newSearcher
+INFO: QuerySenderListener done.
+Mar 01, 2014 1:09:56 AM org.apache.solr.core.SolrCore registerSearcher
+INFO: [] Registered new searcher Searcher@631abe3 main
+Mar 01, 2014 1:09:56 AM org.apache.solr.search.SolrIndexSearcher close
+INFO: Closing Searcher@436ae706 main
+	fieldValueCache{lookups=0,hits=0,hitratio=0.00,inserts=0,evictions=0,size=0,warmupTime=0,cumulative_lookups=0,cumulative_hits=0,cumulative_hitratio=0.00,cumulative_inserts=0,cumulative_evictions=0}
+	filterCache{lookups=1,hits=0,hitratio=0.00,inserts=1,evictions=0,size=1,warmupTime=0,cumulative_lookups=5,cumulative_hits=3,cumulative_hitratio=0.60,cumulative_inserts=2,cumulative_evictions=0}
+	queryResultCache{lookups=1,hits=0,hitratio=0.00,inserts=1,evictions=0,size=1,warmupTime=0,cumulative_lookups=9,cumulative_hits=4,cumulative_hitratio=0.44,cumulative_inserts=5,cumulative_evictions=0}
+	documentCache{lookups=0,hits=0,hitratio=0.00,inserts=0,evictions=0,size=0,warmupTime=0,cumulative_lookups=2,cumulative_hits=1,cumulative_hitratio=0.50,cumulative_inserts=1,cumulative_evictions=0}
+Mar 01, 2014 1:09:56 AM org.apache.solr.update.processor.LogUpdateProcessor finish
+INFO: {commit=} 0 475
+Mar 01, 2014 1:09:56 AM org.apache.solr.core.SolrCore execute
+INFO: [] webapp=/solr path=/update params={wt=ruby} status=0 QTime=475 
